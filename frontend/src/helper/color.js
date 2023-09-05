@@ -64,4 +64,4 @@ const setColor = (group, color) => {
 // setColor("2", "rgb(44, 165, 104)")
 // setColor("3", "rgb(128, 128, 128)")
 
-export default getColor;
+export { getColor, setColor };
