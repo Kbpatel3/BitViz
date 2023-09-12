@@ -15,15 +15,15 @@ const UNKNOWN = "rgb(128, 128, 128)"
  * @returns The corresponding color
  */
 const getColor = (group) => {
-    if (group === "1") {
+    if (group == "1") {
         console.log(ILLICIT);
         return ILLICIT;
     }
-    if (group === "2") {
+    if (group == "2") {
         console.log(LICIT);
         return LICIT;
     }
-    if (group === "3") {
+    if (group == "3") {
         console.log(UNKNOWN);
         return UNKNOWN;
     }

@@ -85,7 +85,10 @@ const Pie = ({ data }) => {
                     .innerRadius(0)
                     .outerRadius(radius)
                 )
-                .attr('fill', (d) => { return getColor(d.data.group) })
+                .attr('fill', (d) => {
+                    console.log(d.data.group);
+                    return getColor(d.data.group);
+                })
                 .attr("stroke", "white")
                 .style("stroke-width", "2px")
                 .style("opacity", 1)
