@@ -87,7 +87,7 @@ const Graph = ({data, highlight, nodeClick}) => {
           ).on('click', (d) => {
             nodeClick(parseInt(d.target.id.slice(4)));
             d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
-            d3.select(`#${d.target.id}`).attr('fill', 'black').attr('r', 9);
+            d3.select(`#${d.target.id}`).attr('fill', (d) => getColor(d.group)).attr('r', 12);
           });
 
         // Adds titles to nodes

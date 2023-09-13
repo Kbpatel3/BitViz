@@ -12,22 +12,22 @@ export default function Landing() {
         position: "absolute",
         height: "100%",
         width: "100%",
-        backgroundColor: "#121212",
-	color: "#FFFFFF",
-	paddingTop: "10%",	
+        backgroundColor: "#000000",
+	color: "#ffa400",
+	paddingTop: "10%",
     }
 	return (
 		<div style={style}>
- 			<div style={{fontSize: "100px", fontFamily: "Roboto, Helvetica, Arial, sans-serif", textAlign: "center"}}>
+ 			<div style={{fontSize: "100px", fontFamily: "Roboto, Helvetica, Arial, sans-serif", textAlign: "center", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
                 		Node-View
             		</div>
             		{/*Tagline text*/}
-            		<div style={{ fontSize: "40px", fontFamily: "Roboto, Helvetica, Arial, sans-serif", textAlign: "center"}}>
+            		<div style={{ fontSize: "40px", fontFamily: "Roboto, Helvetica, Arial, sans-serif", textAlign: "center", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
                 		A tool for analyzing bitcoin transactions
             		</div>
 			<br/>
-			<div style={{marginLeft: "625px"}}>
-				<Button component={Link} to="/app" variant="contained">Go to App</Button>
+			<div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+				<Button component={Link} to="/app" variant="contained" style={{ width: "200px", height: "75px", fontSize:"20px" }}>Go to App</Button>
 			</div>
 		</div>
 	);
