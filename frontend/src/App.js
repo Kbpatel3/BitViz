@@ -99,30 +99,6 @@ function App() {
 
   // return (
   //   <>
-  //     <div className='grid grid-rows-5 h-screen'>
-  //       <div className='row-span-4'>
-  //         {
-  //         /*
-  //         Check to make sure the data has loaded
-  //         If the data has loaded render the result
-  //         Else, tells the user that the data has not loaded yet
-  //         */
-  //         }
-  //         {data ?
-  //           <div className='grid grid-cols-3 w-full h-full'>
-  //
-  //             {/* Graph component, shows the force directed graph */}
-  //             <div className='col-span-2'>
-  //               <Graph data={data} highlight={clickedNode} nodeClick={handleCircleClick}/>
-  //             </div>
-  //
-  //
-  //           </div>
-  //         : <div>Data not loaded</div>
-  //         }
-  //       </div>
-  //
-  //     </div>
   //     {/* Bar selector, shows the barcharts for each timestep */}
   //     <BarSelector highlighted={timestep} clickFunction={handleBarClick} />
   //   </>
@@ -180,13 +156,11 @@ function App() {
 
         {/* Dropdown */}
         {data ?
-          <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">
-            {/*<div className='flex flex-col mr-2 pl-2 border-l-2 border-dashed border-l-black'>*/}
-              {/*<div className='grow py-2'>*/}
-                {graph === 'Bar' && <BarWrapper timestep={timestep} />}
-                {graph === 'Pie' && <Pie data={data.nodes} />}
-              {/*</div>*/}
-              <Select labelId="graph_type_label"
+            <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">
+              {/* Select component for choosing the graph type */}
+              <Select
+                className={"w-full"}
+                labelId="graph_type_label"
                 id="graph_type"
                 value={graph}
                 onChange={handleGraph}
@@ -194,10 +168,12 @@ function App() {
                 <MenuItem value={"Bar"}>Bar Graph</MenuItem>
                 <MenuItem value={"Pie"}>Pie Chart</MenuItem>
               </Select>
-            {/*</div>*/}
-          </div>
-        : <div>Data not loaded</div>
-        }
+
+              {/* Conditional rendering of the selected graph */}
+              {graph === 'Bar' && <BarWrapper timestep={timestep} />}
+              {graph === 'Pie' && <Pie data={data.nodes} />}
+            </div>
+        : <div>Data not loaded</div>}
         <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus orci ac auctor augue mauris. Nunc mattis enim ut tellus elementum sagittis vitae. Eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada. Quis ipsum suspendisse ultrices gravida. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue. Lacus suspendisse faucibus interdum posuere lorem. Vivamus at augue eget arcu dictum varius duis at consectetur. Luctus accumsan tortor posuere ac ut consequat semper viverra. Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut. Arcu vitae elementum curabitur vitae. Elit eget gravida cum sociis natoque penatibus et magnis dis.
 
             Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Risus pretium quam vulputate dignissim. In eu mi bibendum neque egestas. Lectus nulla at volutpat diam ut venenatis tellus. In arcu cursus euismod quis viverra nibh cras. Pellentesque habitant morbi tristique senectus et netus et. Morbi tristique senectus et netus et malesuada. In hac habitasse platea dictumst quisque sagittis purus sit. Vel pretium lectus quam id leo in. Orci sagittis eu volutpat odio. Pretium vulputate</div>
