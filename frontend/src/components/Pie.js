@@ -20,6 +20,8 @@ const Pie = ({ data }) => {
             // Set dimensions and margins
             const dimensions = d3.select(".pieTin").node().getBoundingClientRect();
 
+            console.log(dimensions);
+
             // Sets the height and widths as well as margins
             const height = dimensions.height;
             const width = dimensions.width;
@@ -107,9 +109,9 @@ const Pie = ({ data }) => {
         <div className="pieTin h-full">
             <svg
                 ref={ref}
-                className="Pie inline-block absolute">
+                className="Pie">
 
-                </svg>
+            </svg>
         </div>
     );
 }
