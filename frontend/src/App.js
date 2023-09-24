@@ -7,6 +7,8 @@ import Search from './components/Search';
 import ObserverContext from './context/ObserverContext';
 import { Select, MenuItem } from '@mui/material';
 import BarWrapper from './containers/BarWrapper';
+import setting from './settings_icon.png';
+//import SubGraph from './components/SubGraph';
 
 /**
  * App.js, logic entry point for our data. This function controls the ways things are rendered to the user
@@ -97,6 +99,16 @@ function App() {
     })
   }
 
+  const getTimeSteps = () => {
+    let timeSteps = window.open('http://localhost:3001', "TimeSteps", "popup");
+    //let temp = BarSelector(timestep, handleBarClick);
+    var temp = "timeSteps";
+    timeSteps.document.write(temp);
+    }
+
+    //          <BarSelector highlighted={timestep} clickFunction={handleBarClick} />\
+
+
   // return (
   //   <>
   //     <div className='grid grid-rows-5 h-screen'>
@@ -131,9 +143,24 @@ function App() {
     <>
       <div className="grid grid-cols-3 grid-rows-8 gap-2">
         {/* Row 1 which contains the search bar, page buttons, and the settings icon */}
-        <div className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex flex-row items-center">
+        <div className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex space-x-4 flex-row items-center">
           {/* Search component */}
           <Search/>
+          {/* Home Button */}
+          <button>Home</button>
+          {/* <button onClick={goHome}>Home</button> */}
+
+          {/* Button to shows the barcharts(histogram) for each timestep */}
+          <button onClick={(e) => getTimeSteps()}>TimeSteps</button>
+          
+          <div>\
+            {timestep}
+          </div>\
+
+          {/* Machine Learning Button (Temp)*/}
+          <button>Analyze (ML)</button>
+          {/* Setting Button (Temp) */}
+          <input class="absolute right-7 object-scale-down h-7 w-7" type='image' src={setting}/>
         </div>
 
         {/* Row 2 which contains the main nodal structure */}
@@ -191,16 +218,20 @@ function App() {
                 value={graph}
                 onChange={handleGraph}
               >
-                <MenuItem value={"Bar"}>Bar Graph</MenuItem>
+                <MenuItem value={"Bar"}>Histogram</MenuItem>
                 <MenuItem value={"Pie"}>Pie Chart</MenuItem>
               </Select>
             {/*</div>*/}
           </div>
         : <div>Data not loaded</div>
         }
-        <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus orci ac auctor augue mauris. Nunc mattis enim ut tellus elementum sagittis vitae. Eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada. Quis ipsum suspendisse ultrices gravida. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue. Lacus suspendisse faucibus interdum posuere lorem. Vivamus at augue eget arcu dictum varius duis at consectetur. Luctus accumsan tortor posuere ac ut consequat semper viverra. Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut. Arcu vitae elementum curabitur vitae. Elit eget gravida cum sociis natoque penatibus et magnis dis.
+        <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">
+          {/* <SubGraph/> */}
+          <div>
+            Selected Subgraph
+          </div>
 
-            Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Risus pretium quam vulputate dignissim. In eu mi bibendum neque egestas. Lectus nulla at volutpat diam ut venenatis tellus. In arcu cursus euismod quis viverra nibh cras. Pellentesque habitant morbi tristique senectus et netus et. Morbi tristique senectus et netus et malesuada. In hac habitasse platea dictumst quisque sagittis purus sit. Vel pretium lectus quam id leo in. Orci sagittis eu volutpat odio. Pretium vulputate</div>
+        </div>
         <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus orci ac auctor augue mauris. Nunc mattis enim ut tellus elementum sagittis vitae. Eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada. Quis ipsum suspendisse ultrices gravida. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue. Lacus suspendisse faucibus interdum posuere lorem. Vivamus at augue eget arcu dictum varius duis at consectetur. Luctus accumsan tortor posuere ac ut consequat semper viverra. Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut. Arcu vitae elementum curabitur vitae. Elit eget gravida cum sociis natoque penatibus et magnis dis.
 
             Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Risus pretium quam vulputate dignissim. In eu mi bibendum neque egestas. Lectus nulla at volutpat diam ut venenatis tellus. In arcu cursus euismod quis viverra nibh cras. Pellentesque habitant morbi tristique senectus et netus et. Morbi tristique senectus et netus et malesuada. In hac habitasse platea dictumst quisque sagittis purus sit. Vel pretium lectus quam id leo in. Orci sagittis eu volutpat odio. Pretium vulputate</div>
