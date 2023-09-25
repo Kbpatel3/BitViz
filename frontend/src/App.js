@@ -10,6 +10,7 @@ import BarWrapper from './containers/BarWrapper';
 import setting from './settings_icon.png';
 //import SubGraph from './components/SubGraph';
 import Slider from './components/Slider';
+import Bar from "./components/barchart";
 
 
 /**
@@ -186,6 +187,7 @@ function App() {
 
             Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Risus pretium quam vulputate dignissim. In eu mi bibendum neque egestas. Lectus nulla at volutpat diam ut venenatis tellus. In arcu cursus euismod quis viverra nibh cras. Pellentesque habitant morbi tristique senectus et netus et. Morbi tristique senectus et netus et malesuada. In hac habitasse platea dictumst quisque sagittis purus sit. Vel pretium lectus quam id leo in. Orci sagittis eu volutpat odio. Pretium vulputate</div>
       </div>
+      <BarSelector highlighted={timestep} clickFunction={handleBarClick} />
     </>
   );
 }
