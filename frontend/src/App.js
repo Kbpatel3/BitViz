@@ -121,22 +121,20 @@ function App() {
     <>
       <div className="grid grid-cols-3 grid-rows-8 gap-2">
         {/* Row 1 which contains the search bar, page buttons, and the settings icon */}
-        <div className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex space-x-4 flex-row items-center">
-          {/* Search component */}
-          <Search/>
+        <div className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex space-x-4 flex-row items-center justify-center">
           {/* Home Button */}
-          <button>Home</button>
+          <button className={"absolute left-7"}>Home</button>
           {/* <button onClick={goHome}>Home</button> */}
 
           {/* Button to shows the barcharts(histogram) for each timestep */}
-          <button onClick={(e) => getTimeSteps()}>TimeSteps</button>
-
-          <div>\
-            {timestep}
-          </div>\
+          <button className={"absolute left-20"} onClick={(e) => getTimeSteps()}>TimeSteps</button>
 
           {/* Machine Learning Button (Temp)*/}
-          <button>Analyze (ML)</button>
+          <button className={"absolute left-52"}>Analyze (ML)</button>
+
+          {/* Search component */}
+          <Search/>
+
           {/* Setting Button (Temp) */}
           <input class="absolute right-7 object-scale-down h-7 w-7" type='image' src={setting}/>
         </div>
