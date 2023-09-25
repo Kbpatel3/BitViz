@@ -1,0 +1,10 @@
+# Data files downloaded from kaggle
+elliptic_txs_classes.csv
+elliptic_txs_edgelist.csv
+elliptic_txs_features.csv
+
+# Products of running script.py
+# data_final.json
+limits.json
+metadata.csv
+
