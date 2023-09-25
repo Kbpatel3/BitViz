@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef} from 'react';
 import Graph from './components/Graph';
 import Pie from './components/Pie';
 import BarSelector from './containers/BarSelector';
@@ -30,6 +30,9 @@ function App() {
 
   // Gets functions required for the observer design pattern using React's context API
   const { registerSubscriber, alertSubscriber } = useContext(ObserverContext);
+
+  // Uses to specify the specific place in the page
+  const ref = useRef(null);
 
   // Registers a callback function with the observer
   registerSubscriber((alertObject) => {
@@ -102,12 +105,22 @@ function App() {
     })
   }
 
-  const getTimeSteps = () => {
-    let timeSteps = window.open('http://localhost:3001', "TimeSteps", "popup");
-    //let temp = BarSelector(timestep, handleBarClick);
-    var temp = "timeSteps";
-    timeSteps.document.write(temp);
-    }
+  // Refreshed the Window
+  const refWindow = () => {
+    window.location.reload();
+  }
+
+  // Scrolls down to the TimeSteps Charts when the button is clicked
+  const goTimeSteps = () => {
+    ref.current?.scrollIntoView({behavior: 'smooth'});
+  }
+
+  // const getTimeSteps = () => {
+  //   let timeSteps = window.open('http://localhost:3001', "TimeSteps", "popup");
+  //   //let temp = BarSelector(timestep, handleBarClick);
+  //   var temp = "timeSteps";
+  //   timeSteps.document.write(temp);
+  //   }
 
     //          <BarSelector highlighted={timestep} clickFunction={handleBarClick} />\
 
@@ -118,20 +131,47 @@ function App() {
   //     <BarSelector highlighted={timestep} clickFunction={handleBarClick} />
   //   </>
   // );
+
+  // NOTE: Code for sticky menu bar (Works but Not Completed)
+//   <body class="pt-16">
+//   <nav class="p-4 fixed w-full top-0">
+//     <div className="container mx-auto col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex space-x-4 flex-row items-center justify-center">
+//       <ul class="flex justify-center space-x-4">
+//         {/* Home Button */}
+//         <button className={"absolute left-7"}>Home</button>
+//         {/* <button onClick={goHome}>Home</button> */}
+
+//         {/* Button to shows the barcharts(histogram) for each timestep */}
+//         <button className={"absolute left-20"} onClick={(e) => goTimeSteps()}>TimeSteps</button>
+
+//         {/* Machine Learning Button (Temp)*/}
+//         <button className={"absolute left-48"}>Analyze (ML)</button>
+
+//         {/* Search component */}
+//         <Search/>
+
+//         {/* Setting Button (Temp) */}
+//         <input class="absolute right-7 object-scale-down h-7 w-7" type='image' src={setting}/>
+//       </ul>
+//     </div>
+//   </nav>
+// </body>
+
+
   return (
     <>
       <div className="grid grid-cols-3 grid-rows-8 gap-2">
         {/* Row 1 which contains the search bar, page buttons, and the settings icon */}
         <div className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex space-x-4 flex-row items-center justify-center">
           {/* Home Button */}
-          <button className={"absolute left-7"}>Home</button>
+          <button className={"absolute left-7"} onClick={(e) => refWindow()}>Home</button>
           {/* <button onClick={goHome}>Home</button> */}
 
           {/* Button to shows the barcharts(histogram) for each timestep */}
-          <button className={"absolute left-20"} onClick={(e) => getTimeSteps()}>TimeSteps</button>
+          <button className={"absolute left-20"} onClick={(e) => goTimeSteps()}>TimeSteps</button>
 
           {/* Machine Learning Button (Temp)*/}
-          <button className={"absolute left-52"}>Analyze (ML)</button>
+          <button className={"absolute left-48"}>Analyze (ML)</button>
 
           {/* Search component */}
           <Search/>
@@ -187,7 +227,9 @@ function App() {
 
             Elit at imperdiet dui accumsan sit amet nulla facilisi morbi. Risus pretium quam vulputate dignissim. In eu mi bibendum neque egestas. Lectus nulla at volutpat diam ut venenatis tellus. In arcu cursus euismod quis viverra nibh cras. Pellentesque habitant morbi tristique senectus et netus et. Morbi tristique senectus et netus et malesuada. In hac habitasse platea dictumst quisque sagittis purus sit. Vel pretium lectus quam id leo in. Orci sagittis eu volutpat odio. Pretium vulputate</div>
       </div>
-      <BarSelector highlighted={timestep} clickFunction={handleBarClick} />
+      <div ref={ref}>
+        <BarSelector highlighted={timestep} clickFunction={handleBarClick} />
+      </div>
     </>
   );
 }
