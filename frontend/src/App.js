@@ -7,6 +7,7 @@ import Search from './components/Search';
 import ObserverContext from './context/ObserverContext';
 import { Select, MenuItem } from '@mui/material';
 import BarWrapper from './containers/BarWrapper';
+import Slider from './components/Slider';
 
 /**
  * App.js, logic entry point for our data. This function controls the ways things are rendered to the user
@@ -124,34 +125,9 @@ function App() {
         }
 
         {/* Row 3 which contains the slider */}
-        <div className="col-span-3 row-span-1 row-start-6 bg-slate-200 hover:bg-slate-300">
-            <div className='flex flex-col items-center'>
-              {/* Slider */}
-              <div className='flex flex-row h-fit w-full mt-2 pt-2 border-t-2 border-black'>
-                <button
-                  onClick={(e) => {timestep > 1 && setTimestep(parseInt(timestep) - 1)}}
-                  className='btn-primary'
-                >
-                  Decrease
-                </button>
-                <input
-                  type="range"
-                  min="1"
-                  max="49"
-                  onChange={(e) => handleChange(e.target.value)}
-                  value={timestep}
-                  className='flex-1'/>
-                <button
-                  onClick={(e) => {
-                    timestep < 49 && setTimestep(parseInt(timestep) + 1)
-                  }}
-                  className="btn-primary"
-                >
-                  Increase
-                </button>
-              </div>
-              <p>Timestep: {timestep}</p>
-            </div>
+        <div className="col-span-3 row-span-1 row-start-6 bg-slate-200 hover:bg-slate-300 pt-2.5">
+          {/* Slider component */}
+          <Slider timestep={timestep} setTimestep={setTimestep} handleChange={handleChange}/>
         </div>
 
         {/* Dropdown */}
