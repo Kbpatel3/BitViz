@@ -33,15 +33,15 @@ const Graph = ({data, highlight, nodeClick}) => {
       const simulation = d3
           .forceSimulation(data.nodes)
           .force("link", d3.forceLink().id(d => d.id))
-          .force("charge", d3.forceManyBody().strength(-3))
+          .force("charge", d3.forceManyBody().strength(0))
           .force("center", d3.forceCenter(width / 2, height / 2));
         
         // Functions to define what happens when a user clicks on an app
         
         function dragstarted(event) {
-          if (!event.active) simulation.alphaTarget(0.3).restart();
-          event.subject.fx = event.subject.x;
-          event.subject.fy = event.subject.y;
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            event.subject.fx = event.subject.x;
+            event.subject.fy = event.subject.y;
         }
       
         function dragged(event) {
@@ -154,6 +154,6 @@ function clickNode(id) {
   d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
   // Sets the node with a given ID with a bigger radius and colors it magenta so it stands out
   if(id) {
-    d3.select(`#node${id}`).attr('fill', 'rgb(255, 0, 255)').attr('r', 9);
+    d3.select(`#node${id}`).attr('fill', 'rgb(0,0,0)').attr('r', 9);
   }
 }

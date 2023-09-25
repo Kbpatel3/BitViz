@@ -9,6 +9,8 @@ import { Select, MenuItem } from '@mui/material';
 import BarWrapper from './containers/BarWrapper';
 import setting from './settings_icon.png';
 //import SubGraph from './components/SubGraph';
+import Slider from './components/Slider';
+
 
 /**
  * App.js, logic entry point for our data. This function controls the ways things are rendered to the user
@@ -111,30 +113,6 @@ function App() {
 
   // return (
   //   <>
-  //     <div className='grid grid-rows-5 h-screen'>
-  //       <div className='row-span-4'>
-  //         {
-  //         /*
-  //         Check to make sure the data has loaded
-  //         If the data has loaded render the result
-  //         Else, tells the user that the data has not loaded yet
-  //         */
-  //         }
-  //         {data ?
-  //           <div className='grid grid-cols-3 w-full h-full'>
-  //
-  //             {/* Graph component, shows the force directed graph */}
-  //             <div className='col-span-2'>
-  //               <Graph data={data} highlight={clickedNode} nodeClick={handleCircleClick}/>
-  //             </div>
-  //
-  //
-  //           </div>
-  //         : <div>Data not loaded</div>
-  //         }
-  //       </div>
-  //
-  //     </div>
   //     {/* Bar selector, shows the barcharts for each timestep */}
   //     <BarSelector highlighted={timestep} clickFunction={handleBarClick} />
   //   </>
@@ -152,7 +130,7 @@ function App() {
 
           {/* Button to shows the barcharts(histogram) for each timestep */}
           <button onClick={(e) => getTimeSteps()}>TimeSteps</button>
-          
+
           <div>\
             {timestep}
           </div>\
@@ -175,45 +153,18 @@ function App() {
         }
 
         {/* Row 3 which contains the slider */}
-        <div className="col-span-3 row-span-1 row-start-6 bg-slate-200 hover:bg-slate-300">
-            <div className='flex flex-col items-center'>
-              {/* Slider */}
-              <div className='flex flex-row h-fit w-full mt-2 pt-2 border-t-2 border-black'>
-                <button
-                  onClick={(e) => {timestep > 1 && setTimestep(parseInt(timestep) - 1)}}
-                  className='btn-primary'
-                >
-                  Decrease
-                </button>
-                <input
-                  type="range"
-                  min="1"
-                  max="49"
-                  onChange={(e) => handleChange(e.target.value)}
-                  value={timestep}
-                  className='flex-1'/>
-                <button
-                  onClick={(e) => {
-                    timestep < 49 && setTimestep(parseInt(timestep) + 1)
-                  }}
-                  className="btn-primary"
-                >
-                  Increase
-                </button>
-              </div>
-              <p>Timestep: {timestep}</p>
-            </div>
+        <div className="col-span-3 row-span-1 row-start-6 bg-slate-200 hover:bg-slate-300 pt-2.5">
+          {/* Slider component */}
+          <Slider timestep={timestep} setTimestep={setTimestep} handleChange={handleChange}/>
         </div>
 
         {/* Dropdown */}
         {data ?
-          <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">
-            {/*<div className='flex flex-col mr-2 pl-2 border-l-2 border-dashed border-l-black'>*/}
-              {/*<div className='grow py-2'>*/}
-                {graph === 'Bar' && <BarWrapper timestep={timestep} />}
-                {graph === 'Pie' && <Pie data={data.nodes} />}
-              {/*</div>*/}
-              <Select labelId="graph_type_label"
+            <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">
+              {/* Select component for choosing the graph type */}
+              <Select
+                className={"w-full"}
+                labelId="graph_type_label"
                 id="graph_type"
                 value={graph}
                 onChange={handleGraph}
@@ -221,16 +172,17 @@ function App() {
                 <MenuItem value={"Bar"}>Histogram</MenuItem>
                 <MenuItem value={"Pie"}>Pie Chart</MenuItem>
               </Select>
-            {/*</div>*/}
-          </div>
-        : <div>Data not loaded</div>
-        }
-        <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">
-          {/* <SubGraph/> */}
-          <div>
-            Selected Subgraph
-          </div>
 
+              {/* Conditional rendering of the selected graph */}
+              {graph === 'Bar' && <BarWrapper timestep={timestep} />}
+              {graph === 'Pie' && <Pie data={data.nodes} />}
+            </div>
+        : <div>Data not loaded</div>}
+        <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">
+            {/* <SubGraph/> */}
+            <div>
+                Selected Subgraph
+            </div>
         </div>
         <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus orci ac auctor augue mauris. Nunc mattis enim ut tellus elementum sagittis vitae. Eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada. Quis ipsum suspendisse ultrices gravida. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue. Lacus suspendisse faucibus interdum posuere lorem. Vivamus at augue eget arcu dictum varius duis at consectetur. Luctus accumsan tortor posuere ac ut consequat semper viverra. Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut. Arcu vitae elementum curabitur vitae. Elit eget gravida cum sociis natoque penatibus et magnis dis.
 

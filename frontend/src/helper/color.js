@@ -16,20 +16,20 @@ const UNKNOWN = "rgb(128, 128, 128)"
  */
 const getColor = (group) => {
     if (group == "1") {
-        console.log(ILLICIT);
+        //console.log(ILLICIT);
         return ILLICIT;
     }
     if (group == "2") {
-        console.log(LICIT);
+        //console.log(LICIT);
         return LICIT;
     }
     if (group == "3") {
-        console.log(UNKNOWN);
+        //console.log(UNKNOWN);
         return UNKNOWN;
     }
 
     // Default color
-    return "rgb(255, 0, 255)";
+    return "rgb(0,0,0)";
 }
 
 /**
