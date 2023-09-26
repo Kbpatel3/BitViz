@@ -5,8 +5,8 @@
  */
 
 // Colors to use throughout the app 
-const ILLICIT = "rgb(184, 67, 4)"
-const LICIT =   "rgb(44, 165, 104)"
+const ILLICIT = "rgb(255,164,0)"
+const LICIT =   "rgb(49,56,178)"
 const UNKNOWN = "rgb(128, 128, 128)"
 
 /**
