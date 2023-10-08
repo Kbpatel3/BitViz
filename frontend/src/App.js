@@ -117,9 +117,9 @@ function App() {
           <NavBar scrollToRef={scrollToRef} />
         </div>
 
-        {/* Row 2 which contains the main nodal structure */}
+        {/* Row 2-7 which contains the main nodal structure */}
         {data ? (
-          <div className="h-128 col-span-2 row-span-5 row-start-2 bg-slate-200 hover:bg-slate-300">
+          <div className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 hover:bg-slate-300 h-full">
             {/* Graph component, shows the force directed graph */}
             {/*<div className='col-span-2'>*/}
             <Graph
@@ -133,19 +133,9 @@ function App() {
           <div>Data not loaded</div>
         )}
 
-        {/* Row 3 which contains the slider */}
-        <div className="col-span-3 row-span-1 row-start-7 bg-slate-200 hover:bg-slate-300 pt-2.5">
-          {/* Slider component */}
-          <Slider
-            timestep={timestep}
-            setTimestep={setTimestep}
-            handleChange={handleChange}
-          />
-        </div>
-
-        {/* Dropdown */}
+        {/* Row 2-4 and column 3 which contains the bar graph/pie chart */}
         {data ? (
-          <div className="row-span-2 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300">
+          <div className="row-span-3 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300">
             {/* Select component for choosing the graph type */}
             <Select
               className={"w-full"}
@@ -165,18 +155,30 @@ function App() {
         ) : (
           <div>Data not loaded</div>
         )}
-        <div className="row-span-2 col-start-3 row-start-4 bg-slate-200 hover:bg-slate-300">
+
+        {/* Row 5-7 and column 3 which contains the subgraph */}
+        <div className="row-span-3 col-start-3 row-start-5 bg-slate-200 hover:bg-slate-300">
           {/* <SubGraph/> */}
           <div>
-            Selected Subgraph: Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum.
+            Selected Subgraph: Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
           </div>
+        </div>
+
+        {/* Row 8 which contains the slider */}
+        <div className="col-span-3 row-start-8 bg-slate-200 hover:bg-slate-300 pt-2.5">
+          {/* Slider component */}
+          <Slider
+            timestep={timestep}
+            setTimestep={setTimestep}
+            handleChange={handleChange}
+          />
         </div>
       </div>
       <div ref={scrollToRef}>
