@@ -114,12 +114,12 @@ function App() {
       <div className="grid grid-cols-3 grid-rows-8 gap-2">
         {/* Row 1 which contains the search bar, page buttons, and the settings icon */}
         <div className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex justify-center items-center h-full">
-          <NavBar scrollToRef={scrollToRef}/>
+          <NavBar scrollToRef={scrollToRef} />
         </div>
 
         {/* Row 2 which contains the main nodal structure */}
         {data ? (
-          <div className="h-128 col-span-3 row-span-4 row-start-2 bg-slate-200 hover:bg-slate-300">
+          <div className="h-128 col-span-2 row-span-5 row-start-2 bg-slate-200 hover:bg-slate-300">
             {/* Graph component, shows the force directed graph */}
             {/*<div className='col-span-2'>*/}
             <Graph
@@ -134,7 +134,7 @@ function App() {
         )}
 
         {/* Row 3 which contains the slider */}
-        <div className="col-span-3 row-span-1 row-start-6 bg-slate-200 hover:bg-slate-300 pt-2.5">
+        <div className="col-span-3 row-span-1 row-start-7 bg-slate-200 hover:bg-slate-300 pt-2.5">
           {/* Slider component */}
           <Slider
             timestep={timestep}
@@ -145,7 +145,7 @@ function App() {
 
         {/* Dropdown */}
         {data ? (
-          <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">
+          <div className="row-span-2 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300">
             {/* Select component for choosing the graph type */}
             <Select
               className={"w-full"}
@@ -165,30 +165,18 @@ function App() {
         ) : (
           <div>Data not loaded</div>
         )}
-        <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">
+        <div className="row-span-2 col-start-3 row-start-4 bg-slate-200 hover:bg-slate-300">
           {/* <SubGraph/> */}
-          <div>Selected Subgraph</div>
-        </div>
-        <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus
-          orci ac auctor augue mauris. Nunc mattis enim ut tellus elementum
-          sagittis vitae. Eleifend donec pretium vulputate sapien nec sagittis
-          aliquam malesuada. Quis ipsum suspendisse ultrices gravida. Elit
-          ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at
-          augue. Lacus suspendisse faucibus interdum posuere lorem. Vivamus at
-          augue eget arcu dictum varius duis at consectetur. Luctus accumsan
-          tortor posuere ac ut consequat semper viverra. Egestas quis ipsum
-          suspendisse ultrices gravida dictum fusce ut. Arcu vitae elementum
-          curabitur vitae. Elit eget gravida cum sociis natoque penatibus et
-          magnis dis. Elit at imperdiet dui accumsan sit amet nulla facilisi
-          morbi. Risus pretium quam vulputate dignissim. In eu mi bibendum neque
-          egestas. Lectus nulla at volutpat diam ut venenatis tellus. In arcu
-          cursus euismod quis viverra nibh cras. Pellentesque habitant morbi
-          tristique senectus et netus et. Morbi tristique senectus et netus et
-          malesuada. In hac habitasse platea dictumst quisque sagittis purus
-          sit. Vel pretium lectus quam id leo in. Orci sagittis eu volutpat
-          odio. Pretium vulputate
+          <div>
+            Selected Subgraph: Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            dolor in reprehenderit in voluptate velit esse cillum dolore eu
+            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est
+            laborum.
+          </div>
         </div>
       </div>
       <div ref={scrollToRef}>
