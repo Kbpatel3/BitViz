@@ -10,7 +10,7 @@ import BarWrapper from './containers/BarWrapper';
 import setting from './settings_icon.png';
 //import SubGraph from './components/SubGraph';
 import Slider from './components/Slider';
-import Bar from "./components/barchart";
+//import Bar from "./components/barchart";
 
 
 /**
@@ -52,6 +52,31 @@ function App() {
     
     return query;
   };
+
+  // const temp = (v, s) => {
+  //   const query = `MATCH (n:Transaction {timestep: "${v}"}), ` +
+  //                 `(a:Transaction {timestep: "${v}"})-[]->(b:Transaction {timestep: "${v}"}) ` +
+  //                 `WHERE cs.property = "${s}" ` +
+  //                 `WITH COLLECT(DISTINCT {id: n.id, group: n.group}) as nodes, ` +
+  //                 `COLLECT(DISTINCT {source: a.id, target: b.id}) as links ` +
+  //                 `RETURN ${key}`;
+
+  //                 // `WHERE cs.property = 'clickedNode' ` +
+  //                 // `CALL apoc.path.expandConfig(cs,{relationshipFilter:"CONNECTS>",maxLevel:3,uniqueness:"NODE_GLOBAL"}) YIELD path ` +
+  //                 // `WITH cs, RELATIONSHIPS(path) as r, LAST(NODES(path)) as es ` +
+  //                 // `WHERE es:Label2 ` +
+  //                 // `RETURN cs,es,r`
+  //   return query;
+  // };
+
+  // let tem = temp(timestep, clickedNode);
+  // const {records1, run} = useReadCypher(tem);
+  
+  // useEffect(() => {
+  //   query = temp(timestep, clickedNode);
+  //   run({query});
+  // }, [timestep]);
+
 
   // Get the query
   let query = getQuery(timestep);
@@ -97,6 +122,9 @@ function App() {
     // Update the clicked node
     setClickedNode(id);
 
+    // const query = temp(timestep, clickedNode);
+    // setSubgraph(query);
+
     // Call all of the callbacks registered in the observer context with the id, timestep and source
     alertSubscriber({
       id: parseInt(id),
@@ -104,6 +132,12 @@ function App() {
       source: "graph"
     })
   }
+
+  // const setSubgraph = (subgraph) => {
+  //   this.setState({
+  //     "subgraph": subgraph
+  //   })
+  // };
 
   // Refreshed the Window
   const refWindow = () => {
