@@ -3,17 +3,17 @@
  * @author Kellan Anderson
  * Search component for the application
  */
-import React, { useEffect, useState, useContext } from 'react';
-import { useReadCypher } from "use-neo4j"
-import ObserverContext from '../context/ObserverContext';
-import Dropdown from './dropdown';
+import React, { useEffect, useState, useContext } from "react";
+import { useReadCypher } from "use-neo4j";
+import ObserverContext from "../context/ObserverContext";
+import Dropdown from "./dropdown";
 
 /**
  * Search component of the application
  * @returns A JSX element containing a search bar
  */
 export default function Search() {
-  // Node and node id that is being searched for 
+  // Node and node id that is being searched for
   const [nodeId, setNodeId] = useState(0);
   const [node, setNode] = useState(undefined);
 
@@ -25,19 +25,18 @@ export default function Search() {
   // Gets the register and notify functions from the observer context
   const { registerSubscriber, alertSubscriber } = useContext(ObserverContext);
 
-  
   // Sets the key
   const key = "{id: n.id, timestep: n.timestep, group: n.group, edges: edges}";
-  
+
   // Requests data from the database with the specified query
-  const {run, records, loading, error} = useReadCypher(
-    `MATCH (n {id: "${nodeId}"}), (n)<-[]->(b) WITH n as n, COLLECT(b.id) as edges RETURN ${key}`
+  const { run, records, loading, error } = useReadCypher(
+    `MATCH (n {id: "${nodeId}"}), (n)<-[]->(b) WITH n as n, COLLECT(b.id) as edges RETURN ${key}`,
   );
-    
+
   // Registers the function that should be called when an observer alert is called
   registerSubscriber((alertObject) => {
     // Check to make sure the alert is not coming from this function
-    if(alertObject.source !== "search") {
+    if (alertObject.source !== "search") {
       // Get the id and set the ID state
       const id = alertObject.id;
       setNodeId(id);
@@ -54,25 +53,23 @@ export default function Search() {
     setQueryError(error);
   }, [error]);
 
-  
   // Re-run the query with the specified query whenever the nodeID changes
   useEffect(() => {
     const query = `MATCH (n {id: "${nodeId}"}), (n)-[]->(b) WITH n as n, COLLECT(b.id) as edges RETURN ${key}`;
-    run({query});
-
+    run({ query });
   }, [nodeId]);
-  
+
   // Set the records/node data whenever the records from the database changes
   useEffect(() => {
     // Check to see of the data has been defined yet or not
-    if(records !== undefined) {      
+    if (records !== undefined) {
       let newNode = records.length !== 0 ? records[0].get(key) : undefined;
 
-      // Calls the alert function 
+      // Calls the alert function
       alertSubscriber({
         id: newNode ? newNode.id : undefined,
         timestep: newNode ? newNode.timestep : undefined,
-        source: "search"
+        source: "search",
       });
 
       // Sets the node state
@@ -95,61 +92,68 @@ export default function Search() {
 
     // Sets the node it from the form
     setNodeId(formJson.id);
-  }
+  };
 
   /**
    * Defines the search results
    * @param nodeData The data for a searched node
    * @returns A JSX object to display the nodes information
    */
-  const NodeMeta = ({nodeData}) => {
+  const NodeMeta = ({ nodeData }) => {
     return (
       <>
         {/* Check to make sure the data has been defined */}
-        {nodeData !== undefined ? 
-          (<ul className='grid grid-cols-4 items-center bg-slate-400 py-2 rounded-md'>
+        {nodeData !== undefined ? (
+          <ul className="grid grid-cols-4 items-center bg-slate-400 py-2 rounded-md">
             {/* Display the node id */}
-            <li className='px-3 flex flex-row justify-center'>
-              <h2 className='font-semibold pr-1'>
-                Node id:
-              </h2>
+            <li className="px-3 flex flex-row justify-center">
+              <h2 className="font-semibold pr-1">Node id:</h2>
               {nodeData.id}
             </li>
-            
+
             {/* Display the node timestep */}
-            <li className='px-3 flex flex-row justify-center'>
-              <h2 className='font-semibold pr-1'>
-                Timestep:
-              </h2>
-               {nodeData.timestep}
+            <li className="px-3 flex flex-row justify-center">
+              <h2 className="font-semibold pr-1">Timestep:</h2>
+              {nodeData.timestep}
             </li>
-            
+
             {/* Display the node group */}
-            <li className='px-3 flex flex-row justify-center'>
-              <h2 className='font-semibold pr-1'>
-                Group:
-              </h2>
+            <li className="px-3 flex flex-row justify-center">
+              <h2 className="font-semibold pr-1">Group:</h2>
               {nodeData.group}
             </li>
 
             {/* Display the dropdown showing the edges */}
-            <li className='px-3 flex flex-row justify-center'>
-               <Dropdown title={'Edges'} elements={nodeData.edges} />
+            <li className="px-3 flex flex-row justify-center">
+              <Dropdown title={"Edges"} elements={nodeData.edges} />
             </li>
           </ul>
-          ) : <></>
-        }
+        ) : (
+          <></>
+        )}
       </>
     );
-  }
+  };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input name="id" type="text" className='border-2 border-slate-600 rounded-md pl-1 h-fit'/>
-        <button type='submit' className='btn-primary ml-1'>Search</button>
-      </form>
-      {node ? <NodeMeta nodeData={node} /> : <svg className='animate-spin h-5 w-5'></svg> }
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            name="id"
+            type="text"
+            className="border-2 border-slate-600 rounded-md pl-1 h-fit"
+          />
+          <button type="submit" className="btn-primary ml-1">
+            Search
+          </button>
+        </form>
+        {node ? (
+          <NodeMeta nodeData={node} />
+        ) : (
+          <svg className="animate-spin h-5 w-5"></svg>
+        )}
+      </div>
     </>
   );
 }
