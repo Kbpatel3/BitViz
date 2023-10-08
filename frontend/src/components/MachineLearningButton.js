@@ -7,7 +7,7 @@ export default function MachineLearningButton() {
   return (
     <>
       {/* Machine Learning Button (Temp)*/}
-      <button className={"absolute left-48"}>Analyze (ML)</button>
+      <button className={"mx-auto"}>Analyze (ML)</button>
     </>
   );
 }

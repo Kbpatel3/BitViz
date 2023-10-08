@@ -12,20 +12,29 @@ import HomeButton from "./HomeButton";
 export default function NavBar({ scrollToRef }) {
   return (
     <>
-      {/* Home Button */}
-      <HomeButton />
+      <div className={"flex justify-between items-center w-full h-full"}>
+        {/* Left side of the NavBar for Home, TimeStep, and Analyze buttons */}
+        <div className={"flex space-x-4 ml-2"}>
+          {/* Home Button */}
+          <HomeButton />
 
-      {/* Button to shows the barcharts(histogram) for each timestep */}
-      <ToHistogramButton scrollToRef={scrollToRef} />
+          {/* Button to shows the barcharts(histogram) for each timestep */}
+          <ToHistogramButton scrollToRef={scrollToRef} />
 
-      {/* Machine Learning Button (Temp)*/}
-      <MachineLearningButton />
+          {/* Machine Learning Button (Temp)*/}
+          <MachineLearningButton />
+        </div>
 
-      {/* Search component */}
-      <Search />
+        {/* Search component */}
+        <div className={"flex items-center mr-32"}>
+          <Search />
+        </div>
 
-      {/* Setting Button (Temp) */}
-      <SettingsButton />
+        {/* Setting Button (Temp) */}
+        <div className={"mt-2 mr-2"}>
+          <SettingsButton />
+        </div>
+      </div>
     </>
   );
 }

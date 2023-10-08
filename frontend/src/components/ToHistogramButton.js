@@ -14,7 +14,7 @@ export default function ToHistogramButton({ scrollToRef}) {
   return (
     <>
       {/* Button to shows the barcharts(histogram) for each timestep */}
-      <button className={"absolute left-20"} onClick={(e) => goTimeSteps()}>
+      <button className={"mx-auto"} onClick={(e) => goTimeSteps()}>
         TimeSteps
       </button>
     </>

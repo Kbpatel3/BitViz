@@ -113,7 +113,7 @@ function App() {
     <>
       <div className="grid grid-cols-3 grid-rows-8 gap-2">
         {/* Row 1 which contains the search bar, page buttons, and the settings icon */}
-        <div className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex flex-row items-center justify-center">
+        <div className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex justify-center items-center h-full">
           <NavBar scrollToRef={scrollToRef}/>
         </div>
 

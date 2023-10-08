@@ -12,7 +12,7 @@ export default function HomeButton() {
   return (
     <>
       {/* Home Button */}
-      <button className={"absolute left-7"} onClick={(e) => refWindow()}>
+      <button className={"mx-auto"} onClick={(e) => refWindow()}>
         Home
       </button>
     </>

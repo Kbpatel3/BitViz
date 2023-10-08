@@ -10,7 +10,7 @@ export default function SettingsButton() {
     <>
       {/* Setting Button (Temp) */}
       <input
-        className="absolute right-7 object-scale-down h-7 w-7"
+        className="mx-auto object-scale-down h-7 w-7"
         type="image"
         src={setting}
       />

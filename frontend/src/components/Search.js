@@ -137,23 +137,21 @@ export default function Search() {
 
   return (
     <>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            name="id"
-            type="text"
-            className="border-2 border-slate-600 rounded-md pl-1 h-fit"
-          />
-          <button type="submit" className="btn-primary ml-1">
-            Search
-          </button>
-        </form>
-        {node ? (
-          <NodeMeta nodeData={node} />
-        ) : (
-          <svg className="animate-spin h-5 w-5"></svg>
-        )}
-      </div>
+      <form onSubmit={handleSubmit} className={"mx-auto"}>
+        <input
+          name="id"
+          type="text"
+          className="border-2 border-slate-600 rounded-md pl-1 h-fit"
+        />
+        <button type="submit" className="btn-primary ml-1">
+          Search
+        </button>
+      </form>
+      {node ? (
+        <NodeMeta nodeData={node} />
+      ) : (
+        <svg className="animate-spin h-5 w-5"></svg>
+      )}
     </>
   );
 }
