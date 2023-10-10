@@ -13,7 +13,7 @@ export default function SubGraph({ clickedNode }) {
      WITH COLLECT({source: last_two_nodes[0].id, target: last_two_nodes[1].id}) AS links,
           COLLECT(DISTINCT {id:last_two_nodes[0].id, group:last_two_nodes[0].group}) +
           COLLECT(DISTINCT {id:last_two_nodes[1].id, group:last_two_nodes[1].group}) as nodes
-     RETURN {nodes: nodes, links: links}`;
+     RETURN ${key}`;
     return query;
   };
 
@@ -33,7 +33,16 @@ export default function SubGraph({ clickedNode }) {
   if (records === undefined) {
     console.log("Records is undefined");
   } else {
-    data = records[0].get(key);
+    const rawResult = records[0].get(key);
+    // Remove duplicate nodes by converting them to a Map
+    const uniqueNodesMap = new Map(
+      rawResult.nodes.map((node) => [node.id, node]),
+    );
+    // Convert the unique nodes back to an array
+    const uniqueNodes = Array.from(uniqueNodesMap.values());
+
+    // Now, you have uniqueNodes without duplicates
+    data = { ...rawResult, nodes: uniqueNodes };
     console.log(data);
   }
 
@@ -60,6 +69,7 @@ export default function SubGraph({ clickedNode }) {
           </ul>
         </div>
       ) : (
+        // <SubGraphVisual data={data} highlight={clickedNode} />
         <p>Loading data...</p>
       )}
     </div>
