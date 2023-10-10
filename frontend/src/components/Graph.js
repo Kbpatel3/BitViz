@@ -42,6 +42,9 @@ const Graph = ({data, highlight, nodeClick}) => {
             if (!event.active) simulation.alphaTarget(0.3).restart();
             event.subject.fx = event.subject.x;
             event.subject.fy = event.subject.y;
+
+            // Remove the force you want to disable (e.g., charge)
+            simulation.force("charge", null);
         }
       
         function dragged(event) {
@@ -53,6 +56,9 @@ const Graph = ({data, highlight, nodeClick}) => {
           if (!event.active) simulation.alphaTarget(0);
           event.subject.fx = null;
           event.subject.fy = null;
+
+          // Add back the force when dragging ends
+            //simulation.force("charge", d3.forceManyBody().strength(-1));
         }
 
         // Defines our links (edges) on the screen
