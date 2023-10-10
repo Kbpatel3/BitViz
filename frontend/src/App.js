@@ -12,6 +12,7 @@ import setting from "./settings_icon.png";
 import Slider from "./components/Slider";
 import Bar from "./components/barchart";
 import NavBar from "./components/NavBar";
+import SubGraph from "./components/SubGraph";
 
 /**
  * App.js, logic entry point for our data. This function controls the ways things are rendered to the user
@@ -192,6 +193,7 @@ function App() {
       <div ref={scrollToRef}>
         <BarSelector highlighted={timestep} clickFunction={handleBarClick} />
       </div>
+      <SubGraph />
     </>
   );
 }
