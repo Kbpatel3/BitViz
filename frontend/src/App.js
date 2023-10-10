@@ -158,7 +158,7 @@ function App() {
         )}
 
         {/* Row 5-7 and column 3 which contains the subgraph */}
-        <div className="subgraph row-span-3 col-start-3 row-start-5 bg-slate-200 hover:bg-slate-300 h-[500px] w-[500px]">
+        <div className="subgraph row-span-3 col-start-3 row-start-5 bg-slate-200 hover:bg-slate-300 min-h-[320px] min-w-[500px]">
           {/* <SubGraph/> */}
           {clickedNode ? (
             <div>
