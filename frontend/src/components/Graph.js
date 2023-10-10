@@ -10,6 +10,8 @@ import "./graph.css";
  */
 const Graph = ({data, highlight, nodeClick}) => {
 
+  //alert("Data: " + JSON.stringify(data));
+
   const ref = useD3(
     (svg) => {
 

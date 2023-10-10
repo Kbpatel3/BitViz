@@ -53,18 +53,18 @@ function App() {
     return query;
   };
 
-  const getSubQuery = (v) => {
-    const query = `MATCH path = (n {id: "${v}")-[*]-(m) ` +
-                  `WHERE id(n) <> id(m) ` +
-                  `WITH nodes(path) AS nodes_in_path ` +
-                  `WITH nodes_in_path[size(nodes_in_path) - 2..] AS last_two_nodes ` +
-                  `WITH COLLECT({source: last_two_nodes[0].id, target: last_two_nodes[1].id}) AS links, ` +
-                  `COLLECT(DISTINCT {id:last_two_nodes[0].id, group:last_two_nodes[0].group}) + ` +
-                  `COLLECT(DISTINCT {id:last_two_nodes[1].id, group:last_two_nodes[1].group}) as nodes ` +
-                  `RETURN ${key}`
+  // const getSubQuery = (v) => {
+  //   const query = `MATCH path = (n {id: "${v}")-[*]-(m) ` +
+  //                 `WHERE id(n) <> id(m) ` +
+  //                 `WITH nodes(path) AS nodes_in_path ` +
+  //                 `WITH nodes_in_path[size(nodes_in_path) - 2..] AS last_two_nodes ` +
+  //                 `WITH COLLECT({source: last_two_nodes[0].id, target: last_two_nodes[1].id}) AS links, ` +
+  //                 `COLLECT(DISTINCT {id:last_two_nodes[0].id, group:last_two_nodes[0].group}) + ` +
+  //                 `COLLECT(DISTINCT {id:last_two_nodes[1].id, group:last_two_nodes[1].group}) as nodes ` +
+  //                 `RETURN ${key}`
     
-    return query;
-  };
+  //   return query;
+  // };
 
   // const temp = (v, s) => {
   //   const query = `MATCH (n:Transaction {timestep: "${v}"}), ` +
@@ -85,30 +85,30 @@ function App() {
   // const [run, setRun] = useState({});
   // const [runSub, setRunSub] = useState({});
 
-  let subQuery = getSubQuery(clickedNode);
+  // let subQuery = getSubQuery(clickedNode);
   // let query = getQuery(timestep);
   // const {records, subRecord} = useReadCypher([query, tem]);
   // console.log("\nRecord: " + records);
   //const subRecord = useReadCypher(tem);
 
-  const {subRecord, runSub} = useReadCypher(subQuery);
-  const queryRef = useRef(null);
+  // const {subRecord, runSub} = useReadCypher(subQuery);
+  // const queryRef = useRef(null);
   
   
-  useEffect(() => {
-    queryRef.current = getSubQuery(clickedNode);
-    runSub({subQuery});
-  }, [clickedNode]);
+  // useEffect(() => {
+  //   queryRef.current = getSubQuery(clickedNode);
+  //   runSub({subQuery});
+  // }, [clickedNode]);
 
-  let subData = undefined;
+  // let subData = undefined;
 
-  if(subRecord === undefined) {
-    console.log("Records is undefined");
-  }
-  else {
-    // If the data has finished retreiving from the database, assign it to the data variable
-    subData = subRecord[0].get(key);
-  }
+  // if(subRecord === undefined) {
+  //   console.log("Records is undefined");
+  // }
+  // else {
+  //   // If the data has finished retreiving from the database, assign it to the data variable
+  //   subData = subRecord[0].get(key);
+  // }
 
 
   // Get the query
@@ -116,12 +116,14 @@ function App() {
   
   // Get the functions and variables we need from the use-neo4j package
   const {records, run} = useReadCypher(query);
+  //alert(JSON.stringify(records));
 
   // Requery the database whenever the state changes
   useEffect(() => {
-    queryRef.current = getQuery(timestep);
+    query = getQuery(timestep);
     run({query});
   }, [timestep]);
+  // alert(JSON.stringify(records));
 
   // Init our data
   let data = undefined;
@@ -133,6 +135,7 @@ function App() {
   else {
     // If the data has finished retreiving from the database, assign it to the data variable
     data = records[0].get(key);
+    //alert(JSON.stringify(data));
   }
 
 
@@ -156,7 +159,6 @@ function App() {
   const handleCircleClick = (id) => {
     // Update the clicked node
     setClickedNode(id);
-
     // const query = temp(timestep, clickedNode);
     // setSubgraph(query);
 
@@ -287,13 +289,16 @@ function App() {
             </div>
         : <div>Data not loaded</div>}
         {/* {subData ? */}
+        { clickedNode ?
           <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">
               {/* <SubGraph/> */}
               <div>
                 {/* Subgraph */}
                 {/* <SubGraph data={subData} highlight={clickedNode} nodeClick={handleCircleClick}/> */}
+                <SubGraph clickedNode={clickedNode} nodeClick={handleCircleClick}/>
               </div>
           </div>
+        : <div>No Subgraph</div>}
         {/* : <div>No Subgraph</div>} */}
         <div className="row-span-2 row-start-7 bg-slate-200 hover:bg-slate-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus orci ac auctor augue mauris. Nunc mattis enim ut tellus elementum sagittis vitae. Eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada. Quis ipsum suspendisse ultrices gravida. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue. Lacus suspendisse faucibus interdum posuere lorem. Vivamus at augue eget arcu dictum varius duis at consectetur. Luctus accumsan tortor posuere ac ut consequat semper viverra. Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut. Arcu vitae elementum curabitur vitae. Elit eget gravida cum sociis natoque penatibus et magnis dis.
 

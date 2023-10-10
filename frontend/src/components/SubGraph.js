@@ -3,20 +3,71 @@
 //  * @author Kaushal Patel
 //  * Search component for the application
 //  */
-
+import { useEffect} from 'react';
 import useD3 from "../hooks/useD3";
 import * as d3 from 'd3';
 import getColor from "../helper/color";
 import "./graph.css";
+import { useReadCypher } from 'use-neo4j';
+
 
 /**
  * Graph component for our app, takes data and uses a custom hook to render our graph to the screen
  * @param {*} Data The data for our graph to render
  * @returns The graph component
  */
-const SubGraph = ({data, highlight, nodeClick}) => {
-  console.log("HEloooo");
+const SubGraph = ({clickedNode, nodeClick}) => {
+  console.log("Hello: " + clickedNode);
+  // Constants used for talking to the database
+  const key = "{nodes: nodes, links: links}";
 
+  // const getSubQuery = (v) => {
+  //   const query = `MATCH path = (n {id: "${v}"})-[*]-(m) ` +
+  //                 "WHERE id(n) <> id(m) " +
+  //                 "WITH nodes(path) AS nodes_in_path " +
+  //                 "WITH nodes_in_path[size(nodes_in_path) - 2..] AS last_two_nodes " +
+  //                 "WITH COLLECT({source: last_two_nodes[0].id, target: last_two_nodes[1].id}) AS links, " +
+  //                 "RETURN links";
+  //                 // `COLLECT(DISTINCT {id:last_two_nodes[0].id, group:last_two_nodes[0].group}) \+ ` +
+  //                 // `COLLECT(DISTINCT {id:last_two_nodes[1].id, group:last_two_nodes[1].group}) as nodes ` +
+  //                 // `RETURN ${key}`
+    
+  //   return query;
+  // };
+
+  // for testing purposes
+  // const getSubQuery = (v) => {
+  //   const query = `match (n:Transaction {timestep: "${v}"}), ` +
+  //                 `(a:Transaction {timestep: "${v}"})-[]->(b:Transaction {timestep: "${v}"}) ` +
+  //                 "WITH COLLECT(DISTINCT {id: n.id, group: n.group}) as nodes, " + 
+  //                 `COLLECT(DISTINCT {source: a.id, target: b.id}) as links RETURN ${key}`;
+    
+  //   return query;
+  // };
+
+  let query = getSubQuery(clickedNode);
+
+  const {records, run} = useReadCypher(query);  
+  
+  useEffect(() => {
+    query = getSubQuery(nodeClick);
+    run({query});
+  }, [clickedNode]);
+
+  let data = undefined;
+
+  if(records === undefined) {
+    console.log("Hello1");
+
+    console.log("Records is undefined");
+  }
+  else {
+    // If the data has finished retreiving from the database, assign it to the data variable
+    console.log("Hello2");
+    data = records[0].get(key);
+    console.log("Data: " + data);
+    console.log("Hello3");
+  }
   const ref = useD3(
     (svg) => {
 
@@ -133,7 +184,7 @@ const SubGraph = ({data, highlight, nodeClick}) => {
         .links(data.links);
       
       // Calls the clicked node funciton with the specified highlighted node
-      clickNode(highlight);
+      clickNode(clickedNode);
     },
     // the data to be watched for changes
     [data]
