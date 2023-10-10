@@ -10,7 +10,7 @@ const SubGraphVisual = ({data, highlight}) => {
         if (!data) return;
 
       // Get the parent elements dimentions
-      const dimensions = d3.select(".graphContainer").node().getBoundingClientRect();
+      const dimensions = d3.select(".subgraph").node().getBoundingClientRect();
       // Constants used by the SVG
       const height = dimensions.height;
       const width = dimensions.width;

@@ -49,27 +49,27 @@ export default function SubGraph({ clickedNode }) {
   return (
     <div>
       {data ? (
-        <div>
-          <h2>Nodes</h2>
-          <ul>
-            {data.nodes.map((node) => (
-              <li key={node.id}>
-                ID: {node.id}, Group: {node.group}
-              </li>
-            ))}
-          </ul>
-
-          <h2>Links</h2>
-          <ul>
-            {data.links.map((link, index) => (
-              <li key={index}>
-                Source: {link.source}, Target: {link.target}
-              </li>
-            ))}
-          </ul>
-        </div>
+        // <div>
+        //   <h2>Nodes</h2>
+        //   <ul>
+        //     {data.nodes.map((node) => (
+        //       <li key={node.id}>
+        //         ID: {node.id}, Group: {node.group}
+        //       </li>
+        //     ))}
+        //   </ul>
+        //
+        //   <h2>Links</h2>
+        //   <ul>
+        //     {data.links.map((link, index) => (
+        //       <li key={index}>
+        //         Source: {link.source}, Target: {link.target}
+        //       </li>
+        //     ))}
+        //   </ul>
+        // </div>
+          <SubGraphVisual data={data} highlight={clickedNode} />
       ) : (
-        // <SubGraphVisual data={data} highlight={clickedNode} />
         <p>Loading data...</p>
       )}
     </div>
