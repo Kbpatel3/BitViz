@@ -3,11 +3,6 @@
 //  * @author Kaushal Patel
 //  * Search component for the application
 //  */
-// /**
-//  * @author Noah Hassett
-//  * @author Kaushal Patel
-//  * Search component for the application
-//  */
 
 import useD3 from "../hooks/useD3";
 import * as d3 from 'd3';
@@ -19,13 +14,15 @@ import "./graph.css";
  * @param {*} Data The data for our graph to render
  * @returns The graph component
  */
-const Graph = ({data, highlight, nodeClick}) => {
+const SubGraph = ({data, highlight, nodeClick}) => {
+  console.log("HEloooo");
 
   const ref = useD3(
     (svg) => {
 
       // Get the parent elements dimentions
-      const dimensions = d3.select(".graphContainer").node().getBoundingClientRect();
+      const dimensions = d3.select(".subgraphContainer").node().getBoundingClientRect();
+
       // Constants used by the SVG
       const height = dimensions.height;
       const width = dimensions.width;
@@ -144,7 +141,7 @@ const Graph = ({data, highlight, nodeClick}) => {
 
   // SVG Containing the graph
   return (
-    <div className="graphContainer h-full w-full">
+    <div className="subgraphContainer h-full w-full">
       <svg
       ref={ref}
       className="inline-block absolute">
@@ -154,7 +151,7 @@ const Graph = ({data, highlight, nodeClick}) => {
   );
 }
 
-export default Graph;
+export default SubGraph;
 
 /**
  * Clicked node function, highlights a specific node based off of the id of each node
