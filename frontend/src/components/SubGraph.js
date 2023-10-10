@@ -1,9 +1,8 @@
 import { useReadCypher } from "use-neo4j";
 import { useEffect, useState } from "react";
+import SubGraphVisual from "./SubGraphVisual";
 
-export default function SubGraph() {
-  const [clickedNode, setClickedNode] = useState(null);
-
+export default function SubGraph({ clickedNode }) {
   const key = "{nodes: nodes, links: links}";
 
   const getQuery = (v) => {
@@ -38,17 +37,31 @@ export default function SubGraph() {
     console.log(data);
   }
 
-  const handleButtonClick = (v) => {
-    setClickedNode(v);
-  };
-
   return (
     <div>
-      <button onClick={() => handleButtonClick("34194980")}>34194980</button>
-      TEST
-      <button onClick={() => handleButtonClick("5529846")}>5529846</button>
-      NEW
-      <button onClick={() => handleButtonClick("232896856")}>232896856</button>
+      {data ? (
+        <div>
+          <h2>Nodes</h2>
+          <ul>
+            {data.nodes.map((node) => (
+              <li key={node.id}>
+                ID: {node.id}, Group: {node.group}
+              </li>
+            ))}
+          </ul>
+
+          <h2>Links</h2>
+          <ul>
+            {data.links.map((link, index) => (
+              <li key={index}>
+                Source: {link.source}, Target: {link.target}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <p>Loading data...</p>
+      )}
     </div>
   );
 }

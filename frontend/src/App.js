@@ -160,24 +160,13 @@ function App() {
         {/* Row 5-7 and column 3 which contains the subgraph */}
         <div className="row-span-3 col-start-3 row-start-5 bg-slate-200 hover:bg-slate-300">
           {/* <SubGraph/> */}
-          <div>
-            Selected Subgraph:
-            Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </div>
+          {clickedNode ? (
+            <div>
+              <SubGraph clickedNode={clickedNode} />
+            </div>
+          ) : (
+            <div>Click a node to see its subgraph</div>
+          )}
         </div>
 
         {/* Row 8 which contains the slider */}
@@ -193,7 +182,6 @@ function App() {
       <div ref={scrollToRef}>
         <BarSelector highlighted={timestep} clickFunction={handleBarClick} />
       </div>
-      <SubGraph />
     </>
   );
 }
