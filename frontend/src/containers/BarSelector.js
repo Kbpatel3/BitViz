@@ -71,7 +71,8 @@ export default function BarSelector({ highlighted, clickFunction }) {
         {data.map((d) =>
           {
             // set the border color depending on if it has been highlighted
-            const borderColor = Number(d.timestep.low) === highlighted ? "blue-600" : "white";
+            var borderColor = Number(d.timestep.low) === highlighted ? "red-600" : "white";
+            
             return (
               <div >
                 {/* sets a single barchart and calls the click funciton with the datas timestep on a click event */}

@@ -132,7 +132,7 @@ function App() {
   if (records === undefined) {
     console.log("Records is undefined");
   } else {
-    // If the data has finished retreiving from the database, assign it to the data variable
+    // If the data has finished retrieving from the database, assign it to the data variable
     data = records[0].get(key);
     //console.log(data);
   }
