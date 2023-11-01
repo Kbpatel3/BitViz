@@ -6,6 +6,8 @@ import "./graph.css";
 /**
  * Graph component for our app, takes data and uses a custom hook to render our graph to the screen
  * @param {*} Data The data for our graph to render
+ * @param {*} highlight The node to highlight
+ * @param {*} nodeClick The function to call when a node is clicked
  * @returns The graph component
  */
 const Graph = ({data, highlight, nodeClick}) => {
@@ -37,24 +39,30 @@ const Graph = ({data, highlight, nodeClick}) => {
           .force("link", d3.forceLink().id(d => d.id))
           .force("charge", d3.forceManyBody().strength(-1))
           .force("center", d3.forceCenter(width / 2, height / 2));
-        
+
         // Functions to define what happens when a user clicks on an app
-        
+
         function dragstarted(event) {
             if (!event.active) simulation.alphaTarget(0.3).restart();
             event.subject.fx = event.subject.x;
             event.subject.fy = event.subject.y;
+
+            // Remove the force you want to disable (e.g., charge)
+            simulation.force("charge", null);
         }
-      
+
         function dragged(event) {
           event.subject.fx = event.x;
           event.subject.fy = event.y;
         }
-      
+
         function dragended(event) {
           if (!event.active) simulation.alphaTarget(0);
           event.subject.fx = null;
           event.subject.fy = null;
+
+          // Add back the force when dragging ends
+            //simulation.force("charge", d3.forceManyBody().strength(-1));
         }
 
         // Defines our links (edges) on the screen
@@ -68,7 +76,6 @@ const Graph = ({data, highlight, nodeClick}) => {
           .attr("stroke-width", function(d) {
             return Math.sqrt(d.value);
           });
-
         // Defines our nodes on the screen
         const node = svg
           .append("g")
@@ -88,8 +95,9 @@ const Graph = ({data, highlight, nodeClick}) => {
               .on("end", dragended)
           ).on('click', (d) => {
             nodeClick(parseInt(d.target.id.slice(4)));
-            d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
-            d3.select(`#${d.target.id}`).attr('fill', (d) => getColor(d.group)).attr('r', 12);
+            clickNode(parseInt(d.target.id.slice(4)));
+            // d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
+            // d3.select(`#${d.target.id}`).attr('fill', (d) => getColor(d.group)).attr('r', 12);
           });
 
         // Adds titles to nodes
@@ -111,7 +119,7 @@ const Graph = ({data, highlight, nodeClick}) => {
           .attr("y1", (d) => limitPosition(d.source.y, "y") )
           .attr("x2", (d) => limitPosition(d.target.x, "x") )
           .attr("y2", (d) => limitPosition(d.target.y, "y") );
- 
+
         node
           .attr("cx", (d) => limitPosition(d.x, "x") )
           .attr("cy", (d) => limitPosition(d.y, "y") );
@@ -125,7 +133,7 @@ const Graph = ({data, highlight, nodeClick}) => {
       simulation
         .force("link")
         .links(data.links);
-      
+
       // Calls the clicked node funciton with the specified highlighted node
       clickNode(highlight);
     },
@@ -149,13 +157,12 @@ export default Graph;
 
 /**
  * Clicked node function, highlights a specific node based off of the id of each node
- * @param {*} id 
+ * @param {*} id
  */
 function clickNode(id) {
-  // Resets all the nodes in the graph and set them to the correct size and color
-  d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
-  // Sets the node with a given ID with a bigger radius and colors it magenta so it stands out
-  // if(id) {
-  //   d3.select(`#node${id}`).attr('fill', 'rgb(0,0,0)').attr('r', 9);
-  // }
+    d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
+  d3.select(`#node${id}`)
+    .transition()
+    .duration(500)
+    .attr('r', 12);
 }
