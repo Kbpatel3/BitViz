@@ -59,21 +59,35 @@ export default function Search() {
     run({ query });
   }, [nodeId]);
 
-  // Set the records/node data whenever the records from the database changes
+  // NOTE: alertSubscriber() is causing reloading when clicked a node
+  // // Set the records/node data whenever the records from the database changes
+  // useEffect(() => {
+  //   // Check to see of the data has been defined yet or not
+  //   if (records !== undefined) {
+  //     let newNode = records.length !== 0 ? records[0].get(key) : undefined;
+
+  //     // Calls the alert function
+  //     alertSubscriber({
+  //       id: newNode ? newNode.id : undefined,
+  //       timestep: newNode ? newNode.timestep : undefined,
+  //       source: "search",
+  //     });
+
+  //     // Sets the node state
+  //     setNode(newNode);
+  //   }
+  // }, [records]);
+
+  // updates the graph base on the new node
+  const updateGraph = (newNode) => {
+    setNode(newNode);
+  };
+  
+  // Sets the node whenever the records from the database changes
   useEffect(() => {
-    // Check to see of the data has been defined yet or not
     if (records !== undefined) {
       let newNode = records.length !== 0 ? records[0].get(key) : undefined;
-
-      // Calls the alert function
-      alertSubscriber({
-        id: newNode ? newNode.id : undefined,
-        timestep: newNode ? newNode.timestep : undefined,
-        source: "search",
-      });
-
-      // Sets the node state
-      setNode(newNode);
+      updateGraph(newNode);
     }
   }, [records]);
 
