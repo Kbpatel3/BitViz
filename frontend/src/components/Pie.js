@@ -20,8 +20,6 @@ const Pie = ({ data }) => {
             // Set dimensions and margins
             const dimensions = d3.select(".pieTin").node().getBoundingClientRect();
 
-            console.log(dimensions);
-
             // Sets the height and widths as well as margins
             const height = dimensions.height;
             const width = dimensions.width;
@@ -88,7 +86,7 @@ const Pie = ({ data }) => {
                     .outerRadius(radius)
                 )
                 .attr('fill', (d) => {
-                    console.log(d.data.group);
+                    //console.log(d.data.group);
                     return getColor(d.data.group);
                 })
                 .attr("stroke", "white")

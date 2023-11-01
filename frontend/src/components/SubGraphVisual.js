@@ -143,8 +143,6 @@ const SubGraphVisual = ({ data, highlight }) => {
 
       simulation.force("link").links(data.links);
 
-      // Calls the clicked node funciton with the specified highlighted node
-      clickNode(highlight);
     },
     // the data to be watched for changes
     [data],
@@ -160,13 +158,3 @@ const SubGraphVisual = ({ data, highlight }) => {
 
 export default SubGraphVisual;
 
-/**
- * Clicked node function, highlights a specific node based off of the id of each node
- * @param {*} id
- */
-function clickNode(id) {
-  // Resets all the nodes in the graph and set them to the correct size and color
-  d3.selectAll("circle")
-    .attr("fill", (d) => getColor(d.group))
-    .attr("r", 7);
-}

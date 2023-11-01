@@ -3,12 +3,9 @@ import Graph from "./components/Graph";
 import Pie from "./components/Pie";
 import BarSelector from "./containers/BarSelector";
 import { useReadCypher } from "use-neo4j";
-import Search from "./components/Search";
 import ObserverContext from "./context/ObserverContext";
 import { Select, MenuItem } from "@mui/material";
 import BarWrapper from "./containers/BarWrapper";
-import setting from "./settings_icon.png";
-//import SubGraph from './components/SubGraph';
 import Slider from "./components/Slider";
 import Bar from "./components/barchart";
 import NavBar from "./components/NavBar";
@@ -18,6 +15,8 @@ import SubGraph from "./components/SubGraph";
  * App.js, logic entry point for our data. This function controls the ways things are rendered to the user
  * @author Kellan Anderson
  * @author Aidan Kirk
+ * @author Kaushal Patel
+ * @author Noah Hasset
  * @returns JSX containing the view of our app
  */
 
@@ -76,7 +75,7 @@ function App() {
   } else {
     // If the data has finished retreiving from the database, assign it to the data variable
     data = records[0].get(key);
-    console.log(data);
+    //console.log(data);
   }
 
   // Runs whenever the slider is moved
@@ -158,8 +157,10 @@ function App() {
         )}
 
         {/* Row 5-7 and column 3 which contains the subgraph */}
-        <div className="subgraph row-span-3 col-start-3 row-start-5 bg-slate-200 hover:bg-slate-300
-        min-h-[320px] min-w-[500px]">
+        <div
+          className="subgraph row-span-3 col-start-3 row-start-5 bg-slate-200 hover:bg-slate-300
+        min-h-[320px] min-w-[500px]"
+        >
           {/* <SubGraph/> */}
           {clickedNode ? (
             <div>

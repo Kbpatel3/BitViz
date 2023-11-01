@@ -72,7 +72,7 @@ export default function SubGraph({ clickedNode }) {
     data = { ...rawResult, nodes: uniqueNodes };
 
     // Debug to see the data
-    console.log(data);
+    //console.log(data);
   }
 
   // Return the SubGraphVisual component if the data has been loaded
@@ -99,7 +99,7 @@ export default function SubGraph({ clickedNode }) {
         //   </ul>
         // </div>
         // Render the subgraph visual with the data and the clicked node
-        <SubGraphVisual data={data} highlight={clickedNode.id} />
+        <SubGraphVisual data={data} highlight={clickedNode} />
       ) : (
         <p>Loading data...</p>
       )}
