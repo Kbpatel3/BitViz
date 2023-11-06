@@ -22,9 +22,9 @@ const Pie = ({ data }) => {
 
             // Sets the height and widths as well as margins
             //const height = dimensions.height;
-            
+
             //fixed height so that the pie chart doesn't get too small or too big
-            const height = 300;
+            const height = 280;
             const width = dimensions.width;
             console.log("Height: " + height + " Width: " + width);
             const margin = 40

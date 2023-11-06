@@ -83,7 +83,7 @@ export default function BarSelector({ highlighted, clickFunction }) {
                   onClick={() => clickFunction(d.timestep.low)}
                   >
                     {/* Renders a single bar chart */}
-                    <Bar data={d.groups} />
+                    <Bar data={d.groups} h={undefined} />
                 </div>
                 {/* Show the timestep of the barchart */}
                 <p className="text-center">Timestep {d.timestep.low}</p>

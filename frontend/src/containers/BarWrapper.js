@@ -40,7 +40,7 @@ export default function BarWrapper({timestep}) {
 
     // Set the result
     result = (
-      <Bar data={data} />
+      <Bar data={data} h={300} />
     );
   }
 

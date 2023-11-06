@@ -180,7 +180,8 @@ function App() {
 
         {/* Row 2-7 which contains the main nodal structure */}
         {data ? (
-          <div className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 hover:bg-slate-300 h-full">
+          <div className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 hover:bg-slate-300">
+          {/* <div className="h-full col-span-2 row-span-6 row-start-2 bg-slate-200 hover:bg-slate-300"> */}
             {/* Graph component, shows the force directed graph */}
             {/*<div className='col-span-2'>*/}
             <Graph
@@ -191,12 +192,15 @@ function App() {
             {/*</div>*/}
           </div>
         ) : (
-          <div>Data not loaded</div>
+          <div className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 hover:bg-slate-300">
+          Data not loaded
+          </div>
         )}
 
         {/* Row 2-4 and column 3 which contains the bar graph/pie chart */}
         {data ? (
-          <div className="row-span-3 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300">
+          //! h-80 recommended
+          <div className="h-80 row-span-3 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300">
             {/* Select component for choosing the graph type */}
             <Select
               className={"w-full"}
@@ -214,7 +218,9 @@ function App() {
             {graph === "Pie" && <Pie data={data.nodes} />}
           </div>
         ) : (
-          <div>Data not loaded</div>
+          <div className="h-80 row-span-3 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300">
+          Data not loaded
+          </div>
         )}
 
         {/* Row 5-7 and column 3 which contains the subgraph */}
@@ -233,7 +239,7 @@ function App() {
         </div>
 
         {/* Row 8 which contains the slider */}
-        <div className="col-span-3 row-start-8 bg-slate-200 hover:bg-slate-300 pt-2.5">
+        <div ref={scrollToRef} className="col-span-3 row-start-8 bg-slate-200 hover:bg-slate-300 pt-2.5">
           {/* Slider component */}
           <Slider
             timestep={timestep}
@@ -242,7 +248,7 @@ function App() {
           />
         </div>
       </div>
-      <div ref={scrollToRef}>
+      <div>
         <BarSelector highlighted={timestep} clickFunction={handleBarClick} />
       </div>
     </>
