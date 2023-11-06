@@ -21,8 +21,12 @@ const Pie = ({ data }) => {
             const dimensions = d3.select(".pieTin").node().getBoundingClientRect();
 
             // Sets the height and widths as well as margins
-            const height = dimensions.height;
+            //const height = dimensions.height;
+            
+            //fixed height so that the pie chart doesn't get too small or too big
+            const height = 300;
             const width = dimensions.width;
+            console.log("Height: " + height + " Width: " + width);
             const margin = 40
 
             // Adjust radius to fit inside react page
