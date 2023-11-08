@@ -200,7 +200,8 @@ function App() {
         {/* Row 2-4 and column 3 which contains the bar graph/pie chart */}
         {data ? (
           //! h-80 recommended
-          <div className="h-80 row-span-3 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300">
+            // Shift this down to anchor bottom of container
+          <div className="row-span-3 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300 max-h-[320px] max-w-[500px]">
             {/* Select component for choosing the graph type */}
             <Select
               className={"w-full"}

@@ -87,7 +87,7 @@ const Bar = ({ data }) => {
     )
     
     return (
-        <div className="bar-container h-full">
+        <div className="bar-container">
             {/* SVG to render the chart in */}
             <svg
                 ref={ref}
