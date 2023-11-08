@@ -16,29 +16,28 @@ import convert from "../helper/convert";
  * @returns A JSX component showing the army of barcharts
  */
 export default function BarSelector({ highlighted, clickFunction }) {
-    // Define our query and our key
-    const query = 'match (n:meta) with collect({timestep: n.timestep, illicit:n.illicit, licit:n.licit,' +
-                  ' unknown:n.unknown}) as meta return meta';
-    const key = 'meta';
+  // Define our query and our key
+  const query = 'match (n:meta) with collect({timestep: n.timestep, illicit:n.illicit, licit:n.licit,' +
+                ' unknown:n.unknown}) as meta return meta';
+  const key = 'meta';
 
-    // Get the results and the loading value from the database
-    const { loading, first } = useReadCypher(query);
+  // Get the results and the loading value from the database
+  const { loading, first } = useReadCypher(query);
 
-    // Define the initial result
-    let result = <div>Loading</div>;
+  // Define the initial result
+  let result = <div>Loading</div>;
 
-    // Check to see if the data has been loaded
-    if(first === undefined) {
-      console.log("Meta data is undefined")
-    } else {
-      // Data has been loaded, gets the data and passes it to convert() to be properly formatted
-      let data = first.get(key);
-      data = convert(data);
+  // Check to see if the data has been loaded
+  if(first === undefined) {
+    console.log("Meta data is undefined")
+  } else {
+    // Data has been loaded, gets the data and passes it to convert() to be properly formatted
+    let data = first.get(key);
+    data = convert(data);
 
-      data.map((d) => {
-        console.log(d);
-      });
-
+    data.map((d) => {
+      console.log(d);
+    });
     const sortBarsByIllicit = (data) => {
       return data.sort((a, b) => {
         const illicitValueA = a.groups[0].value;
@@ -72,8 +71,7 @@ export default function BarSelector({ highlighted, clickFunction }) {
         {data.map((d) =>
           {
             // set the border color depending on if it has been highlighted
-            const borderColor = Number(d.timestep.low) === highlighted ? "border-rose-600" : "border-white";
-            
+            const borderColor = Number(d.timestep.low) === highlighted ? "border-rose-600" : "border-grey";
             return (
               <div >
                 {/* sets a single barchart and calls the click funciton with the datas timestep on a click event */}
@@ -83,7 +81,7 @@ export default function BarSelector({ highlighted, clickFunction }) {
                   onClick={() => clickFunction(d.timestep.low)}
                   >
                     {/* Renders a single bar chart */}
-                    <Bar data={d.groups} h={undefined} />
+                    <Bar data={d.groups} />
                 </div>
                 {/* Show the timestep of the barchart */}
                 <p className="text-center">Timestep {d.timestep.low}</p>

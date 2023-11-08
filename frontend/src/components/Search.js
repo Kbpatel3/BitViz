@@ -14,10 +14,8 @@ import Dropdown from "./dropdown";
  */
 export default function Search() {
   // Node and node id that is being searched for
-  const [nodeId, setNodeId] = useState(null);
+  const [nodeId, setNodeId] = useState(0);
   const [node, setNode] = useState(undefined);
-
-  const [clickedNode, setClickedNode] = useState(0);
 
   // Data defined by the use-neo4j hook
   const [nodeLoading, setNodeLoading] = useState(true);
@@ -38,7 +36,6 @@ export default function Search() {
   // Registers the function that should be called when an observer alert is called
   registerSubscriber((alertObject) => {
     // Check to make sure the alert is not coming from this function
-    //setNodeId(0);
     if (alertObject.source !== "search") {
       // Get the id and set the ID state
       const id = alertObject.id;
@@ -67,12 +64,13 @@ export default function Search() {
     // Check to see of the data has been defined yet or not
     if (records !== undefined) {
       let newNode = records.length !== 0 ? records[0].get(key) : undefined;
+
       // Calls the alert function
-      // alertSubscriber({
-      //   id: newNode ? newNode.id : undefined,
-      //   timestep: newNode ? newNode.timestep : undefined,
-      //   source: "search",
-      // });
+      alertSubscriber({
+        id: newNode ? newNode.id : undefined,
+        timestep: newNode ? newNode.timestep : undefined,
+        source: "search",
+      });
 
       // Sets the node state
       setNode(newNode);
@@ -94,12 +92,6 @@ export default function Search() {
 
     // Sets the node it from the form
     setNodeId(formJson.id);
-    
-    alertSubscriber({
-      id: parseInt(formJson.id),
-      timestep: undefined,
-      source: "graph",
-    });
   };
 
   /**
@@ -142,7 +134,7 @@ export default function Search() {
       </>
     );
   };
-  
+
   return (
     <>
       <form onSubmit={handleSubmit} className={"mx-auto"}>

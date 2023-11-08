@@ -14,7 +14,7 @@ import getColor from "../helper/color";
  * @param data The data to render
  * @returns A barchart JSX component
  */
-const Bar = ({ data }, { h }) => {
+const Bar = ({ data }) => {
     // Calls the useD3 hook to render the component
     const ref = useD3(
         (svg) => {
@@ -23,14 +23,8 @@ const Bar = ({ data }, { h }) => {
 
             // Get the wrapping containers size
             const dimensions = d3.select(".bar-container").node().getBoundingClientRect();
-            
-            // if height is not specified, use the containers height
-            if(h === undefined) {
-                h = dimensions.height;
-            }
-
             // Constants used by the SVG
-            const height = h;
+            const height = dimensions.height;
             const width = dimensions.width;
 
             // Clear the display
