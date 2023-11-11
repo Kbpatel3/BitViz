@@ -17,6 +17,8 @@ export default function Search() {
   const [nodeId, setNodeId] = useState(0);
   const [node, setNode] = useState(undefined);
 
+  const [clickedNode, setClickedNode] = useState(0);
+
   // Data defined by the use-neo4j hook
   const [nodeLoading, setNodeLoading] = useState(true);
   const [queryError, setQueryError] = useState(false);
@@ -92,6 +94,13 @@ export default function Search() {
 
     // Sets the node it from the form
     setNodeId(formJson.id);
+    
+    console.log("Time45: " + formJson.timestep);
+    alertSubscriber({
+      id: parseInt(formJson.id),
+      timestep: formJson.timestep,
+      source: "graph",
+    });
   };
 
   /**
