@@ -14,10 +14,8 @@ import Dropdown from "./dropdown";
  */
 export default function Search() {
   // Node and node id that is being searched for
-  const [nodeId, setNodeId] = useState(null);
+  const [nodeId, setNodeId] = useState(0);
   const [node, setNode] = useState(undefined);
-
-  const [clickedNode, setClickedNode] = useState(0);
 
   // Data defined by the use-neo4j hook
   const [nodeLoading, setNodeLoading] = useState(true);
@@ -95,9 +93,10 @@ export default function Search() {
     // Sets the node it from the form
     setNodeId(formJson.id);
     
+    console.log("Time45: " + formJson.timestep);
     alertSubscriber({
       id: parseInt(formJson.id),
-      timestep: undefined,
+      timestep: formJson.timestep,
       source: "graph",
     });
   };
