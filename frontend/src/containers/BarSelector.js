@@ -36,6 +36,8 @@ export default function BarSelector({highlighted, clickFunction}) {
     // Define the initial result
     let result = <div>Loading</div>;
 
+    const [isNewData, setIsNewData] = React.useState(false);
+
     // Check to see if the data has been loaded
     if (first === undefined) {
         console.log("Meta data is undefined")
@@ -100,6 +102,7 @@ export default function BarSelector({highlighted, clickFunction}) {
             // const sortedData = isFiltered ? sortBarsByIllicit(newData, sortOption, sortOrder) : sortBarsByIllicit(data, sortOption, sortOrder);
             setSortedData(sortedData);
             setNewData(sortedData);
+            setIsNewData(true);
         };
 
         // filters the data based on the filterOption, minRange, and maxRange
@@ -120,24 +123,28 @@ export default function BarSelector({highlighted, clickFunction}) {
                         labelValue = (a.groups[2].value/totalValue) * 100;
                         break;
                 }
+                console.log("HelloResult:", labelValue); //!remove
                 // checks if the labelValue is within the range
                 if (labelValue >= minRange && labelValue <= maxRange) {
+                    console.log("Helloooo:", totalValue); //!remove
                     return true;
                 }
             });
         };
 
         // Define a function to handle the filtering button click
-        const handleFilterClick = (filterOption, minRange, maxMin) => {
+        const handleFilterClick = (filterOption, minRange, maxRange) => {
             // Filter the data and update the state
             if (filterOption === "Default") {
                 sortedData.length > 0 ? setNewData(sortedData) : setNewData(data); //TODO: make it so it'll be sorted after reset it
             } else {
                 // if sortedData is not empty, filter the sortedData, otherwise filter the data
+                console.log("HellooThere:", maxRange);
                 const filteredData = sortedData.length > 0 ? 
-                filterData(sortedData, filterOption, minRange, maxMin) : filterData(data, filterOption, minRange, maxMin);
+                filterData(sortedData, filterOption, minRange, maxRange) : filterData(data, filterOption, minRange, maxRange);
 
                 setNewData(filteredData); // sets the filtered data
+                setIsNewData(true);
             }
         };
 
@@ -149,7 +156,7 @@ export default function BarSelector({highlighted, clickFunction}) {
 
         // data = sortBarsByIllicit(data);
 
-
+        console.log("Hello555", isNewData);
         // Sets/displayed the barcharts
         result = (
             <>
@@ -180,26 +187,26 @@ export default function BarSelector({highlighted, clickFunction}) {
                         Filter
                     </button> */}
 
-                    <form id="filterForm" class="mr-5">
+                    <form id="filterForm" className="mr-5">
                         <select id="filterType" name="filterType">
                             <option value="Illicit">Illicit</option>
                             <option value="Licit">Licit</option>
                             <option value="Unknown">Unknown</option>
                         </select>
 
-                        <input type="number" id="minRange" name="minRange" placeholder="Min (%)" min="0" max="100" class="w-24 py-1 px-2 border rounded"></input>
+                        <input type="number" id="minRange" name="minRange" placeholder="Min (%)" min="0" max="100" className="w-24 py-1 px-2 border rounded"></input>
                         <label> ~ </label>
-                        <input type="number" id="maxRange" name="maxRange" placeholder="Max (%)" min="0" max="100" class="w-24 py-1 px-2 border rounded"></input>
+                        <input type="number" id="maxRange" name="maxRange" placeholder="Max (%)" min="0" max="100" className="w-24 py-1 px-2 border rounded"></input>
                         <label> </label>
                         <button type="button" onClick={(e) => {
                                 handleFilterClick(document.getElementById("filterType").value,
                                                     document.getElementById("minRange").value === "" ? 0 : document.getElementById("minRange").value,
                                                     document.getElementById("maxRange").value === "" ? 100 : document.getElementById("maxRange").value);
-                            }} class="border rounded">Filter</button>
+                            }} className="border rounded">Filter</button>
                         
                         {/* ToDo: Discuss the need */}
                         <label> </label>
-                        <button type="button" onClick={(e) => {handleFilterClick("Default", 0, 100)}} class="border rounded">Reset</button>
+                        <button type="button" onClick={(e) => {handleFilterClick("Default", 0, 100)}} className="border rounded">Reset</button>
                     </form>
 
                 </div>
@@ -230,7 +237,7 @@ export default function BarSelector({highlighted, clickFunction}) {
                     </select>
                 {/* </div> */}
 
-                <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10">
+                {/* <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10"> */}
                     {/* Whether the user selected the sorted data */}
                     {/* {sortedData.length > 0 ? (
                         sortedData.map((d) => (
@@ -248,42 +255,47 @@ export default function BarSelector({highlighted, clickFunction}) {
                                 <p className="text-center">Timestep {d.timestep.low}</p>
                             </div>
                         ))
+                        
                     ) : ( */}
-                    {newData.length > 0 ? (
-                        newData.map((d) => (
-                            <div key={d.timestep.low}>
-                                <div
-                                    className={`m-2 p-1 border-4 ${
-                                        Number(d.timestep.low) === highlighted
-                                            ? "border-rose-600"
-                                            : "border-grey"
-                                    } border-dashed self-center h-40`}
-                                    onClick={() => clickFunction(d.timestep.low)}
-                                >
-                                    <Bar data={d.groups}/>
+                    {/* Checks whether either sorting or filtering is performed */}
+                    {isNewData ? 
+                    ( newData.length > 0 ? ( // Checks whether the new data is empty
+                        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10">
+                            {newData.map((d) => (
+                                <div key={d.timestep.low}>
+                                    <div
+                                        className={`m-2 p-1 border-4 ${
+                                            Number(d.timestep.low) === highlighted
+                                                ? "border-rose-600"
+                                                : "border-grey"
+                                        } border-dashed self-center h-40`}
+                                        onClick={() => clickFunction(d.timestep.low)}
+                                    >
+                                        <Bar data={d.groups}/>
+                                    </div>
+                                    <p className="text-center">Timestep {d.timestep.low}</p>
                                 </div>
-                                <p className="text-center">Timestep {d.timestep.low}</p>
-                            </div>
-                        ))
+                            ))}
+                        </div>) : ("No Matched Timesteps")
                     ) : (
-                        data.map((d) => (
-                        //filteredData.map((d) => (
-                            <div key={d.timestep.low}>
-                                <div
-                                    className={`m-2 p-1 border-4 ${
-                                        Number(d.timestep.low) === highlighted
-                                            ? "border-rose-600"
-                                            : "border-grey"
-                                    } border-dashed self-center h-40`}
-                                    onClick={() => clickFunction(d.timestep.low)}
-                                >
-                                    <Bar data={d.groups}/>
+                        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10">
+                            {data.map((d) => (
+                                <div key={d.timestep.low}>
+                                    <div
+                                        className={`m-2 p-1 border-4 ${
+                                            Number(d.timestep.low) === highlighted
+                                                ? "border-rose-600"
+                                                : "border-grey"
+                                        } border-dashed self-center h-40`}
+                                        onClick={() => clickFunction(d.timestep.low)}
+                                    >
+                                        <Bar data={d.groups}/>
+                                    </div>
+                                    <p className="text-center">Timestep {d.timestep.low}</p>
                                 </div>
-                                <p className="text-center">Timestep {d.timestep.low}</p>
-                            </div>
-                        ))
+                            ))}
+                        </div>
                     )}
-                </div>
             </>
         );
     }
