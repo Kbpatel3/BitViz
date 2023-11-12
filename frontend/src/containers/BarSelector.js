@@ -1,6 +1,8 @@
 /**
- * @author Adian Kirk
+ * @author Aidan Kirk
  * @author Kellan Anderson
+ * @author Noah Hassett
+ * @author Kaushal Patel
  * Container to hold several barcharts, specifically, one per timestep. AKA Army of barcharts
  */
 
@@ -26,6 +28,10 @@ export default function BarSelector({highlighted, clickFunction}) {
 
     // State for sorted data
     const [sortedData, setSortedData] = React.useState([]);
+    
+    //!temp
+    const [filteredData, setFilteredData] = React.useState([]);
+    const [newData, setNewData] = React.useState([]);
 
     // Define the initial result
     let result = <div>Loading</div>;
@@ -37,6 +43,11 @@ export default function BarSelector({highlighted, clickFunction}) {
         // Data has been loaded, gets the data and passes it to convert() to be properly formatted
         let data = first.get(key);
         data = convert(data);
+
+        //!temp
+        let isFiltered = false;
+        let isSorted = false;
+        //setNewData(data);
 
         const sortBarsByIllicit = (data, sortOption, sortOrder) => {
             return data.sort((a, b) => {
@@ -82,13 +93,58 @@ export default function BarSelector({highlighted, clickFunction}) {
 
         // Define a function to handle the sorting button click
         const handleSortClick = (sortOption, sortOrder) => {
+            isSorted = true;
             // Sort the data and update the state
             // data = sortBarsByIllicit(data)
             console.log("sortOption: ", sortOption);
             console.log("sortOrder: ", sortOrder);
-            const sortedData = sortBarsByIllicit(data, sortOption, sortOrder);
-            setSortedData(sortedData);
+            const sortedData = isFiltered ? sortBarsByIllicit(newData, sortOption, sortOrder) : sortBarsByIllicit(data, sortOption, sortOrder);
+            //setSortedData(sortedData);
+            setNewData(sortedData);
         };
+
+        const filterData = (data, filterOption, minRange, maxRange) => {
+            return data.filter((a) => {
+                let totalValue = a.groups[0].value + a.groups[1].value + a.groups[2].value;
+                let labelValue;
+                
+                //!check the calculation
+                switch (filterOption) {
+                    case "Illicit":
+                        labelValue = (a.groups[0].value/totalValue) * 100;
+                        console.log("REsult: " + labelValue);
+                        break;
+                    case "Licit":
+                        labelValue = (a.groups[1].value/totalValue) * 100;
+                        break;
+                    case "Unknown":
+                        labelValue = (a.groups[2].value/totalValue) * 100;
+                        break;
+                }
+                if (labelValue >= minRange && labelValue <= maxRange) {
+                    return true;
+                }
+            });
+        };
+
+        const handleFilterClick = (filterOption, minRange, maxMin) => {
+            isFiltered = true;
+            console.log("filterOption: ", filterOption);
+            console.log("minRange: ", minRange);
+            console.log("maxMin: ", maxMin);
+            if (filterOption === "Default") {
+                isSorted ? setNewData(sortedData) : setNewData(data); //TODO: make it so it'll be sorted after reset it
+            } else {
+                const filteredData = filterData(data, filterOption, minRange, maxMin);
+                setNewData(filteredData);
+            }
+        };
+
+        // //!temp
+        // const toggleFileter = () => {
+        //     var filterPanel = document.getElementById("filterPanel");
+        //     filterPanel.classList.toggle("hidden");
+        // }
 
         // data = sortBarsByIllicit(data);
 
@@ -96,7 +152,7 @@ export default function BarSelector({highlighted, clickFunction}) {
         // Sets/displayed the barcharts
         result = (
             <>
-                <div>
+                <div className="flex justify-between items-center">
                     <select
                         className="block mt-1 border-gray-300 rounded-md shadow-sm focus:border-rose-600 focus:ring-rose-600 text-center"
                         onChange={(e) => {
@@ -112,10 +168,88 @@ export default function BarSelector({highlighted, clickFunction}) {
                         <option value={"Unknown,0"}>Sort Unknown (Ascending)</option>
                         <option value={"Unknown,1"}>Sort Unknown (Descending)</option>
                     </select>
+                    
+                    {/* <button className="block mt-1 border-gray-300 rounded-md shadow-sm focus:border-rose-600 focus:ring-rose-600 text-center" 
+                            onClick={(e) => handleFilterClick("Unknown", 70, true)}>
+                        Filter Timesteps
+                    </button> */}
+
+                    {/* <button className="mr-8" 
+                            onClick={(e) => toggleFileter()}>
+                        Filter
+                    </button> */}
+
+                    <form id="filterForm" class="mr-5">
+                        <select id="filterType" name="filterType">
+                            <option value="Illicit">Illicit</option>
+                            <option value="Licit">Licit</option>
+                            <option value="Unknown">Unknown</option>
+                        </select>
+
+                        <input type="number" id="minRange" name="minRange" placeholder="Min (%)" min="0" max="100" class="w-24 py-1 px-2 border rounded"></input>
+                        <label> ~ </label>
+                        <input type="number" id="maxRange" name="maxRange" placeholder="Max (%)" min="0" max="100" class="w-24 py-1 px-2 border rounded"></input>
+                        <label> </label>
+                        <button type="button" onClick={(e) => {
+                                handleFilterClick(document.getElementById("filterType").value,
+                                                    document.getElementById("minRange").value === "" ? 0 : document.getElementById("minRange").value,
+                                                    document.getElementById("maxRange").value === "" ? 100 : document.getElementById("maxRange").value);
+                            }} class="border rounded">Filter</button>
+                        
+                        {/* ToDo: Discuss the need */}
+                        <label> </label>
+                        <button type="button" onClick={(e) => {handleFilterClick("Default", 0, 100)}} class="border rounded">Reset</button>
+                    </form>
+
                 </div>
+                
+                {/* Filter Panel when we need more features for filtering */}
+                {/* <div id="filterPanel" class="hidden bg-white p-4 mt-4 border border-gray-300 rounded">
+                    <div class="mb-4">
+                    <label for="minRange" class="block text-sm font-medium text-gray-600">Min Range:</label>
+                    <input type="text" id="minRange" name="minRange" class="mt-1 p-2 border border-gray-300 rounded w-full">
+                    </input>
+                    </div>
+
+                    <div class="mb-4">
+                    <label for="maxRange" class="block text-sm font-medium text-gray-600">Max Range:</label>
+                    <input type="text" id="maxRange" name="maxRange" class="mt-1 p-2 border border-gray-300 rounded w-full">
+                    </input>
+                    </div>
+                </div> */}
+
+                    {/* <select
+                        className="block mt-1 border-gray-300 rounded-md shadow-sm focus:border-rose-600 focus:ring-rose-600 text-center"
+                            onChange={(e) => {
+                                const [filterBy, filterRange, isMin] = e.target.value.split(",");
+                                handleSortClick(filterBy, parseInt(filterRange, 10), isMin);
+                            }}
+                    >
+                        <button value={"Filter Timesteps, 50, true"}>Filter Timesteps</button>
+                    </select>
+                {/* </div> */}
+
                 <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10">
-                    {sortedData.length > 0 ? (
+                    {/* Whether the user selected the sorted data */}
+                    {/* {sortedData.length > 0 ? (
                         sortedData.map((d) => (
+                            <div key={d.timestep.low}>
+                                <div
+                                    className={`m-2 p-1 border-4 ${
+                                        Number(d.timestep.low) === highlighted
+                                            ? "border-rose-600"
+                                            : "border-grey"
+                                    } border-dashed self-center h-40`}
+                                    onClick={() => clickFunction(d.timestep.low)}
+                                >
+                                    <Bar data={d.groups}/>
+                                </div>
+                                <p className="text-center">Timestep {d.timestep.low}</p>
+                            </div>
+                        ))
+                    ) : ( */}
+                    {newData.length > 0 ? (
+                        newData.map((d) => (
                             <div key={d.timestep.low}>
                                 <div
                                     className={`m-2 p-1 border-4 ${
@@ -132,6 +266,7 @@ export default function BarSelector({highlighted, clickFunction}) {
                         ))
                     ) : (
                         data.map((d) => (
+                        //filteredData.map((d) => (
                             <div key={d.timestep.low}>
                                 <div
                                     className={`m-2 p-1 border-4 ${
