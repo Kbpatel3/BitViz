@@ -43,6 +43,7 @@ export default function SubGraph({ clickedNode }) {
 
   // Requery the database whenever the state of the clicked node changes
   useEffect(() => {
+    console.log("Hello555");
     query = getQuery(clickedNode);
     run({ query });
     if (loading) console.log("Loading");

@@ -1,6 +1,8 @@
 /**
- * @author Adian Kirk
+ * @author Aidan Kirk
  * @author Kellan Anderson
+ * @author Noah Hassett
+ * @author Kaushal Patel
  * Search component for the application
  */
 import React, { useEffect, useState, useContext } from "react";
@@ -12,12 +14,12 @@ import Dropdown from "./dropdown";
  * Search component of the application
  * @returns A JSX element containing a search bar
  */
-export default function Search() {
+export default function Search({ timestep }) {
   // Node and node id that is being searched for
   const [nodeId, setNodeId] = useState(0);
   const [node, setNode] = useState(undefined);
 
-  const [clickedNode, setClickedNode] = useState(0);
+  //const [clickedNode, setClickedNode] = useState(0);
 
   // Data defined by the use-neo4j hook
   const [nodeLoading, setNodeLoading] = useState(true);
@@ -59,6 +61,7 @@ export default function Search() {
   useEffect(() => {
     const query = `MATCH (n {id: "${nodeId}"}), (n)-[]->(b) WITH n as n, COLLECT(b.id) as edges RETURN ${key}`;
     run({ query });
+    //console.log("Hello:", records[0]._fields[0].timestep);
   }, [nodeId]);
 
   // Set the records/node data whenever the records from the database changes
@@ -68,11 +71,13 @@ export default function Search() {
       let newNode = records.length !== 0 ? records[0].get(key) : undefined;
 
       // Calls the alert function
-      alertSubscriber({
-        id: newNode ? newNode.id : undefined,
-        timestep: newNode ? newNode.timestep : undefined,
-        source: "search",
-      });
+      if (newNode !== undefined && parseInt(newNode.timestep) !== timestep) {
+        alertSubscriber({ //TODO: clean up this object
+          id: newNode ? newNode.id : undefined,
+          timestep: newNode ? newNode.timestep : undefined,
+          source: "search",
+        });
+      }
 
       // Sets the node state
       setNode(newNode);

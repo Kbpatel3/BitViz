@@ -9,7 +9,7 @@ import HomeButton from "./HomeButton";
  * @fileoverview NavBar component for the application
  * @returns {JSX.Element} A JSX element containing the NavBar
  */
-export default function NavBar({ scrollToRef }) {
+export default function NavBar({ scrollToRef, timestep }) {
   return (
     <>
       <div className={"flex justify-between items-center w-full h-full"}>
@@ -27,7 +27,7 @@ export default function NavBar({ scrollToRef }) {
 
         {/* Search component */}
         <div className={"flex items-center mr-32"}>
-          <Search />
+          <Search timestep={timestep}/>
         </div>
 
         {/* Setting Button (Temp) */}
