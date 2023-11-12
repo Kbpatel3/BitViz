@@ -30,7 +30,7 @@ export default function BarSelector({highlighted, clickFunction}) {
     const [sortedData, setSortedData] = React.useState([]);
     
     //!temp
-    const [filteredData, setFilteredData] = React.useState([]);
+    //const [filteredData, setFilteredData] = React.useState([]);
     const [newData, setNewData] = React.useState([]);
 
     // Define the initial result
@@ -45,9 +45,8 @@ export default function BarSelector({highlighted, clickFunction}) {
         data = convert(data);
 
         //!temp
-        let isFiltered = false;
-        let isSorted = false;
-        //setNewData(data);
+        //let isFiltered = false;
+        //let isSorted = false;
 
         const sortBarsByIllicit = (data, sortOption, sortOrder) => {
             return data.sort((a, b) => {
@@ -93,26 +92,26 @@ export default function BarSelector({highlighted, clickFunction}) {
 
         // Define a function to handle the sorting button click
         const handleSortClick = (sortOption, sortOrder) => {
-            isSorted = true;
             // Sort the data and update the state
             // data = sortBarsByIllicit(data)
             console.log("sortOption: ", sortOption);
             console.log("sortOrder: ", sortOrder);
-            const sortedData = isFiltered ? sortBarsByIllicit(newData, sortOption, sortOrder) : sortBarsByIllicit(data, sortOption, sortOrder);
-            //setSortedData(sortedData);
+            const sortedData = sortBarsByIllicit(data, sortOption, sortOrder);
+            // const sortedData = isFiltered ? sortBarsByIllicit(newData, sortOption, sortOrder) : sortBarsByIllicit(data, sortOption, sortOrder);
+            setSortedData(sortedData);
             setNewData(sortedData);
         };
 
+        // filters the data based on the filterOption, minRange, and maxRange
         const filterData = (data, filterOption, minRange, maxRange) => {
             return data.filter((a) => {
                 let totalValue = a.groups[0].value + a.groups[1].value + a.groups[2].value;
                 let labelValue;
                 
-                //!check the calculation
+                // Calculate the percentage of the label
                 switch (filterOption) {
                     case "Illicit":
                         labelValue = (a.groups[0].value/totalValue) * 100;
-                        console.log("REsult: " + labelValue);
                         break;
                     case "Licit":
                         labelValue = (a.groups[1].value/totalValue) * 100;
@@ -121,22 +120,24 @@ export default function BarSelector({highlighted, clickFunction}) {
                         labelValue = (a.groups[2].value/totalValue) * 100;
                         break;
                 }
+                // checks if the labelValue is within the range
                 if (labelValue >= minRange && labelValue <= maxRange) {
                     return true;
                 }
             });
         };
 
+        // Define a function to handle the filtering button click
         const handleFilterClick = (filterOption, minRange, maxMin) => {
-            isFiltered = true;
-            console.log("filterOption: ", filterOption);
-            console.log("minRange: ", minRange);
-            console.log("maxMin: ", maxMin);
+            // Filter the data and update the state
             if (filterOption === "Default") {
-                isSorted ? setNewData(sortedData) : setNewData(data); //TODO: make it so it'll be sorted after reset it
+                sortedData.length > 0 ? setNewData(sortedData) : setNewData(data); //TODO: make it so it'll be sorted after reset it
             } else {
-                const filteredData = filterData(data, filterOption, minRange, maxMin);
-                setNewData(filteredData);
+                // if sortedData is not empty, filter the sortedData, otherwise filter the data
+                const filteredData = sortedData.length > 0 ? 
+                filterData(sortedData, filterOption, minRange, maxMin) : filterData(data, filterOption, minRange, maxMin);
+
+                setNewData(filteredData); // sets the filtered data
             }
         };
 
