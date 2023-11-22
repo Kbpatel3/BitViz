@@ -133,7 +133,7 @@ const Graph = ({data, highlight, nodeClick}) => {
         .links(data.links);
 
       // Calls the clicked node funciton with the specified highlighted node
-      clickNode(highlight);
+      //clickNode(highlight);
     },
     // the data to be watched for changes
     [data]
@@ -159,8 +159,8 @@ export default Graph;
  */
 function clickNode(id) {
     d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
-  d3.select(`#node${id}`)
-    .transition()
-    .duration(500)
-    .attr('r', 12);
+    d3.select(`#node${id}`)
+      .transition()
+      .duration(500)
+      .attr('r', 12);
 }

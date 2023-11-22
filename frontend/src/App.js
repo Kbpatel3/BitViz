@@ -54,64 +54,6 @@ function App() {
         return query;
     };
 
-    // const getSubQuery = (v) => {
-    //   const query = `MATCH path = (n {id: "${v}")-[*]-(m) ` +
-    //                 `WHERE id(n) <> id(m) ` +
-    //                 `WITH nodes(path) AS nodes_in_path ` +
-    //                 `WITH nodes_in_path[size(nodes_in_path) - 2..] AS last_two_nodes ` +
-    //                 `WITH COLLECT({source: last_two_nodes[0].id, target: last_two_nodes[1].id}) AS links, ` +
-    //                 `COLLECT(DISTINCT {id:last_two_nodes[0].id, group:last_two_nodes[0].group}) + ` +
-    //                 `COLLECT(DISTINCT {id:last_two_nodes[1].id, group:last_two_nodes[1].group}) as nodes ` +
-    //                 `RETURN ${key}`
-
-    //   return query;
-    // };
-
-    // const temp = (v, s) => {
-    //   const query = `MATCH (n:Transaction {timestep: "${v}"}), ` +
-    //                 `(a:Transaction {timestep: "${v}"})-[]->(b:Transaction {timestep: "${v}"}) ` +
-    //                 `WHERE n.id = "${s}" ` +
-    //                 `WITH COLLECT(DISTINCT {id: n.id, group: n.group}) as nodes, ` +
-    //                 `COLLECT(DISTINCT {source: a.id, target: b.id}) as links ` +
-    //                 `RETURN ${key}`;
-
-    // //                 // `WHERE cs.property = 'clickedNode' ` +
-    // //                 // `CALL apoc.path.expandConfig(cs,{relationshipFilter:"CONNECTS>",maxLevel:3,uniqueness:"NODE_GLOBAL"}) YIELD path ` +
-    // //                 // `WITH cs, RELATIONSHIPS(path) as r, LAST(NODES(path)) as es ` +
-    // //                 // `WHERE es:Label2 ` +
-    // //                 // `RETURN cs,es,r`
-    //   return query;
-    // };
-
-    // const [run, setRun] = useState({});
-    // const [runSub, setRunSub] = useState({});
-
-    // let subQuery = getSubQuery(clickedNode);
-    // let query = getQuery(timestep);
-    // const {records, subRecord} = useReadCypher([query, tem]);
-    // console.log("\nRecord: " + records);
-    //const subRecord = useReadCypher(tem);
-
-    // const {subRecord, runSub} = useReadCypher(subQuery);
-    // const queryRef = useRef(null);
-
-
-    // useEffect(() => {
-    //   queryRef.current = getSubQuery(clickedNode);
-    //   runSub({subQuery});
-    // }, [clickedNode]);
-
-    // let subData = undefined;
-
-    // if(subRecord === undefined) {
-    //   console.log("Records is undefined");
-    // }
-    // else {
-    //   // If the data has finished retreiving from the database, assign it to the data variable
-    //   subData = subRecord[0].get(key);
-    // }
-
-
     // Get the query
     let query = getQuery(timestep);
 
@@ -144,7 +86,10 @@ function App() {
 
     // Runs when a bar chart has been clicked on
     const handleBarClick = (v) => {
-        setTimestep(parseInt(v));
+        if (v !== timestep) { // only update if the bar clicked is not the current timestep
+            setTimestep(parseInt(v));
+            setClickedNode(0); // reset the clicked node
+        }
     };
 
     // Handles the change of the dropdown

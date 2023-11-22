@@ -16,7 +16,7 @@ import "./graph.css";
  * @returns {JSX.Element} - SubGraphVisual component
  * @constructor - SubGraphVisual
  */
-const SubGraphVisual = ({ data, highlight }) => {
+const SubGraphVisual = ({ data, highlight}) => {
   // D3 reference
   const ref = useD3(
     (svg) => {
@@ -100,9 +100,11 @@ const SubGraphVisual = ({ data, highlight }) => {
         .data(data.nodes)
         .enter()
         .append("circle")
+        //.attr("id", (d) => clickedNode(d.id))
         .attr("id", (d) => `node${d.id}`)
-        .attr("r", 7)
-        .attr("fill", (d) => getColor(d.group))
+        // .attr("r", 7)
+        // //.attr("r", d => (d.id == highlight) ? 12 : 7)
+        // .attr("fill", (d) => getColor(d.group))
         .call(
           d3
             .drag()
@@ -111,6 +113,7 @@ const SubGraphVisual = ({ data, highlight }) => {
             .on("end", dragended),
         );
 
+      
       // Adds titles to nodes
       node.append("title").text((d) => {
         return d.id;
@@ -138,14 +141,33 @@ const SubGraphVisual = ({ data, highlight }) => {
           .attr("cy", (d) => limitPosition(d.y, "y"));
       };
 
+      
+
       // Add the ticked method, nodes and links to our simulation
       simulation.nodes(data.nodes).on("tick", ticked);
 
       simulation.force("link").links(data.links);
 
+      //node.each(clickNode);
+      //clickNode(highlight);
+      
+      /**
+       * Clicked node function, highlights a specific node based off of the id of each node
+       * @param {*} id
+       */
+      function clickNode(id) {
+          d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
+          svg.select(`#node${id}`) // highlighting the node that was clicked
+            .transition()
+            .duration(500)
+            .attr('r', 12);
+      }
+
+      clickNode(highlight);
+
     },
     // the data to be watched for changes
-    [data],
+    [highlight],
   );
 
   // SVG Containing the graph
@@ -157,4 +179,21 @@ const SubGraphVisual = ({ data, highlight }) => {
 };
 
 export default SubGraphVisual;
+
+/**
+ * Clicked node function, highlights a specific node based off of the id of each node
+ * @param {*} id
+ */
+// function clickNode(id) {
+//   console.log("Hello6: ", id);
+//   //d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
+//   d3.select(`#node${id}`)
+//     .transition()
+//     .duration(500)
+//     .attr('r', 12);
+// }
+
+// function triggerClick(nodeId) {
+//   d3.select(`#node${nodeId}`).dispatch("click");
+// }
 
