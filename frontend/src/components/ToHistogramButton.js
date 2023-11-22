@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import timesteps from "../timesteps_icon.png";
 
 /**
  * Button to scroll to the TimeSteps Charts when the button is clicked
@@ -13,10 +14,14 @@ export default function ToHistogramButton({ scrollToRef}) {
 
   return (
     <>
-      {/* Button to shows the barcharts(histogram) for each timestep */}
-      <button className={"mx-auto"} onClick={(e) => goTimeSteps()}>
-        TimeSteps
-      </button>
-    </>
+    {/* Button to shows the barcharts(histogram) for each timestep */}
+    <input
+      className="mx-auto object-scale-down h-7 w-7"
+      type="image"
+      src={timesteps}
+      title="TimeSteps"
+      onClick={(e) => goTimeSteps()}
+    />
+  </>
   );
 }

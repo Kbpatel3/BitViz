@@ -13,6 +13,7 @@ export default function SettingsButton() {
         className="mx-auto object-scale-down h-7 w-7"
         type="image"
         src={setting}
+        title="Settings"
       />
     </>
   );

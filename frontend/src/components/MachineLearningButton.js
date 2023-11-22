@@ -1,3 +1,5 @@
+import machineLearning from "../ML_icon.png";
+
 /**
  * Machine Learning Button Component
  * @fileoverview Machine Learning Button Component
@@ -6,8 +8,13 @@
 export default function MachineLearningButton() {
   return (
     <>
-      {/* Machine Learning Button (Temp)*/}
-      <button className={"mx-auto"}>Analyze (ML)</button>
-    </>
+    {/* Machine Learning Button (Temp)*/}
+    <input
+      className="mx-auto object-scale-down h-7 w-7"
+      type="image"
+      src={machineLearning}
+      title="Machine Learning Analysis"
+    />
+  </>
   );
 }

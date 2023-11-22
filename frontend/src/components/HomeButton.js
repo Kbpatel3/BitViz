@@ -1,3 +1,5 @@
+import home from "../home_icon.png";
+
 /**
  * Home Button Component
  * @fileoverview Home Button Component
@@ -11,10 +13,14 @@ export default function HomeButton() {
 
   return (
     <>
-      {/* Home Button */}
-      <button className={"mx-auto"} onClick={(e) => refWindow()}>
-        Home
-      </button>
-    </>
+    {/* Home Button */}
+    <input
+      className="mx-auto object-scale-down h-7 w-7"
+      type="image"
+      src={home}
+      title="Home (Refresh)"
+      onClick={(e) => refWindow()}
+    />
+  </>
   );
 }
