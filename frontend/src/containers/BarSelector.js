@@ -29,8 +29,7 @@ export default function BarSelector({highlighted, clickFunction}) {
     // State for sorted data
     const [sortedData, setSortedData] = React.useState([]);
     
-    //!temp
-    //const [filteredData, setFilteredData] = React.useState([]);
+    // State for sorted/filtered data
     const [newData, setNewData] = React.useState([]);
 
     // Define the initial result
@@ -96,8 +95,6 @@ export default function BarSelector({highlighted, clickFunction}) {
         const handleSortClick = (sortOption, sortOrder) => {
             // Sort the data and update the state
             // data = sortBarsByIllicit(data)
-            console.log("sortOption: ", sortOption);
-            console.log("sortOrder: ", sortOrder);
             const sortedData = sortBarsByIllicit(data, sortOption, sortOrder);
             // const sortedData = isFiltered ? sortBarsByIllicit(newData, sortOption, sortOrder) : sortBarsByIllicit(data, sortOption, sortOrder);
             setSortedData(sortedData);
@@ -123,10 +120,8 @@ export default function BarSelector({highlighted, clickFunction}) {
                         labelValue = (a.groups[2].value/totalValue) * 100;
                         break;
                 }
-                console.log("HelloResult:", labelValue); //!remove
                 // checks if the labelValue is within the range
                 if (labelValue >= minRange && labelValue <= maxRange) {
-                    console.log("Helloooo:", totalValue); //!remove
                     return true;
                 }
             });
@@ -139,7 +134,6 @@ export default function BarSelector({highlighted, clickFunction}) {
                 sortedData.length > 0 ? setNewData(sortedData) : setNewData(data); //TODO: make it so it'll be sorted after reset it
             } else {
                 // if sortedData is not empty, filter the sortedData, otherwise filter the data
-                console.log("HellooThere:", maxRange);
                 const filteredData = sortedData.length > 0 ? 
                 filterData(sortedData, filterOption, minRange, maxRange) : filterData(data, filterOption, minRange, maxRange);
 
@@ -156,7 +150,6 @@ export default function BarSelector({highlighted, clickFunction}) {
 
         // data = sortBarsByIllicit(data);
 
-        console.log("Hello555", isNewData);
         // Sets/displayed the barcharts
         result = (
             <>
@@ -279,7 +272,7 @@ export default function BarSelector({highlighted, clickFunction}) {
                         </div>) : ("No Matched Timesteps")
                     ) : (
                         <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10">
-                            {data.map((d) => (
+                            {data.map((d) => ( console.log("Hello5:"),
                                 <div key={d.timestep.low}>
                                     <div
                                         className={`m-2 p-1 border-4 ${
