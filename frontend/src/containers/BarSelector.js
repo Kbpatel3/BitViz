@@ -272,7 +272,7 @@ export default function BarSelector({highlighted, clickFunction}) {
                         </div>) : ("No Matched Timesteps")
                     ) : (
                         <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10">
-                            {data.map((d) => ( console.log("Hello5:"),
+                            {data.map((d) => (
                                 <div key={d.timestep.low}>
                                     <div
                                         className={`m-2 p-1 border-4 ${

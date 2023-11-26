@@ -38,11 +38,9 @@ export default function BarWrapper({timestep}) {
         {label: 'unknown', value: data.groups[0].unknown.low, group: 3},
       ]
     
-    //console.log("Hello5555555555555");
     // Set the result
     result = (
-      // <div>hello</div>
-      <Bar data={data} />
+      <Bar data={data}/>
     );
   }
 
