@@ -11,10 +11,11 @@ import SubGraphVisual from "./SubGraphVisual";
 /**
  * SubGraph component, used to render the subgraph of a specific node
  * @param clickedNode - the node that was clicked on
+ * @param nodeClick - function to be called when a node is clicked
  * @returns {JSX.Element} - the subgraph of the clicked node
  * @constructor - the subgraph component
  */
-export default function SubGraph({ clickedNode }) {
+export default function SubGraph({ clickedNode, nodeClick }) {
   // Constants used for talking to the database
   const key = "{nodes: nodes, links: links}";
 
@@ -72,7 +73,7 @@ export default function SubGraph({ clickedNode }) {
     data = { ...rawResult, nodes: uniqueNodes };
 
     // Debug to see the data
-    //console.log(data);
+    console.log("Data: ", data);
   }
 
   // Return the SubGraphVisual component if the data has been loaded
@@ -99,7 +100,7 @@ export default function SubGraph({ clickedNode }) {
         //   </ul>
         // </div>
         // Render the subgraph visual with the data and the clicked node
-        <SubGraphVisual data={data} highlight={clickedNode} />
+        <SubGraphVisual data={data} highlight={clickedNode} nodeClick={nodeClick}/>
       ) : (
         <p>Loading data...</p>
       )}

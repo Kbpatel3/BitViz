@@ -13,10 +13,11 @@ import "./graph.css";
  * SubGraphVisual component, used to generate the subgraph visual using D3
  * @param data - data to be used to generate the graph
  * @param highlight - node to be highlighted
+ * @param nodeClick - function to be called when a node is clicked
  * @returns {JSX.Element} - SubGraphVisual component
  * @constructor - SubGraphVisual
  */
-const SubGraphVisual = ({ data, highlight}) => {
+const SubGraphVisual = ({ data, highlight, nodeClick }) => {
   // D3 reference
   const ref = useD3(
     (svg) => {
@@ -111,7 +112,11 @@ const SubGraphVisual = ({ data, highlight}) => {
             .on("start", dragstarted)
             .on("drag", dragged)
             .on("end", dragended),
-        );
+        )
+        // .on('click', (d) => { // when a node in the subgraph is clicked
+        //   nodeClick(parseInt(d.target.id.slice(4)));
+        //   clickNode(parseInt(d.target.id.slice(4)));
+        // });
 
       
       // Adds titles to nodes
@@ -167,7 +172,7 @@ const SubGraphVisual = ({ data, highlight}) => {
 
     },
     // the data to be watched for changes
-    [highlight],
+    [data],
   );
 
   // SVG Containing the graph
