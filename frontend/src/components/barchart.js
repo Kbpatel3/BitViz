@@ -80,7 +80,9 @@ const Bar = ({ data }) => {
                 .attr("y", (d) => height - y_axis(d.value))
                 .attr("width", x_axis.bandwidth())
                 .attr("height", (d) => {
+                    console.log(d.value)
                     return y_axis(d.value);
+                    // d.value / height = ratio (d.value / ratio)
                 })
                 // Colors the bars according to the groups
                 .attr("fill", (d) => getColor(d.group) );
