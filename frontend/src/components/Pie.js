@@ -15,7 +15,7 @@ import getColor from "../helper/color.js";
  * @param Data The data to render the chart with
  * @returns A JSX component for a pie chart.
  */
-const Pie = ({ data }) => {
+const Pie = ({data, h}) => {
     const ref = useD3(
         (svg) => {
             
@@ -23,8 +23,8 @@ const Pie = ({ data }) => {
             const dimensions = d3.select(".pieTin").node().getBoundingClientRect();
 
             // Sets the height and widths as well as margins
-            //!const height = dimensions.height;
-            const height = 280;
+            //const height = dimensions.height;
+            const height = h; // gets the constant height value depend on the window size
             const width = dimensions.width;
             console.log("Height: " + height + " Width: " + width);
             const margin = 40
