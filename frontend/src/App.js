@@ -10,6 +10,7 @@ import Slider from "./components/Slider";
 import Bar from "./components/barchart";
 import NavBar from "./components/NavBar";
 import SubGraph from "./components/SubGraph";
+import Key from "./components/Key";
 
 /**
  * App.js, logic entry point for our data. This function controls the ways things are rendered to the user
@@ -130,6 +131,7 @@ function App() {
                         {/* <div className="h-full col-span-2 row-span-6 row-start-2 bg-slate-200 hover:bg-slate-300"> */}
                         {/* Graph component, shows the force directed graph */}
                         {/*<div className='col-span-2'>*/}
+                        <Key className={"m-auto"}/>
                         <Graph
                             data={data}
                             highlight={clickedNode}
@@ -148,7 +150,7 @@ function App() {
                     //! h-80 recommended
                     // Shift this down to anchor bottom of container
                     <div
-                        className="row-span-3 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300 max-h-[320px] max-w-[500px]">
+                        className="row-span-3 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300 max-h-[320px]">
                         {/* Select component for choosing the graph type */}
                         <Select
                             className={"w-full"}

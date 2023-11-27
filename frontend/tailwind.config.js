@@ -7,7 +7,12 @@ module.exports = {
     extend: {
       height: {
         '128' : '41rem',
-      }
+      },
+      backgroundColor: {
+        'illicit-yellow': '#FFA400FF',
+        'licit-blue': '#3138B2FF',
+        'unknown-grey': '#808080',
+      },
     },
   },
   plugins: [],
