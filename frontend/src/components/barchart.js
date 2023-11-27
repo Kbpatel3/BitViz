@@ -69,7 +69,8 @@ const Bar = ({ data }) => {
                 .selectAll("path")
                 .append("g")
                 .call(d3.axisLeft(y_axis));
-               
+            
+            //console.log
             // Set the bars and apply it to the svg
             svg
                 .selectAll(".barchart")
@@ -80,6 +81,7 @@ const Bar = ({ data }) => {
                 .attr("y", (d) => height - y_axis(d.value))
                 .attr("width", x_axis.bandwidth())
                 .attr("height", (d) => {
+                    console.log("Heloooo:", d.value);
                     return y_axis(d.value);
                 })
                 // Colors the bars according to the groups

@@ -142,7 +142,7 @@ export default function BarSelector({highlighted, clickFunction}) {
             }
         };
 
-        // For filter panel
+        // Note: For filter panel
         // const toggleFileter = () => {
         //     var filterPanel = document.getElementById("filterPanel");
         //     filterPanel.classList.toggle("hidden");
@@ -205,7 +205,7 @@ export default function BarSelector({highlighted, clickFunction}) {
 
                 </div>
                 
-                {/* Filter Panel when we need more features for filtering */}
+                {/* Note: Filter Panel when we need more features for filtering */}
                 {/* <div id="filterPanel" class="hidden bg-white p-4 mt-4 border border-gray-300 rounded">
                     <div class="mb-4">
                     <label for="minRange" class="block text-sm font-medium text-gray-600">Min Range:</label>
