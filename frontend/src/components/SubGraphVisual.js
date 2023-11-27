@@ -1,7 +1,7 @@
 /**
  * SubGraphVisual component, used to generate the subgraph visual using D3
  * @author Kaushal Patel
- * @author Noah Hasset
+ * @author Noah Hassett
  */
 
 import useD3 from "../hooks/useD3";

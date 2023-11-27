@@ -10,7 +10,7 @@ import Layout from './Layout';
 import Landing from './Landing';
 
 /**
- * @author Adian Kirk
+ * @author Aidan Kirk
  * @author Kellan Anderson
  * Javascript entry point for the application, gets an HTML element with an ID of root and renders the JSX rendered
  * in the app component

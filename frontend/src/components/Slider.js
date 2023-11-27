@@ -1,5 +1,20 @@
+/**
+ * D3 function for displaying a slider
+ * @author Aidan Kirk
+ * @author Kellan Anderson
+ * @author Kaushal Patel
+ * @author Noah Hassett
+ */
+
 import React from 'react';
 
+/**
+ * A slider component for the application.
+ * @param {*} timestep The current timestep
+ * @param {*} setTimestep The function to set the timestep
+ * @param {*} handleChange The function to handle the change
+ * @returns A JSX component for a slider
+ */
 function Slider({ timestep, setTimestep, handleChange}) {
     return (
         <>

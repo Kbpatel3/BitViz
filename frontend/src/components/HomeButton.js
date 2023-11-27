@@ -1,5 +1,10 @@
-import home from "../home_icon.png";
+/**
+ * Defines a Home Button Component
+ * @author Noah Hassett
+ * @author Kaushal Patel
+ */
 
+import home from "../home_icon.png";
 /**
  * Home Button Component
  * @fileoverview Home Button Component

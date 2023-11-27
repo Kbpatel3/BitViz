@@ -1,3 +1,9 @@
+/**
+ * Defines a NavBar Component
+ * @author Noah Hassett
+ * @author Kaushal Patel
+ */
+
 import Search from "./Search";
 import SettingsButton from "./SettingsButton";
 import MachineLearningButton from "./MachineLearningButton";

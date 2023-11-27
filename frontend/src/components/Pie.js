@@ -1,9 +1,9 @@
 /**
+ * Pie chart component for the application
  * @author Adian Kirk
  * @author Kellan Anderson
  * @author Noah Hasset
  * @author Kaushal Patel
- * Pie chart component for the application
  */
 import useD3 from "../hooks/useD3";
 import React from "react";
@@ -13,7 +13,7 @@ import getColor from "../helper/color.js";
 /**
  * Pie chart component for the application
  * @param Data The data to render the chart with
- * @returns 
+ * @returns A JSX component for a pie chart.
  */
 const Pie = ({ data }) => {
     const ref = useD3(

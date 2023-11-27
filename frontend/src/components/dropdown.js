@@ -1,10 +1,17 @@
 /**
- * @author Adian Kirk
- * @author Kellan Anderson
  * Component to show what edges are connected to a specific node
+ * @author Aidan Kirk
+ * @author Kellan Anderson
+ * 
  */
 import React, { useState } from "react";
 
+/**
+ * Dropdown component, used to display a dropdown menu
+ * @param title The title of the dropdown menu
+ * @param elements The elements to display in the dropdown menu
+ * @returns A JSX component for a dropdown menu
+ */
 export default function Dropdown({title, elements}) {
   // Tracks if the dropdown has been clicked
   const [dropped, setDropped] = useState(false);

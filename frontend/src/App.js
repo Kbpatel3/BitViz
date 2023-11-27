@@ -16,7 +16,7 @@ import SubGraph from "./components/SubGraph";
  * @author Kellan Anderson
  * @author Aidan Kirk
  * @author Kaushal Patel
- * @author Noah Hasset
+ * @author Noah Hassett
  * @returns JSX containing the view of our app
  */
 

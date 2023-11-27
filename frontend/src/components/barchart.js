@@ -1,7 +1,9 @@
 /**
- * @author Adian Kirk
+ * D3 function for displaying a barchart
+ * @author Aidan Kirk
  * @author Kellan Anderson
- * D3 funtion for dispalying a barchart
+ * @author Noah Hassett
+ * @author Kaushal Patel
  */
 import React from "react";
 import useD3 from "../hooks/useD3";
@@ -9,7 +11,8 @@ import * as d3 from 'd3';
 import getColor from "../helper/color";
 
 /**
- * Defines the componet for a barchart. Does not load data and it is required for it to be in a container to render 
+ * Defines the componet for a barchart. Does not load data and it is required for it to be in a 
+ * container to render 
  * accurate data
  * @param data The data to render
  * @returns A barchart JSX component

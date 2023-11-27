@@ -1,7 +1,7 @@
 /**
+ * Function to define the colors used in our application
  * @author Adian Kirk
  * @author Kellan Anderson
- * Funtion to define the colors used in our application
  */
 
 // Colors to use throughout the app 

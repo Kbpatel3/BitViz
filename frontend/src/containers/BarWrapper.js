@@ -1,8 +1,10 @@
 /**
- * @author Adian Kirk
+ * Defines a container for a single barchart, used to retreive data for a sinlge chart. This 
+ * component is mainly used to show the barchart next to the force directed graph
+ * @author Aidan Kirk
  * @author Kellan Anderson
- * Defines a container for a single barchart, used to retreive data for a sinlge chart. This component is mainly used to
- * show the barchart next to the force directed graph
+ * @author Noah Hassett
+ * @author Kaushal Patel
  */
 import React from "react";
 import { useReadCypher } from "use-neo4j";

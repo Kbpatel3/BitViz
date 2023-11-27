@@ -1,3 +1,9 @@
+/**
+ * Defines a Settings Button Component
+ * @author Noah Hassett
+ * @author Kaushal Patel
+ */
+
 import setting from "../settings_icon.png";
 
 /**

@@ -1,7 +1,7 @@
 /**
  * SubGraph component, used to render the subgraph of a specific node
  * @author Kaushal Patel
- * @author Noah Hasset
+ * @author Noah Hassett
  */
 
 import { useReadCypher } from "use-neo4j";

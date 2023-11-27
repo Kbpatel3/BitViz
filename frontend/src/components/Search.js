@@ -1,9 +1,9 @@
 /**
+ * Search component for the application
  * @author Aidan Kirk
  * @author Kellan Anderson
  * @author Noah Hassett
  * @author Kaushal Patel
- * Search component for the application
  */
 import React, { useEffect, useState, useContext } from "react";
 import { useReadCypher } from "use-neo4j";

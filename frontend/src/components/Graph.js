@@ -1,3 +1,11 @@
+/**
+ * @author Aidan Kirk
+ * @author Kellan Anderson
+ * @author Noah Hassett
+ * @author Kaushal Patel
+ * D3 function for displaying a graph
+ */
+
 import useD3 from "../hooks/useD3";
 import * as d3 from 'd3';
 import getColor from "../helper/color";
@@ -74,6 +82,7 @@ const Graph = ({data, highlight, nodeClick}) => {
           .attr("stroke-width", function(d) {
             return Math.sqrt(d.value);
           });
+
         // Defines our nodes on the screen
         const node = svg
           .append("g")
@@ -128,11 +137,12 @@ const Graph = ({data, highlight, nodeClick}) => {
         .nodes(data.nodes)
         .on("tick", ticked);
 
+      // Add the links
       simulation
         .force("link")
         .links(data.links);
 
-      // Calls the clicked node funciton with the specified highlighted node
+      // Calls the clicked node function with the specified highlighted node
       //clickNode(highlight);
     },
     // the data to be watched for changes

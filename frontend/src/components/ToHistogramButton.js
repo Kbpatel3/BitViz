@@ -3,6 +3,9 @@ import timesteps from "../timesteps_icon.png";
 
 /**
  * Button to scroll to the TimeSteps Charts when the button is clicked
+ * @author Noah Hassett
+ * @author Kaushal Patel
+ * @param {*} scrollToRef The reference to the TimeSteps Charts
  * @fileoverview Button to scroll to the TimeSteps Charts when the button is clicked
  * @returns {JSX.Element} A JSX element containing the TimeSteps Button
  */

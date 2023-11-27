@@ -1,9 +1,9 @@
 /**
+ * Container to hold several barcharts, specifically, one per timestep. AKA Army of barcharts
  * @author Aidan Kirk
  * @author Kellan Anderson
  * @author Noah Hassett
  * @author Kaushal Patel
- * Container to hold several barcharts, specifically, one per timestep. AKA Army of barcharts
  */
 
 import React from "react";
@@ -142,7 +142,7 @@ export default function BarSelector({highlighted, clickFunction}) {
             }
         };
 
-        // //!temp
+        // For filter panel
         // const toggleFileter = () => {
         //     var filterPanel = document.getElementById("filterPanel");
         //     filterPanel.classList.toggle("hidden");
@@ -170,6 +170,7 @@ export default function BarSelector({highlighted, clickFunction}) {
                         <option value={"Unknown,1"}>Sort Unknown (Descending)</option>
                     </select>
                     
+                    {/* For filter Panel */}
                     {/* <button className="block mt-1 border-gray-300 rounded-md shadow-sm focus:border-rose-600 focus:ring-rose-600 text-center" 
                             onClick={(e) => handleFilterClick("Unknown", 70, true)}>
                         Filter Timesteps
@@ -250,6 +251,7 @@ export default function BarSelector({highlighted, clickFunction}) {
                         ))
                         
                     ) : ( */}
+
                     {/* Checks whether either sorting or filtering is performed */}
                     {isNewData ? 
                     ( newData.length > 0 ? ( // Checks whether the new data is empty

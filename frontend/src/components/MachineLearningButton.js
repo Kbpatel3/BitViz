@@ -1,3 +1,9 @@
+/**
+ * Defines a Machine Learning Button Component
+ * @author Noah Hassett
+ * @author Kaushal Patel
+ */
+
 import machineLearning from "../ML_icon.png";
 
 /**
