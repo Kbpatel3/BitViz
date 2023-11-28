@@ -169,7 +169,7 @@ function App() {
                                 <BarWrapper timestep={timestep}/>
                             </div>
                         )}
-                        {graph === "Pie" && <Pie data={data.nodes} h={window.outerHeight/3 < 270 ? 270 : window.outerHeight/3}/>}
+                        {graph === "Pie" && <Pie data={data.nodes}/>}
                     </div>
                 ) : (
                     <div className="h-80 row-span-3 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300">
