@@ -11,7 +11,7 @@
  */
 export default function Key() {
   return (
-  <div className="text-right">
+  <div className="flex justify-end space-x-4">
     {/* Key */}
     <div className="flex items-center">
       <div className="w-4 h-4 rounded-full bg-illicit-yellow mr-2"></div>
@@ -25,6 +25,7 @@ export default function Key() {
       <div className="w-4 h-4 rounded-full bg-unknown-grey mr-2"></div>
       <p>Unknown</p>
     </div>
+    <div class="ml-4"></div>
   </div>
 );
 
