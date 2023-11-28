@@ -17,7 +17,7 @@ import Landing from './Landing';
  */
 
 // Address and port of the database
-const address = 'localhost';
+const address = '152.30.5.83';
 const port = 7687;
 
 // Name and password
