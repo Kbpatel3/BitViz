@@ -1,13 +1,17 @@
 /**
- * @author Adian Kirk
+ * Converts raw data into a format suitable for D3 visualization.
+ *
+ * @module DataConverter
+ * @function
+ * @param {Array} data - The raw data to be converted.
+ * @returns {Array} rtn - Formatted data suitable for D3 visualization.
  * @author Kellan Anderson
- * Converts the data in a way that D3 can display it
- * 
- * @param data The data to convert
- * @returns Formatted data
+ * @author Aidan Kirk
+ * @author Kaushal Patel
+ * @author Noah Hassett
  */
 export default function convert(data) {
-  // Init the return array
+  // Initialize the return array
   const rtn = [];
 
   // Loop over each element in data

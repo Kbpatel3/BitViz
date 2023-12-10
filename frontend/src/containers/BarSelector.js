@@ -1,21 +1,33 @@
 /**
  * Container to hold several barcharts, specifically, one per timestep. AKA Army of barcharts
- * @author Aidan Kirk
+ *
+ * @module BarSelector
+ * @constant
+ * @type {React.Component}
+ * @see Bar
+ * @see use-neo4j
+ * @see convert
  * @author Kellan Anderson
- * @author Noah Hassett
+ * @author Aidan Kirk
  * @author Kaushal Patel
+ * @author Noah Hassett
  */
 
-import React from "react";
-import Bar from "../components/barchart";
-import {useReadCypher} from "use-neo4j";
-import convert from "../helper/convert";
+// Imports
+import React from "react";  // React
+import Bar from "../components/barchart";   // Barchart
+import {useReadCypher} from "use-neo4j";    // Neo4j
+import convert from "../helper/convert";    // Convert
 
 /**
- * Barselector componets, defines the logic needed to display a barchart per each timestep
- * @param highlightedAndClickfuntion takes two parameters, highlighted is the barchart to highlight, and the click
- * function, which is run whenever a barchart is clicked on
- * @returns A JSX component showing the army of barcharts
+ * BarSelector component, defines the logic needed to display a barchart for each timestep.
+ *
+ * @function
+ * @name BarSelector
+ * @param {Object} props - React component properties.
+ * @param {number} props.highlighted - The timestep of the highlighted barchart.
+ * @param {Function} props.clickFunction - The function to be run whenever a barchart is clicked on.
+ * @returns {React.Component} - A JSX component showing the army of barcharts.
  */
 export default function BarSelector({highlighted, clickFunction}) {
     // Define our query and our key
@@ -35,6 +47,7 @@ export default function BarSelector({highlighted, clickFunction}) {
     // Define the initial result
     let result = <div>Loading</div>;
 
+    // State for whether the data is new
     const [isNewData, setIsNewData] = React.useState(false);
 
     // Check to see if the data has been loaded
@@ -42,33 +55,47 @@ export default function BarSelector({highlighted, clickFunction}) {
         console.log("Meta data is undefined")
     } else {
         // Data has been loaded, gets the data and passes it to convert() to be properly formatted
+
+        // Get the data
         let data = first.get(key);
+
+        // Convert the data
         data = convert(data);
 
-        //!temp
-        //let isFiltered = false;
-        //let isSorted = false;
 
+        /**
+         * Sorts the data based on the sortOption and sortOrder
+         * @param data - the data to be sorted
+         * @param sortOption - the option to sort by (Illicit, Licit, Unknown)
+         * @param sortOrder - the order to sort by (Ascending is 0, Descending is 1)
+         * @returns {*} - the sorted data
+         */
         const sortBarsByIllicit = (data, sortOption, sortOrder) => {
+            // Sort the data based on the sortOption
             return data.sort((a, b) => {
+                // Temporary variables to hold the value of the label to be sorted
                 let labelValueA;
                 let labelValueB;
+                // Switch statement to determine which label to sort by
                 switch (sortOption) {
                     case "Illicit":
+                        // Index 0 is Illicit label and its value
                         labelValueA = a.groups[0].value;
                         labelValueB = b.groups[0].value;
                         break;
                     case "Licit":
+                        // Index 1 is Licit label and its value
                         labelValueA = a.groups[1].value;
                         labelValueB = b.groups[1].value;
                         break;
                     case "Unknown":
+                        // Index 2 is Unknown label and its value
                         labelValueA = a.groups[2].value;
                         labelValueB = b.groups[2].value;
                         break;
                 }
 
-                // Change the order based on sortOrder
+                // Change the order based on sortOrder (Ascending or Descending)
                 if (sortOrder === 0) {
                     if (labelValueA > labelValueB) {
                         return 1;
@@ -77,6 +104,7 @@ export default function BarSelector({highlighted, clickFunction}) {
                     } else {
                         return 0;
                     }
+                // Descending
                 } else if (sortOrder === 1) {
                     if (labelValueA > labelValueB) {
                         return -1;
@@ -85,60 +113,88 @@ export default function BarSelector({highlighted, clickFunction}) {
                     } else {
                         return 0;
                     }
+                // Default
                 } else {
                     return 0;
                 }
             });
         };
 
-        // Define a function to handle the sorting button click
+        /**
+         * Defines a function to handle the sorting button click
+         * @param sortOption - the option to sort by (Illicit, Licit, Unknown)
+         * @param sortOrder - the order to sort by (Ascending is 0, Descending is 1)
+         */
         const handleSortClick = (sortOption, sortOrder) => {
-            // Sort the data and update the state
-            // data = sortBarsByIllicit(data)
+            // Call the sortBarsByIllicit function to sort the data
             const sortedData = sortBarsByIllicit(data, sortOption, sortOrder);
-            // const sortedData = isFiltered ? sortBarsByIllicit(newData, sortOption, sortOrder) : sortBarsByIllicit(data, sortOption, sortOrder);
+
+            // Update the state
             setSortedData(sortedData);
+
+            // Set the new data to the sorted data and update the state for isNewData to true
             setNewData(sortedData);
             setIsNewData(true);
         };
 
-        // filters the data based on the filterOption, minRange, and maxRange
+        /**
+         * Defines a function to filter the data based on the filterOption, minRange, and maxRange
+         * @param data - the data to be filtered
+         * @param filterOption - the option to filter by (Illicit, Licit, Unknown)
+         * @param minRange - the minimum range to filter by
+         * @param maxRange - the maximum range to filter by
+         * @returns {*} - the filtered data
+         */
         const filterData = (data, filterOption, minRange, maxRange) => {
+            // Filter the data based on the filterOption
             return data.filter((a) => {
+                // Calculate the total value of the label
                 let totalValue = a.groups[0].value + a.groups[1].value + a.groups[2].value;
                 let labelValue;
                 
-                // Calculate the percentage of the label
+                // Calculate the percentage of the label based on the total value
                 switch (filterOption) {
                     case "Illicit":
+                        // Index 0 is Illicit label and its value
                         labelValue = (a.groups[0].value/totalValue) * 100;
                         break;
                     case "Licit":
+                        // Index 1 is Licit label and its value
                         labelValue = (a.groups[1].value/totalValue) * 100;
                         break;
                     case "Unknown":
+                        // Index 2 is Unknown label and its value
                         labelValue = (a.groups[2].value/totalValue) * 100;
                         break;
                 }
-                // checks if the labelValue is within the range
+
+                // Check if the labelValue is within the range of minRange and maxRange
                 if (labelValue >= minRange && labelValue <= maxRange) {
+                    // If it is, return true
                     return true;
                 }
             });
         };
 
-        // Define a function to handle the filtering button click
+        /**
+         * Defines a function to handle the filter button click
+         * @param filterOption - the option to filter by (Illicit, Licit, Unknown)
+         * @param minRange - the minimum range to filter by
+         * @param maxRange - the maximum range to filter by
+         */
         const handleFilterClick = (filterOption, minRange, maxRange) => {
-            // Filter the data and update the state
+            // Check if the filterOption is Default
             if (filterOption === "Default") {
-                sortedData.length > 0 ? setNewData(sortedData) : setNewData(data); //TODO: make it so it'll be sorted after reset it
+                // If the length of sortedData is greater than 0, set the newData to sortedData, otherwise default data
+                // This ensures that the data will be sorted after reset it
+                sortedData.length > 0 ? setNewData(sortedData) : setNewData(data);
             } else {
-                // if sortedData is not empty, filter the sortedData, otherwise filter the data
+                // This means that the user has selected a filter option. If the data was sorted, filter the sorted data, otherwise filter the default data
                 const filteredData = sortedData.length > 0 ? 
                 filterData(sortedData, filterOption, minRange, maxRange) : filterData(data, filterOption, minRange, maxRange);
 
                 setNewData(filteredData); // sets the filtered data
-                setIsNewData(true);
+                setIsNewData(true); // sets the isNewData to true
             }
         };
 

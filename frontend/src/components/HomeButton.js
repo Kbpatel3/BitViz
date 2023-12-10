@@ -4,7 +4,7 @@
  * @author Kaushal Patel
  */
 
-import home from "../home_icon.png";
+import home from "../media/home_icon.png";
 /**
  * Home Button Component
  * @fileoverview Home Button Component

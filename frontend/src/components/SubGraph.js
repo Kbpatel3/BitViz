@@ -4,9 +4,10 @@
  * @author Noah Hassett
  */
 
-import { useReadCypher } from "use-neo4j";
-import { useEffect, useState } from "react";
-import SubGraphVisual from "./SubGraphVisual";
+// Imports
+import { useReadCypher } from "use-neo4j";  // Neo4j hook for reading data from the database
+import { useEffect, useState } from "react";  // React hooks
+import SubGraphVisual from "./SubGraphVisual";  // SubGraphVisual component
 
 /**
  * SubGraph component, used to render the subgraph of a specific node
@@ -50,7 +51,7 @@ export default function SubGraph({ clickedNode, nodeClick }) {
     if (error) console.log("Error");
   }, [clickedNode]);
 
-  // Init our data
+  // Initialize our data
   let data = undefined;
 
   // Check to see if the data has been assigned by the database yet
@@ -80,25 +81,6 @@ export default function SubGraph({ clickedNode, nodeClick }) {
   return (
     <div>
       {data ? (
-        // <div>
-        //   <h2>Nodes</h2>
-        //   <ul>
-        //     {data.nodes.map((node) => (
-        //       <li key={node.id}>
-        //         ID: {node.id}, Group: {node.group}
-        //       </li>
-        //     ))}
-        //   </ul>
-        //
-        //   <h2>Links</h2>
-        //   <ul>
-        //     {data.links.map((link, index) => (
-        //       <li key={index}>
-        //         Source: {link.source}, Target: {link.target}
-        //       </li>
-        //     ))}
-        //   </ul>
-        // </div>
         // Render the subgraph visual with the data and the clicked node
         <SubGraphVisual data={data} highlight={clickedNode} nodeClick={nodeClick}/>
       ) : (

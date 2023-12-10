@@ -1,9 +1,17 @@
 /**
- * @author Adian Kirk
+ * Observer context for the application, managing subscribers and notifications.
+ *
+ * @module ObserverContext
+ * @constant
+ * @type {React.Context}
+ * @see {@link https://reactjs.org/docs/context.html} for more on React Context
  * @author Kellan Anderson
- * Observer context for the application, manages subscribers and notifications
+ * @author Aidan Kirk
+ * @author Kaushal Patel
+ * @author Noah Hassett
  */
 
+// Import the context API and useRef hook
 import React, { createContext, useRef } from "react";
 
 // Create and export our context
@@ -11,29 +19,36 @@ const ObserverContext = createContext();
 export default ObserverContext;
 
 /**
- * Provider for the context API, holds the array of callback functions and the nesseary functions required to register 
- * and notify a subscriber
- * @param children The children to render inside of the context
- * @returns A context API
+ * Provider for the context API, holding the array of callback functions and necessary functions required to register
+ * and notify a subscriber.
+ *
+ * @function
+ * @name ObserverProvider
+ * @param {Object} props - React component properties.
+ * @param {React.ReactNode} props.children - The children to render inside of the context.
+ * @returns {React.Component} - A context API provider component.
  */
 export function ObserverProvider({children}) {  
   
-  // Init the callbacks array. Uses reacts useRef hook since when we change data it does not cause a re-render
+  // Initialize the callbacks array. Uses React's useRef hook since when we change data it does not cause a re-render
   const observerCallbacks = useRef([]);
 
   /**
-   * Adds a callback function to the list of subscribers to notify. Takes a function passed in by the subscriber to be 
-   * called later
-   * @param callback The function to be run when the subscriber is notified 
+   * Adds a callback function to the list of subscribers to notify.
+   * @function
+   * @name registerSubscriber
+   * @param {Function} callback - The function to be run when the subscriber is notified.
    */
   const registerSubscriber = (callback) => {
-    // Adds the callback function to the list of \
+    // Adds the callback function to the list of subscribers
     observerCallbacks.current = [...observerCallbacks.current, callback];
   }
 
   /**
-   * Calls each callback function registered in the subscriber list
-   * @param alertObject Object to call the callback functions with
+   * Calls each callback function registered in the subscriber list.
+   * @function
+   * @name alertSubscriber
+   * @param {Object} alertObject - Object to call the callback functions with.
    */
   const alertSubscriber = (alertObject) => {
     // Loop over the functions that have been subscribed with

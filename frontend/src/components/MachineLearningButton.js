@@ -4,7 +4,7 @@
  * @author Kaushal Patel
  */
 
-import machineLearning from "../ML_icon.png";
+import machineLearning from "../media/ML_icon.png";
 
 /**
  * Machine Learning Button Component

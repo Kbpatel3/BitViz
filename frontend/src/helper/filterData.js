@@ -1,9 +1,20 @@
+/**
+ * Filters and formats data for visualization, extracting nodes and links from the input data.
+ *
+ * @module DataFilter
+ * @function
+ * @param {Array} data - The raw data to be filtered and formatted.
+ * @returns {Object} - Formatted data containing nodes and links suitable for visualization.
+ */
 const filterData = (data) => {
-  // Build the node list
-  var node_list = [];
-  var link_list = [];
+
+  // Initialize the node and link lists
+  const node_list = [];
+  const link_list = [];
+
+  // Loop over each element in the data
   data.forEach(node => {
-    // Add to the node list
+    // Add the source and target nodes to the node list
     if(!node_list.includes(node.source)) {
       node_list.push(node.source);
     }
@@ -11,7 +22,7 @@ const filterData = (data) => {
       node_list.push(node.target);
     }
 
-    // Add to the link list
+    // Add the source and target nodes to the link list
     link_list.push({source: node.source.id, target: node.target.id});
   });
 

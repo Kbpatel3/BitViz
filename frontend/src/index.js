@@ -1,3 +1,17 @@
+/**
+ * Index.js
+ *
+ * This module serves as the entry point for the React application. It initializes the
+ * application by rendering the root component, setting up the Neo4j database connection,
+ * defining routes using React Router, and utilizing various context providers.
+ *
+ * @module Index
+ * @author Kellan Anderson
+ * @author Aidan Kirk
+ * @author Kaushal Patel
+ * @author Noah Hassett
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -9,12 +23,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
 import Landing from './Landing';
 
-/**
- * @author Aidan Kirk
- * @author Kellan Anderson
- * Javascript entry point for the application, gets an HTML element with an ID of root and renders the JSX rendered
- * in the app component
- */
 
 // Address and port of the database
 const address = '152.30.5.83';
@@ -31,13 +39,15 @@ const driver = createDriver('neo4j', address, port, databaseName, password);
 // Gets the root of the index.html document (found in frontend/public/)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+// Renders the root component of the application
 root.render(
   <React.StrictMode>
+    {/* Neo4j database provider context */}
     <Neo4jProvider driver={driver}>
       {/* Observer context */}
       <ObserverProvider>
 
-        {/* Routes inside of the app */}
+        {/* Routes inside the app */}
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Layout />}>

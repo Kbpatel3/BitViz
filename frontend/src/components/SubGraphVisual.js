@@ -1,21 +1,34 @@
 /**
- * SubGraphVisual component, used to generate the subgraph visual using D3
+ * SubGraphVisual component, used to generate the subgraph visual using D3.
+ *
+ * @module SubGraphVisual
+ * @type {React.Component}
+ * @param {Object} props - React component properties.
+ * @param {Object} props.data - Data to be used to generate the graph.
+ * @param {string} props.highlight - Node to be highlighted.
+ * @param {Function} props.nodeClick - Function to be called when a node is clicked.
+ * @returns {JSX.Element} - SubGraphVisual component.
+ * @constructor - SubGraphVisual
  * @author Kaushal Patel
  * @author Noah Hassett
  */
 
-import useD3 from "../hooks/useD3";
-import * as d3 from "d3";
-import getColor from "../helper/color";
-import "./graph.css";
+// Imports
+import useD3 from "../hooks/useD3"; // Custom hook to use D3
+import * as d3 from "d3";        // D3
+import getColor from "../helper/color"; // Helper function to get color based off of group
+import "./graph.css";         // CSS for the graph
 
 /**
- * SubGraphVisual component, used to generate the subgraph visual using D3
- * @param data - data to be used to generate the graph
- * @param highlight - node to be highlighted
- * @param nodeClick - function to be called when a node is clicked
- * @returns {JSX.Element} - SubGraphVisual component
- * @constructor - SubGraphVisual
+ * SubGraphVisual component, used to generate the subgraph visual using D3.
+ *
+ * @function
+ * @name SubGraphVisual
+ * @param {Object} props - React component properties.
+ * @param {Object} props.data - Data to be used to generate the graph.
+ * @param {string} props.highlight - Node to be highlighted.
+ * @param {Function} props.nodeClick - Function to be called when a node is clicked.
+ * @returns {JSX.Element} - SubGraphVisual component.
  */
 const SubGraphVisual = ({ data, highlight, nodeClick }) => {
   // D3 reference
@@ -24,8 +37,9 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
       // If there is no data, return
       if (!data) return;
 
-      // Get the parent elements dimentions
+      // Get the parent element's dimensions
       const dimensions = d3.select(".subgraph").node().getBoundingClientRect();
+
       // Constants used by the SVG
       const height = dimensions.height;
       const width = dimensions.width;
@@ -50,11 +64,14 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
         .force("charge", d3.forceManyBody().strength(-1))
         .force("center", d3.forceCenter(width / 2, height / 2));
 
-      // Functions to define what happens when a user clicks on an app
+      // Functions to define what happens when a user clicks on a node
 
       /**
-       * Drag started function, defines what happens when a user starts to drag a node
-       * @param event - event that triggered the function
+       * Drag started function, defines what happens when a user starts to drag a node.
+       *
+       * @function
+       * @name dragstarted
+       * @param {Object} event - Event that triggered the function.
        */
       function dragstarted(event) {
         if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -63,8 +80,11 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
       }
 
       /**
-       * Dragged function, defines what happens when a user drags a node
-       * @param event - event that triggered the function
+       * Dragged function, defines what happens when a user drags a node.
+       *
+       * @function
+       * @name dragged
+       * @param {Object} event - Event that triggered the function.
        */
       function dragged(event) {
         event.subject.fx = event.x;
@@ -72,8 +92,11 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
       }
 
       /**
-       * Drag ended function, defines what happens when a user stops dragging a node
-       * @param event - event that triggered the function
+       * Drag ended function, defines what happens when a user stops dragging a node.
+       *
+       * @function
+       * @name dragended
+       * @param {Object} event - Event that triggered the function.
        */
       function dragended(event) {
         if (!event.active) simulation.alphaTarget(0);
@@ -101,11 +124,7 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
         .data(data.nodes)
         .enter()
         .append("circle")
-        //.attr("id", (d) => clickedNode(d.id))
         .attr("id", (d) => `node${d.id}`)
-        // .attr("r", 7)
-        // //.attr("r", d => (d.id == highlight) ? 12 : 7)
-        // .attr("fill", (d) => getColor(d.group))
         .call(
           d3
             .drag()
@@ -113,10 +132,6 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
             .on("drag", dragged)
             .on("end", dragended),
         )
-        // .on('click', (d) => { // when a node in the subgraph is clicked
-        //   nodeClick(parseInt(d.target.id.slice(4)));
-        //   clickNode(parseInt(d.target.id.slice(4)));
-        // });
 
       
       // Adds titles to nodes
@@ -132,7 +147,10 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
       };
 
       /**
-       * Ticked function, defines what happens to the nodes as the simulation "ticks"
+       * Ticked function, defines what happens to the nodes as the simulation "ticks".
+       *
+       * @function
+       * @name ticked
        */
       const ticked = () => {
         link
@@ -146,19 +164,17 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
           .attr("cy", (d) => limitPosition(d.y, "y"));
       };
 
-      
-
       // Add the ticked method, nodes and links to our simulation
       simulation.nodes(data.nodes).on("tick", ticked);
-
       simulation.force("link").links(data.links);
 
-      //node.each(clickNode);
-      //clickNode(highlight);
       
       /**
-       * Clicked node function, highlights a specific node based off of the id of each node
-       * @param {*} id
+       * Clicked node function, highlights a specific node based on the id of each node.
+       *
+       * @function
+       * @name clickNode
+       * @param {string} id - Node id.
        */
       function clickNode(id) {
           d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
@@ -184,21 +200,4 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
 };
 
 export default SubGraphVisual;
-
-/**
- * Clicked node function, highlights a specific node based off of the id of each node
- * @param {*} id
- */
-// function clickNode(id) {
-//   console.log("Hello6: ", id);
-//   //d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
-//   d3.select(`#node${id}`)
-//     .transition()
-//     .duration(500)
-//     .attr('r', 12);
-// }
-
-// function triggerClick(nodeId) {
-//   d3.select(`#node${nodeId}`).dispatch("click");
-// }
 

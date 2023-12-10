@@ -1,26 +1,45 @@
-import {useEffect, useState, useContext, useRef} from "react";
-import Graph from "./components/Graph";
-import Pie from "./components/Pie";
-import BarSelector from "./containers/BarSelector";
-import {useReadCypher} from "use-neo4j";
-import ObserverContext from "./context/ObserverContext";
-import {Select, MenuItem} from "@mui/material";
-import BarWrapper from "./containers/BarWrapper";
-import Slider from "./components/Slider";
-import Bar from "./components/barchart";
-import NavBar from "./components/NavBar";
-import SubGraph from "./components/SubGraph";
-import Key from "./components/Key";
-
 /**
- * App.js, logic entry point for our data. This function controls the ways things are rendered to the user
+ * App.js
+ *
+ * The main component of our application. This component is responsible for rendering all the other components
+ * in our application. It also contains the logic for the observer design pattern. This pattern is used to communicate
+ * between the slider, the bar charts, and the force-directed graph. Whenever the slider is moved, the App component
+ * is notified, and it updates the timestep. Whenever a bar chart is clicked, the App component is notified and it updates
+ * the timestep. Whenever a node is clicked on the force-directed graph, the App component is notified and it updates the
+ * clicked node. The App component then notifies all of the other components of the change in state. This allows us to have
+ * a single source of truth for the state of the application. This component also contains the logic for querying the database.
+ * Whenever the timestep is changed, the App component queries the database for the data at that timestep.
+ *
+ * @module App
  * @author Kellan Anderson
  * @author Aidan Kirk
  * @author Kaushal Patel
  * @author Noah Hassett
- * @returns JSX containing the view of our app
+ * @returns {JSX.Element} - JSX containing the view of our app
  */
 
+// Import statements
+import {useEffect, useState, useContext, useRef} from "react";  // React hooks
+import Graph from "./components/Graph"; // Force directed graph
+import Pie from "./components/Pie"; // Pie chart
+import BarSelector from "./containers/BarSelector"; // Bar chart selector
+import {useReadCypher} from "use-neo4j";    // Neo4j hook
+import ObserverContext from "./context/ObserverContext";    // Observer context
+import {Select, MenuItem} from "@mui/material"; // Select component
+import BarWrapper from "./containers/BarWrapper";   // Bar chart wrapper
+import Slider from "./components/Slider";   // Slider component
+import Bar from "./components/barchart";    // Bar chart
+import NavBar from "./components/NavBar";   // Navigation bar
+import SubGraph from "./components/SubGraph";   // Subgraph
+import Key from "./components/Key";  // Key
+
+
+/**
+ * Main application component responsible for rendering the entire application.
+ * Implements the observer design pattern to manage state across components.
+ *
+ * @returns {JSX.Element} - JSX containing the view of the app
+ */
 function App() {
     // Used to keep track of the timestep
     const [timestep, setTimestep] = useState(1);
@@ -105,7 +124,7 @@ function App() {
         // const query = temp(timestep, clickedNode);
         // setSubgraph(query);
 
-        // Call all of the callbacks registered in the observer context with the id, timestep and source
+        // Call all the callbacks registered in the observer context with the id, timestep and source
         alertSubscriber({
             id: parseInt(id),
             timestep: undefined,
@@ -128,10 +147,10 @@ function App() {
                 {/* Row 2-7 which contains the main nodal structure */}
                 {data ? (
                     <div className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 hover:bg-slate-300">
-                        {/* <div className="h-full col-span-2 row-span-6 row-start-2 bg-slate-200 hover:bg-slate-300"> */}
-                        {/* Graph component, shows the force directed graph */}
-                        {/*<div className='col-span-2'>*/}
+                        {/* Render the color key */}
                         <Key className={"m-auto"}/>
+
+                        {/* Render the force directed graph */}
                         <Graph
                             data={data}
                             highlight={clickedNode}

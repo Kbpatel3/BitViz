@@ -1,128 +1,137 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<meta charset="utf-8" />
-<style>
+<head>
+  <meta charset="utf-8" />
+  <style>
 
-  .links line {
-    stroke: #999;
-    stroke-opacity: 0.6;
-  }
-
-  .nodes circle {
-    stroke: #fff;
-    stroke-width: 1.5px;
-  }
-
-</style>
-<svg width="960" height="600"></svg>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script>
-
-  var svg = d3.select("svg");
-  var width = svg.attr("width");
-  var height = svg.attr("height");
-
-  d3.json("~/Code/Capstone/frontend/src/test.json/", function(error, graph) {
-    if (error) throw error;
-
-    // Assign x,y and vx,vy (velocity) coordinates to each node in array 
-    var simulation = d3
-      .forceSimulation(graph.nodes)
-      .force(
-        "link",
-        d3
-          .forceLink()
-          .id(function(d) {
-            return d.name;
-          })
-          .links(graph.links)
-      )
-
-      // How much force is required to drag the nodes
-      .force("charge", d3.forceManyBody().strength(-30))   
-
-      // How much force is required to shrink or expand the center
-      .force("center", d3.forceCenter(width / 2, height / 2))
-      .on("tick", ticked);
-
-    var link = svg // Create vector graphics for every link between nodes
-      .append("g")
-      .attr("class", "links")
-      .selectAll("line")
-      .data(graph.links)
-      .enter()
-      .append("line")
-      .attr("stroke-width", function(d) {
-        return 3;
-      });
-
-    // TODO:  In future iterations a function will be put in place to assign
-    //        -  blue -> licit transaction
-    //        -  red -> illicit transaction
-
-    var node = svg // Create vector graphics for every node
-      .append("g")
-      .attr("class", "nodes")
-      .selectAll("circle")
-      .data(graph.nodes)
-      .enter()
-      .append("circle")
-      .attr("r", 5)
-      .attr("fill", function(d) {
-        return "red";
-      })
-      .call(       // Call d3's drag api to initialize actions
-        d3
-          .drag()
-          .on("start", dragstarted)
-          .on("drag", dragged)
-          .on("end", dragended)
-      );
- 
-    // If a node is clicked on, assign movement attributes
-    function ticked() {
-      link
-        .attr("x1", function(d) {
-          return d.source.x;
-        })
-        .attr("y1", function(d) {
-          return d.source.y;
-        })
-        .attr("x2", function(d) {
-          return d.target.x;
-        })
-        .attr("y2", function(d) {
-          return d.target.y;
-        });
-
-      node
-        .attr("cx", function(d) {
-          return d.x;
-        })
-        .attr("cy", function(d) {
-          return d.y;
-        });
+    /* Styling for the links between nodes */
+    .links line {
+      stroke: #999;
+      stroke-opacity: 0.6;
     }
-  });
 
-  // If node is clicked on, restart drag event
-  function dragstarted(d) {
-    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-    d.fx = d.x;
-    d.fy = d.y;
-  }
+    /* Styling for the nodes */
+    .nodes circle {
+      stroke: #fff;
+      stroke-width: 1.5px;
+    }
 
-  // If node is ticked, give it draggable properties
-  function dragged(d) {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
-  }
+  </style>
+</head>
 
-  // If user stops dragging, node is released and becomes static
-  function dragended(d) {
-    if (!d3.event.active) simulation.alphaTarget(0);
-    d.fx = null;
-    d.fy = null;
-  }
+<body>
 
-</script>
+  <!-- SVG container for rendering the graph -->
+  <svg width="960" height="600"></svg>
+
+  <!-- Include the D3.js library from a CDN -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+  <script>
+    // Select the SVG container
+    var svg = d3.select("svg");
+
+    // Get the width and height of the SVG container
+    var width = svg.attr("width");
+    var height = svg.attr("height");
+
+    // Load JSON data representing the graph
+    d3.json("~/Code/Capstone/frontend/src/test.json/", function(error, graph) {
+      if (error) throw error;
+
+      // Create a force simulation for the nodes and links
+      var simulation = d3.forceSimulation(graph.nodes)
+        .force(
+          "link",
+          d3.forceLink()
+            .id(function(d) {
+              return d.name;
+            })
+            .links(graph.links)
+        )
+        .force("charge", d3.forceManyBody().strength(-30)) // Node repulsion force
+        .force("center", d3.forceCenter(width / 2, height / 2)) // Centering force
+        .on("tick", ticked); // Callback function for each simulation tick
+
+      // Create vector graphics for links between nodes
+      var link = svg
+        .append("g")
+        .attr("class", "links")
+        .selectAll("line")
+        .data(graph.links)
+        .enter()
+        .append("line")
+        .attr("stroke-width", function(d) {
+          return 3;
+        });
+
+      // Create vector graphics for nodes
+      var node = svg
+        .append("g")
+        .attr("class", "nodes")
+        .selectAll("circle")
+        .data(graph.nodes)
+        .enter()
+        .append("circle")
+        .attr("r", 5)
+        .attr("fill", function(d) {
+          return "red";
+        })
+        .call(
+          d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended)
+        );
+
+      // Callback function for each simulation tick
+      function ticked() {
+        link
+          .attr("x1", function(d) {
+            return d.source.x;
+          })
+          .attr("y1", function(d) {
+            return d.source.y;
+          })
+          .attr("x2", function(d) {
+            return d.target.x;
+          })
+          .attr("y2", function(d) {
+            return d.target.y;
+          });
+
+        node
+          .attr("cx", function(d) {
+            return d.x;
+          })
+          .attr("cy", function(d) {
+            return d.y;
+          });
+      }
+    });
+
+    // If node is clicked on, restart drag event
+    function dragstarted(d) {
+      if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+
+    // If node is ticked, give it draggable properties
+    function dragged(d) {
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+    }
+
+    // If user stops dragging, node is released and becomes static
+    function dragended(d) {
+      if (!d3.event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+
+  </script>
+</body>
+
+</html>

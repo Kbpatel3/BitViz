@@ -4,7 +4,7 @@
  * @author Kaushal Patel
  */
 
-import setting from "../settings_icon.png";
+import setting from "../media/settings_icon.png";
 
 /**
  * SettingsButton component for the application

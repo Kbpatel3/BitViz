@@ -1,19 +1,31 @@
 /**
- * Defines a container for a single barchart, used to retreive data for a sinlge chart. This 
- * component is mainly used to show the barchart next to the force directed graph
- * @author Aidan Kirk
+ * Defines a container for a single barchart, used to retrieve data for a single chart. This
+ * component is mainly used to show the barchart next to the force-directed graph.
+ *
+ * @module BarWrapper
+ * @constant
+ * @type {React.Component}
+ * @see Bar
+ * @see use-neo4j
  * @author Kellan Anderson
- * @author Noah Hassett
+ * @author Aidan Kirk
  * @author Kaushal Patel
+ * @author Noah Hassett
  */
-import React from "react";
-import { useReadCypher } from "use-neo4j";
-import Bar from "../components/barchart";
+
+// Imports
+import React from "react";  // React
+import { useReadCypher } from "use-neo4j";  // Neo4j hook
+import Bar from "../components/barchart"; // Barchart
 
 /**
- * Wrapper for the barchart, loads the data for a single barchart
- * @param timestep The timestep to render 
- * @returns A JSX component holding a single barchart
+ * Wrapper for the barchart, loads the data for a single barchart.
+ *
+ * @function
+ * @name BarWrapper
+ * @param {Object} props - React component properties.
+ * @param {number} props.timestep - The timestep to render.
+ * @returns {React.Component} - A JSX component holding a single barchart.
  */
 export default function BarWrapper({timestep}) {
   // Defines the key and the query to get data from the database
@@ -23,7 +35,7 @@ export default function BarWrapper({timestep}) {
   // Gets the data and the loading values
   const { loading, first } = useReadCypher(query);
 
-  // Init the result vector
+  // Initialize the result vector
   let result = <div>Loading</div>
 
   // Check to see if the data has been loaded yet
