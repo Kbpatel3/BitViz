@@ -19,6 +19,7 @@ import * as d3 from "d3";        // D3
 import getColor from "../helper/color"; // Helper function to get color based off of group
 import "./graph.css";         // CSS for the graph
 
+// !new function
 /**
  * SubGraphVisual component, used to generate the subgraph visual using D3.
  *

@@ -9,8 +9,6 @@
  * @see use-neo4j
  * @author Kellan Anderson
  * @author Aidan Kirk
- * @author Kaushal Patel
- * @author Noah Hassett
  */
 
 // Imports
@@ -18,6 +16,7 @@ import React from "react";  // React
 import { useReadCypher } from "use-neo4j";  // Neo4j hook
 import Bar from "../components/barchart"; // Barchart
 
+// !no changes
 /**
  * Wrapper for the barchart, loads the data for a single barchart.
  *

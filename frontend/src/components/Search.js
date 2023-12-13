@@ -10,6 +10,7 @@ import { useReadCypher } from "use-neo4j";
 import ObserverContext from "../context/ObserverContext";
 import Dropdown from "./dropdown";
 
+// !changed line: 73, 102
 /**
  * Search component of the application
  * @returns A JSX element containing a search bar
@@ -18,8 +19,6 @@ export default function Search({ timestep }) {
   // Node and node id that is being searched for
   const [nodeId, setNodeId] = useState(0);
   const [node, setNode] = useState(undefined);
-
-  //const [clickedNode, setClickedNode] = useState(0);
 
   // Data defined by the use-neo4j hook
   const [nodeLoading, setNodeLoading] = useState(true);
@@ -59,9 +58,9 @@ export default function Search({ timestep }) {
 
   // Re-run the query with the specified query whenever the nodeID changes
   useEffect(() => {
-    const query = `MATCH (n {id: "${nodeId}"}), (n)-[]->(b) WITH n as n, COLLECT(b.id) as edges RETURN ${key}`;
+    const query = 
+    `MATCH (n {id: "${nodeId}"}), (n)-[]->(b) WITH n as n, COLLECT(b.id) as edges RETURN ${key}`;
     run({ query });
-    //console.log("Hello:", records[0]._fields[0].timestep);
   }, [nodeId]);
 
   // Set the records/node data whenever the records from the database changes
@@ -70,9 +69,10 @@ export default function Search({ timestep }) {
     if (records !== undefined) {
       let newNode = records.length !== 0 ? records[0].get(key) : undefined;
 
-      // Calls the alert function
+      // Calls the alert function if the node has changed
+      // needs to prevent refreshing the graph when node is clicked
       if (newNode !== undefined && parseInt(newNode.timestep) !== timestep) {
-        alertSubscriber({ //TODO: clean up this object
+        alertSubscriber({
           id: newNode ? newNode.id : undefined,
           timestep: newNode ? newNode.timestep : undefined,
           source: "search",
@@ -100,7 +100,7 @@ export default function Search({ timestep }) {
     // Sets the node it from the form
     setNodeId(formJson.id);
     
-    console.log("Time45: " + formJson.timestep);
+    // prevents the graph from refreshing when node is clicked
     alertSubscriber({
       id: parseInt(formJson.id),
       timestep: formJson.timestep,

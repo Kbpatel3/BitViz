@@ -8,8 +8,6 @@
  * @module Landing
  * @author Kellan Anderson
  * @author Aidan Kirk
- * @author Kaushal Patel
- * @author Noah Hassett
  */
 
 import React from 'react';
@@ -17,8 +15,11 @@ import nodes from "./media/nodes.jpg"	// Importing the background image for the 
 import {Button} from "@mui/material";
 import {Link} from "react-router-dom";
 
+// !no changes but we'll remove this function in the end
 /**
- * The 'Landing' component is a functional React component that renders the landing page of the application. It includes a background image, a title, a tagline, and a button to navigate to another part of the application.
+ * The 'Landing' component is a functional React component that renders the landing page of the 
+ * application. It includes a background image, a title, a tagline, and a button to navigate to 
+ * another part of the application.
  * @returns {JSX.Element} - The JSX element corresponding to the landing page of the application.
  * @constructor
  */
@@ -39,17 +40,21 @@ export default function Landing() {
 	return (
 		<div style={style}>
 			{/* Title */}
- 			<div style={{fontSize: "100px", fontFamily: "Roboto, Helvetica, Arial, sans-serif", textAlign: "center", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
+ 			<div style={{fontSize: "100px", fontFamily: "Roboto, Helvetica, Arial, sans-serif", 
+				textAlign: "center", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
                 		Node-View
             		</div>
             		{/*Tagline text*/}
-            		<div style={{ fontSize: "40px", fontFamily: "Roboto, Helvetica, Arial, sans-serif", textAlign: "center", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
+            		<div style={{ fontSize: "40px", 
+						fontFamily: "Roboto, Helvetica, Arial, sans-serif", textAlign: "center", 
+						backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
                 		A tool for analyzing bitcoin transactions
             		</div>
 			<br/>
 			{/* Button to navigate to the application */}
 			<div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-				<Button component={Link} to="/app" variant="contained" style={{ width: "200px", height: "75px", fontSize:"20px" }}>Go to App</Button>
+				<Button component={Link} to="/app" variant="contained" 
+					style={{ width: "200px", height: "75px", fontSize:"20px" }}>Go to App</Button>
 			</div>
 		</div>
 	);

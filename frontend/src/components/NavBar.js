@@ -10,6 +10,7 @@ import MachineLearningButton from "./MachineLearningButton";
 import ToHistogramButton from "./ToHistogramButton";
 import HomeButton from "./HomeButton";
 
+// !new function
 /**
  * NavBar component for the application
  * @fileoverview NavBar component for the application

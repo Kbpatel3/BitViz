@@ -6,6 +6,7 @@
 
 import setting from "../media/settings_icon.png";
 
+// !new function
 /**
  * SettingsButton component for the application
  * @fileoverview SettingsButton component for the application

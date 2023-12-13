@@ -10,6 +10,7 @@ import useD3 from "../hooks/useD3";
 import * as d3 from 'd3';
 import getColor from "../helper/color";
 
+// !changed line 65
 /**
  * Defines the componet for a barchart. Does not load data and it is required for it to be in a 
  * container to render 
@@ -61,7 +62,7 @@ const Bar = ({ data }) => {
             // Set the Y axis
             const y_axis = d3
                 .scaleLinear()
-                .domain([0, height])
+                .domain([0, height]) // changed the height to be adjust to max bar height
                 .range([0, height]);
               
             // Apply the y axis to the svg

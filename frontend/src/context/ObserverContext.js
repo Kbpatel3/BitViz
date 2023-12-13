@@ -18,9 +18,10 @@ import React, { createContext, useRef } from "react";
 const ObserverContext = createContext();
 export default ObserverContext;
 
+// !just added new comments
 /**
- * Provider for the context API, holding the array of callback functions and necessary functions required to register
- * and notify a subscriber.
+ * Provider for the context API, holding the array of callback functions and necessary functions 
+ * required to register and notify a subscriber.
  *
  * @function
  * @name ObserverProvider
@@ -30,7 +31,8 @@ export default ObserverContext;
  */
 export function ObserverProvider({children}) {  
   
-  // Initialize the callbacks array. Uses React's useRef hook since when we change data it does not cause a re-render
+  // Initialize the callbacks array. Uses React's useRef hook since when we change data it does not
+  // cause a re-render
   const observerCallbacks = useRef([]);
 
   /**
@@ -77,17 +79,21 @@ Context uses a useRef hook to store an array of callbacks that is consistent bet
 
 Graph:
   Register:
-    The graph register callback should traverse to a new timestep, clear any highlighted nodes and highlight a new node.
+    The graph register callback should traverse to a new timestep, clear any highlighted nodes and 
+    highlight a new node.
     Register can expect to take a node object with the nodes id and timestep.
   Alert:
-    Alert should be called when a user clicks on a node on the graph. The alert function should be passed a nodes id
+    Alert should be called when a user clicks on a node on the graph. The alert function should be 
+      passed a nodes id
 
 Search:
   Register:
-    The search component should take a single number representing an ID and call a search function. After the search 
-    function returns we should display the data and call the alert function. ISSUE: calling the alert function inside of
-    the registered callback means that the callback will become recursive. FIX: Pass an optional value that declares
-    where the value comes from (i.e. {source:"search"}) and check for that in the registered callback; 
+    The search component should take a single number representing an ID and call a search function.
+    After the search function returns we should display the data and call the alert function. 
+    ISSUE: calling the alert function inside of the registered callback means that the callback
+    will become recursive. 
+    FIX: Pass an optional value that declares where the value comes from (i.e. {source:"search"}) 
+    and check for that in the registered callback; 
   Alert:
     Pass the found nodes timestep and node id
 

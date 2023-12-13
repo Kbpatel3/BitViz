@@ -11,10 +11,12 @@ import * as d3 from 'd3';
 import getColor from "../helper/color";
 import "./graph.css";
 
+// !Changed the force of the graph, line: 47, 57
+// !Make the feature of highlighting node work: line 107, 172-
 /**
  * Graph component for our app, takes data and uses a custom hook to render our graph to the screen
  * @param {*} Data The data for our graph to render
- * @param {*} highlight The node to highlight
+ * @param {*} highlight The node to highlight (Will be use in next semester)
  * @param {*} nodeClick The function to call when a node is clicked
  * @returns The graph component
  */
@@ -23,7 +25,7 @@ const Graph = ({data, highlight, nodeClick}) => {
   const ref = useD3(
     (svg) => {
 
-      // Get the parent elements dimentions
+      // Get the parent elements dimensions
       const dimensions = d3.select(".graphContainer").node().getBoundingClientRect();
       // Constants used by the SVG
       const height = dimensions.height;
@@ -102,7 +104,7 @@ const Graph = ({data, highlight, nodeClick}) => {
               .on("end", dragended)
           ).on('click', (d) => {
             nodeClick(parseInt(d.target.id.slice(4)));
-            clickNode(parseInt(d.target.id.slice(4)));
+            clickNode(parseInt(d.target.id.slice(4))); // added for highlighting node
             // d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
             // d3.select(`#${d.target.id}`).attr('fill', (d) => getColor(d.group)).attr('r', 12);
           });

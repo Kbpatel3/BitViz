@@ -9,6 +9,7 @@ import { useReadCypher } from "use-neo4j";  // Neo4j hook for reading data from 
 import { useEffect, useState } from "react";  // React hooks
 import SubGraphVisual from "./SubGraphVisual";  // SubGraphVisual component
 
+// !new function
 /**
  * SubGraph component, used to render the subgraph of a specific node
  * @param clickedNode - the node that was clicked on

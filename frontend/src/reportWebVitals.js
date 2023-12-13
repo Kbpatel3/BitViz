@@ -11,7 +11,7 @@
 const reportWebVitals = onPerfEntry => {
   // Check if the callback function is provided and is a function
   if (onPerfEntry && onPerfEntry instanceof Function) {
-    // Dynamically import the 'web-vitals' library to avoid bundling it with the main application code
+    // Dynamically import the 'web-vitals' library to avoid bundling it with the main app code
     import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
       // Call the provided callback function with each web vital metric
       getCLS(onPerfEntry); // Cumulative Layout Shift

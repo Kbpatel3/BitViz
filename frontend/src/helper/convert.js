@@ -1,3 +1,4 @@
+// !no changes
 /**
  * Converts raw data into a format suitable for D3 visualization.
  *
@@ -7,8 +8,6 @@
  * @returns {Array} rtn - Formatted data suitable for D3 visualization.
  * @author Kellan Anderson
  * @author Aidan Kirk
- * @author Kaushal Patel
- * @author Noah Hassett
  */
 export default function convert(data) {
   // Initialize the return array

@@ -1,14 +1,16 @@
 /**
  * App.js
  *
- * The main component of our application. This component is responsible for rendering all the other components
- * in our application. It also contains the logic for the observer design pattern. This pattern is used to communicate
- * between the slider, the bar charts, and the force-directed graph. Whenever the slider is moved, the App component
- * is notified, and it updates the timestep. Whenever a bar chart is clicked, the App component is notified and it updates
- * the timestep. Whenever a node is clicked on the force-directed graph, the App component is notified and it updates the
- * clicked node. The App component then notifies all of the other components of the change in state. This allows us to have
- * a single source of truth for the state of the application. This component also contains the logic for querying the database.
- * Whenever the timestep is changed, the App component queries the database for the data at that timestep.
+ * The main component of our application. This component is responsible for rendering all the other 
+ * components in our application. It also contains the logic for the observer design pattern. This 
+ * pattern is used to communicate between the slider, the bar charts, and the force-directed graph.
+ * Whenever the slider is moved, the App component is notified, and it updates the timestep. 
+ * Whenever a bar chart is clicked, the App component is notified and it updates the timestep. 
+ * Whenever a node is clicked on the force-directed graph, the App component is notified and it 
+ * updates the clicked node. The App component then notifies all of the other components of the 
+ * change in state. This allows us to have a single source of truth for the state of the 
+ * application. This component also contains the logic for querying the database. Whenever the 
+ * timestep is changed, the App component queries the database for the data at that timestep.
  *
  * @module App
  * @author Kellan Anderson
@@ -34,6 +36,7 @@ import SubGraph from "./components/SubGraph";   // Subgraph
 import Key from "./components/Key";  // Key
 
 
+// !mainly modified html code to change the tool's layout
 /**
  * Main application component responsible for rendering the entire application.
  * Implements the observer design pattern to manage state across components.
@@ -51,8 +54,8 @@ function App() {
     // Gets functions required for the observer design pattern using React's context API
     const {registerSubscriber, alertSubscriber} = useContext(ObserverContext);
 
-    // Uses to specify the specific place in the page
-    const ref = useRef(null);
+    // Parent ref for the army of bar charts
+    const scrollToRef = useRef(null);
 
     // Registers a callback function with the observer
     registerSubscriber((alertObject) => {
@@ -121,10 +124,8 @@ function App() {
     const handleCircleClick = (id) => {
         // Update the clicked node
         setClickedNode(id);
-        // const query = temp(timestep, clickedNode);
-        // setSubgraph(query);
 
-        // Call all the callbacks registered in the observer context with the id, timestep and source
+        // Call all the callbacks registered in the observer context with the id, timestep and src
         alertSubscriber({
             id: parseInt(id),
             timestep: undefined,
@@ -132,21 +133,21 @@ function App() {
         });
     };
 
-    // Parent ref for the army of bar charts
-    const scrollToRef = useRef(null);
-
     return (
         <>
             <div className="grid grid-cols-3 grid-rows-8 gap-2">
                 {/* Row 1 which contains the search bar, page buttons, and the settings icon */}
                 <div
-                    className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex justify-center items-center h-full">
+                    className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex 
+                        justify-center items-center h-full">
                     <NavBar scrollToRef={scrollToRef} timestep={timestep}/>
                 </div>
 
                 {/* Row 2-7 which contains the main nodal structure */}
                 {data ? (
-                    <div className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 hover:bg-slate-300">
+                    <div 
+                    className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 
+                        hover:bg-slate-300">
                         {/* Render the color key */}
                         <Key className={"m-auto"}/>
 
@@ -159,17 +160,19 @@ function App() {
                         {/*</div>*/}
                     </div>
                 ) : (
-                    <div className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 hover:bg-slate-300">
+                    <div 
+                    className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 
+                        hover:bg-slate-300">
                         Data not loaded
                     </div>
                 )}
 
                 {/* Row 2-4 and column 3 which contains the bar graph/pie chart */}
                 {data ? (
-                    //! h-80 recommended
                     // Shift this down to anchor bottom of container
                     <div
-                        className="row-span-3 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300 max-h-[320px]">
+                        className="row-span-3 col-start-3 row-start-2 bg-slate-200 
+                            hover:bg-slate-300 max-h-[320px]">
                         {/* Select component for choosing the graph type */}
                         <Select
                             className={"w-full"}
@@ -191,15 +194,17 @@ function App() {
                         {graph === "Pie" && <Pie data={data.nodes}/>}
                     </div>
                 ) : (
-                    <div className="h-80 row-span-3 col-start-3 row-start-2 bg-slate-200 hover:bg-slate-300">
+                    <div 
+                    className="h-80 row-span-3 col-start-3 row-start-2 bg-slate-200 
+                        hover:bg-slate-300">
                         Data not loaded
                     </div>
                 )}
 
                 {/* Row 5-7 and column 3 which contains the subgraph */}
                 <div
-                    className="subgraph row-span-3 col-start-3 row-start-5 bg-slate-200 hover:bg-slate-300
-        min-h-[320px] min-w-[500px]"
+                    className="subgraph row-span-3 col-start-3 row-start-5 bg-slate-200 
+                        hover:bg-slate-300 min-h-[320px] min-w-[500px]"
                 >
                     {/* <SubGraph/> */}
                     {clickedNode ? (
@@ -212,7 +217,8 @@ function App() {
                 </div>
 
                 {/* Row 8 which contains the slider */}
-                <div ref={scrollToRef} className="col-span-3 row-start-8 bg-slate-200 hover:bg-slate-300 pt-2.5">
+                <div ref={scrollToRef} 
+                className="col-span-3 row-start-8 bg-slate-200 hover:bg-slate-300 pt-2.5">
                     {/* Slider component */}
                     <Slider
                         timestep={timestep}

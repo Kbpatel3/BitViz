@@ -15,6 +15,8 @@ import getColor from "../helper/color.js";
  * @param Data The data to render the chart with
  * @returns A JSX component for a pie chart.
  */
+
+// !modified line 29
 const Pie = ({data}) => {
     const ref = useD3(
         (svg) => {
@@ -26,7 +28,6 @@ const Pie = ({data}) => {
             //const height = dimensions.height;
             const height = 270; // gets the constant height value depend on the window size
             const width = dimensions.width;
-            console.log("Height: " + height + " Width: " + width);
             const margin = 40
 
             // Adjust radius to fit inside react page
@@ -90,7 +91,6 @@ const Pie = ({data}) => {
                     .outerRadius(radius)
                 )
                 .attr('fill', (d) => {
-                    //console.log(d.data.group);
                     return getColor(d.data.group);
                 })
                 .attr("stroke", "white")

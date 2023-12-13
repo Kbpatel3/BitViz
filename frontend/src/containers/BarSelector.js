@@ -19,20 +19,19 @@ import Bar from "../components/barchart";   // Barchart
 import {useReadCypher} from "use-neo4j";    // Neo4j
 import convert from "../helper/convert";    // Convert
 
+// !added sorting and filtering features
 /**
  * BarSelector component, defines the logic needed to display a barchart for each timestep.
  *
- * @function
- * @name BarSelector
  * @param {Object} props - React component properties.
  * @param {number} props.highlighted - The timestep of the highlighted barchart.
- * @param {Function} props.clickFunction - The function to be run whenever a barchart is clicked on.
+ * @param {Function} props.clickFunction - A function to be run whenever a barchart is clicked on.
  * @returns {React.Component} - A JSX component showing the army of barcharts.
  */
 export default function BarSelector({highlighted, clickFunction}) {
     // Define our query and our key
-    const query = 'match (n:meta) with collect({timestep: n.timestep, illicit:n.illicit, licit:n.licit,' +
-        ' unknown:n.unknown}) as meta return meta';
+    const query = 'match (n:meta) with collect({timestep: n.timestep, illicit:n.illicit, ' +
+        'licit:n.licit, unknown:n.unknown}) as meta return meta';
     const key = 'meta';
 
     // Get the results and the loading value from the database
@@ -185,13 +184,16 @@ export default function BarSelector({highlighted, clickFunction}) {
         const handleFilterClick = (filterOption, minRange, maxRange) => {
             // Check if the filterOption is Default
             if (filterOption === "Default") {
-                // If the length of sortedData is greater than 0, set the newData to sortedData, otherwise default data
+                // If the length of sortedData is greater than 0, set the newData to sortedData, 
+                // otherwise default data
                 // This ensures that the data will be sorted after reset it
                 sortedData.length > 0 ? setNewData(sortedData) : setNewData(data);
             } else {
-                // This means that the user has selected a filter option. If the data was sorted, filter the sorted data, otherwise filter the default data
+                // This means that the user has selected a filter option. If the data was sorted, 
+                // filter the sorted data, otherwise filter the default data
                 const filteredData = sortedData.length > 0 ? 
-                filterData(sortedData, filterOption, minRange, maxRange) : filterData(data, filterOption, minRange, maxRange);
+                    filterData(sortedData, filterOption, minRange, maxRange) 
+                                : filterData(data, filterOption, minRange, maxRange);
 
                 setNewData(filteredData); // sets the filtered data
                 setIsNewData(true); // sets the isNewData to true
@@ -204,14 +206,14 @@ export default function BarSelector({highlighted, clickFunction}) {
         //     filterPanel.classList.toggle("hidden");
         // }
 
-        // data = sortBarsByIllicit(data);
-
         // Sets/displayed the barcharts
         result = (
             <>
                 <div className="flex justify-between items-center m-2">
                     <select
-                        className="block mt-1 border-gray-300 rounded-md shadow-sm focus:border-rose-600 focus:ring-rose-600 text-center bg-slate-200 hover:bg-slate-300"
+                        className="block mt-1 border-gray-300 rounded-md shadow-sm 
+                        focus:border-rose-600 focus:ring-rose-600 text-center bg-slate-200 
+                        hover:bg-slate-300"
                         onChange={(e) => {
                             const [sortBy, sortOrder] = e.target.value.split(",");
                             handleSortClick(sortBy, parseInt(sortOrder, 10));
@@ -226,8 +228,9 @@ export default function BarSelector({highlighted, clickFunction}) {
                         <option value={"Unknown,1"}>Sort Unknown (Descending)</option>
                     </select>
                     
-                    {/* For filter Panel */}
-                    {/* <button className="block mt-1 border-gray-300 rounded-md shadow-sm focus:border-rose-600 focus:ring-rose-600 text-center" 
+                    {/* For filter Panel, when we need more things to filter*/}
+                    {/* <button className="block mt-1 border-gray-300 rounded-md shadow-sm 
+                    focus:border-rose-600 focus:ring-rose-600 text-center" 
                             onClick={(e) => handleFilterClick("Unknown", 70, true)}>
                         Filter Timesteps
                     </button> */}
@@ -236,6 +239,7 @@ export default function BarSelector({highlighted, clickFunction}) {
                             onClick={(e) => toggleFileter()}>
                         Filter
                     </button> */}
+
                     <div className={"rounded-md bg-slate-200 hover:bg-slate-300 p-2"}>
                         <form id="filterForm" className="mr-5">
                             <select id="filterType" name="filterType">
@@ -244,41 +248,55 @@ export default function BarSelector({highlighted, clickFunction}) {
                                 <option value="Unknown">Unknown</option>
                             </select>
 
-                            <input type="number" id="minRange" name="minRange" placeholder="Min (%)" min="0" max="100" className="w-24 py-1 px-2 border rounded"></input>
+                            <input type="number" id="minRange" name="minRange" 
+                            placeholder="Min (%)" min="0" max="100" 
+                            className="w-24 py-1 px-2 border rounded"></input>
                             <label> ~ </label>
-                            <input type="number" id="maxRange" name="maxRange" placeholder="Max (%)" min="0" max="100" className="w-24 py-1 px-2 border rounded"></input>
+                            <input type="number" id="maxRange" name="maxRange" 
+                            placeholder="Max (%)" min="0" max="100" 
+                            className="w-24 py-1 px-2 border rounded"></input>
                             <label> </label>
                             <button type="button" onClick={(e) => {
-                                    handleFilterClick(document.getElementById("filterType").value,
-                                                        document.getElementById("minRange").value === "" ? 0 : document.getElementById("minRange").value,
-                                                        document.getElementById("maxRange").value === "" ? 100 : document.getElementById("maxRange").value);
+                                handleFilterClick(document.getElementById("filterType").value,
+                                            document.getElementById("minRange").value === 
+                                            "" ? 0 : document.getElementById("minRange").value,
+                                            document.getElementById("maxRange").value === 
+                                            "" ? 100 : document.getElementById("maxRange").value);
                                 }} className="border rounded">Filter</button>
 
                             {/* ToDo: Discuss the need */}
                             <label> </label>
-                            <button type="button" onClick={(e) => {handleFilterClick("Default", 0, 100)}} className="border rounded">Reset</button>
+                            <button type="button" onClick={(e) => {
+                                handleFilterClick("Default", 0, 100)}} 
+                                className="border rounded">Reset</button>
                         </form>
                     </div>
 
                 </div>
                 
                 {/* Note: Filter Panel when we need more features for filtering */}
-                {/* <div id="filterPanel" class="hidden bg-white p-4 mt-4 border border-gray-300 rounded">
+                {/* <div id="filterPanel" class="hidden bg-white p-4 mt-4 border border-gray-300 
+                rounded">
                     <div class="mb-4">
-                    <label for="minRange" class="block text-sm font-medium text-gray-600">Min Range:</label>
-                    <input type="text" id="minRange" name="minRange" class="mt-1 p-2 border border-gray-300 rounded w-full">
+                    <label for="minRange" class="block text-sm font-medium text-gray-600">
+                    Min Range:</label>
+                    <input type="text" id="minRange" name="minRange" class="mt-1 p-2 border 
+                    border-gray-300 rounded w-full">
                     </input>
                     </div>
 
                     <div class="mb-4">
-                    <label for="maxRange" class="block text-sm font-medium text-gray-600">Max Range:</label>
-                    <input type="text" id="maxRange" name="maxRange" class="mt-1 p-2 border border-gray-300 rounded w-full">
+                    <label for="maxRange" class="block text-sm font-medium text-gray-600">
+                    Max Range:</label>
+                    <input type="text" id="maxRange" name="maxRange" class="mt-1 p-2 border 
+                    border-gray-300 rounded w-full">
                     </input>
                     </div>
                 </div> */}
 
                     {/* <select
-                        className="block mt-1 border-gray-300 rounded-md shadow-sm focus:border-rose-600 focus:ring-rose-600 text-center"
+                        className="block mt-1 border-gray-300 rounded-md shadow-sm 
+                        focus:border-rose-600 focus:ring-rose-600 text-center"
                             onChange={(e) => {
                                 const [filterBy, filterRange, isMin] = e.target.value.split(",");
                                 handleSortClick(filterBy, parseInt(filterRange, 10), isMin);

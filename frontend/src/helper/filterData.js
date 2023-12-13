@@ -2,7 +2,6 @@
  * Filters and formats data for visualization, extracting nodes and links from the input data.
  *
  * @module DataFilter
- * @function
  * @param {Array} data - The raw data to be filtered and formatted.
  * @returns {Object} - Formatted data containing nodes and links suitable for visualization.
  */

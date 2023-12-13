@@ -13,14 +13,14 @@
 import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-
+// !added comments
 /**
  * Custom hook for integrating D3.js to render graphs in a React component.
  *
  * @module useD3
  * @param {Function} renderGraph - Callback function responsible for rendering the graph using D3.
  * @param {Array} dependencies - Dependencies that trigger graph rendering when changed.
- * @returns {Object} ref - Reference object pointing to the DOM element where the graph is rendered.
+ * @returns {Object} Reference object pointing to the DOM element where the graph is rendered.
  */
 const useD3 = (renderGraph, dependencies) => {
     // Create a reference to the DOM element where the graph is rendered
