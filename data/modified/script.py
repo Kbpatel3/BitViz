@@ -17,9 +17,10 @@ final.json
 import json
 from math import ceil
 
-MAX_NODES = 30
-MAX_EDGES = 20
-MIN_EDGES = 2
+MAX_NODES = 30 * 95
+MAX_EDGES = 20 * 95
+MIN_EDGES = 2 * 95
+
 
 def sort_by_timestep(initial_data):
     """
@@ -45,8 +46,8 @@ def sort_by_timestep(initial_data):
     """
 
     # Init return dictionary
-    return_dict = {f'timestep{i}':[] for i in range(1,50)}
-    
+    return_dict = {f'timestep{i}': [] for i in range(1, 50)}
+
     # Loop over each node id in the data
     for key in initial_data:
         # Get the node and timestep at the specified key
@@ -54,8 +55,9 @@ def sort_by_timestep(initial_data):
         ts = node['timestep']
 
         # Append the node to the appropiate spot in our return dictionary
-        return_dict[f'timestep{ts}'].append({ "id": key, "group": node['group'], "edges": node['edges'] })
-    
+        return_dict[f'timestep{ts}'].append(
+            {"id": key, "group": node['group'], "edges": node['edges']})
+
     return return_dict
 
 
@@ -67,7 +69,7 @@ def create_limits(timestep_sorted_dict, write_to_file=False):
     """
 
     # Init our limits dictionary
-    limits = {f'timestep{i}':{} for i in range(1, 50)}
+    limits = {f'timestep{i}': {} for i in range(1, 50)}
 
     # Loop over each timestep in our data
     for timestep in timestep_sorted_dict:
@@ -84,7 +86,7 @@ def create_limits(timestep_sorted_dict, write_to_file=False):
                 group2_sum += 2
             elif node['group'] == "3":
                 group3_sum += 3
-        
+
         # Calculate the totals
         timestep_total = group1_sum + group2_sum + group3_sum
 
@@ -108,7 +110,7 @@ def filter_group(sorted_dict, limits_dict):
     """
     Filter the nodes in the final data based on the groups that we calculated in create_limits()
     """
-    rtn_dict = {f'timestep{i}': [] for i in range(1,50)}
+    rtn_dict = {f'timestep{i}': [] for i in range(1, 50)}
     # Loop over every timestep
     for timestep in sorted_dict:
         # get the nodes in a timestep
@@ -120,7 +122,7 @@ def filter_group(sorted_dict, limits_dict):
             "group2": 0,
             "group3": 0
         }
-        
+
         # loop over the nodes in a timestep while counters are not equal
         node_cnt = 0
         while comp_counter != current_counter and node_cnt <= len(nodes) - 1:
@@ -142,8 +144,9 @@ def filter_group(sorted_dict, limits_dict):
                     current_counter[group_key] += 1
             # Increment the node counter
             node_cnt += 1
-    
+
     return rtn_dict
+
 
 def get_final(filtered_dict, initial_dict, write_to_file=True):
     """
@@ -184,7 +187,7 @@ def get_final(filtered_dict, initial_dict, write_to_file=True):
             # Data is wrapped in { "data": [] } for the database
             f.write(json.dumps({"data": final}, indent=2))
 
-    return { "data": final }
+    return {"data": final}
 
 
 def pull_timestep(string):
@@ -196,14 +199,16 @@ def pull_timestep(string):
         return string[-2:]
     return string[-1]
 
+
 def percent_as_str(part, whole):
     """
     Convert the values to a percentage string rounded to 2 decimal places
     """
     frac = float(part) / float(whole)
-    return str(int((frac * 10000) // 1)/100)
+    return str(int((frac * 10000) // 1) / 100)
 
-def print_stats(data, filename='metadata.csv'):  
+
+def print_stats(data, filename='metadata.csv'):
     """
     Takes the data and writes it to a .csv file. This allows us to look at the data easier through a program such as
     Excel
@@ -213,7 +218,7 @@ def print_stats(data, filename='metadata.csv'):
     checked_nodes = []
 
     # Make a dictionary for holding counts of the groups of our data
-    print_data = { f'{i}':{ "1": 0, "2": 0, "3": 0 } for i in range(1,50) }
+    print_data = {f'{i}': {"1": 0, "2": 0, "3": 0} for i in range(1, 50)}
     totals_data = {'1': 0, '2': 0, '3': 0, 'total': 0}
 
     # Loop over the nodes in oir data
@@ -226,7 +231,7 @@ def print_stats(data, filename='metadata.csv'):
             print_data[node['timestep']][node['group']] += 1
             totals_data[node['group']] += 1
             totals_data['total'] += 1
-    
+
     # Title string for our csv file
     csv_str = "Timestep,Group 1,Group 2,Group 3,Group 1 %,Group 2 %,Group 3 %,total\n"
 
@@ -242,7 +247,7 @@ def print_stats(data, filename='metadata.csv'):
         g3p = percent_as_str(g3, total)
         # Append the data to our csv file
         csv_str += f'Timestep {timestep},{g1},{g2},{g3},{g1p},{g2p},{g3p},{total}\n'
-        
+
     # Add the totals line to our file
     csv_str += f'TOTALS,{totals_data["1"]},{totals_data["2"]},{totals_data["3"]},{totals_data["total"]}'
 
@@ -250,6 +255,7 @@ def print_stats(data, filename='metadata.csv'):
     with open(filename, 'w') as f:
         f.write(csv_str)
         print("Data written to " + filename)
+
 
 def main():
     """
@@ -264,7 +270,7 @@ def main():
         features = f.readlines()
         for i in features:
             line = i.split(',')
-            initial_data[line[0]] = { "timestep": line[1], "group": "", "edges": [] }
+            initial_data[line[0]] = {"timestep": line[1], "group": "", "edges": []}
 
     # Load data from the classes
     with open('elliptic_txs_classes.csv', 'r') as f:
@@ -276,7 +282,7 @@ def main():
             else:
                 group = line[1]
             initial_data[line[0]]["group"] = group.strip()
-    
+
     # Load data from edgelist
     with open('elliptic_txs_edgelist.csv', 'r') as f:
         edges = f.readlines()[1:]
@@ -287,10 +293,14 @@ def main():
     # Pass initial data to filters
     timestep_sorted_data = sort_by_timestep(initial_data)
     limits = create_limits(timestep_sorted_data)
-    filtered_data = filter_group(timestep_sorted_data, limits)    
-    final_data = get_final(filtered_data, initial_data)
-    
-    print_stats(final_data["data"])
+    filtered_data = filter_group(timestep_sorted_data, limits)
+    final_data = get_final(timestep_sorted_data, initial_data)
+
+    #print("Final Data\n")
+    #print(final_data)
+
+    #print_stats(final_data["data"])
+
 
 if __name__ == "__main__":
     main()
