@@ -17,6 +17,12 @@ final.json
 import json
 from math import ceil
 
+# Limits the data
+# MAX_NODES = 30
+# MAX_EDGES = 20
+# MIN_EDGES = 2
+
+# ?Max nodes and edges for the entire dataset
 MAX_NODES = 30 * 95
 MAX_EDGES = 20 * 95
 MIN_EDGES = 2 * 95
@@ -24,7 +30,7 @@ MIN_EDGES = 2 * 95
 
 def sort_by_timestep(initial_data):
     """
-    Takes the laoded data and sorts it by timesteps
+    Takes the loaded data and sorts it by timesteps
     
     Data needs to be in the format of:
     {
@@ -54,7 +60,7 @@ def sort_by_timestep(initial_data):
         node = initial_data[key]
         ts = node['timestep']
 
-        # Append the node to the appropiate spot in our return dictionary
+        # Append the node to the appropriate spot in our return dictionary
         return_dict[f'timestep{ts}'].append(
             {"id": key, "group": node['group'], "edges": node['edges']})
 
@@ -147,6 +153,26 @@ def filter_group(sorted_dict, limits_dict):
 
     return rtn_dict
 
+def get_illicit_data(data, filename):
+    """
+    Get the illicit data from the final data
+    """
+    illicits = []
+    with open(filename, 'w') as out:
+        for each in data["data"]:
+            if each["group"] == '1' or is_illicit(each):
+                illicits.append(each)
+        out.write(json.dumps({"data": illicits}, indent=2))
+
+
+def is_illicit(data):
+    """
+    Check if the edge data is illicit
+    """
+    for each in data["edges"]:
+        if each["group"] == '1':
+            return True
+    return False
 
 def get_final(filtered_dict, initial_dict, write_to_file=True):
     """
@@ -295,6 +321,7 @@ def main():
     limits = create_limits(timestep_sorted_data)
     filtered_data = filter_group(timestep_sorted_data, limits)
     final_data = get_final(timestep_sorted_data, initial_data)
+    get_illicit_data(final_data, 'illicit_data.json')
 
     #print("Final Data\n")
     #print(final_data)
