@@ -153,26 +153,26 @@ def filter_group(sorted_dict, limits_dict):
 
     return rtn_dict
 
-def get_illicit_data(data, filename):
-    """
-    Get the illicit data from the final data
-    """
-    illicits = []
-    with open(filename, 'w') as out:
-        for each in data["data"]:
-            if each["group"] == '1' or is_illicit(each):
-                illicits.append(each)
-        out.write(json.dumps({"data": illicits}, indent=2))
+# def get_illicit_data(data, filename):
+#     """
+#     Get the illicit data from the final data
+#     """
+#     illicits = []
+#     with open(filename, 'w') as out:
+#         for each in data["data"]:
+#             if each["group"] == '1' or is_illicit(each):
+#                 illicits.append(each)
+#         out.write(json.dumps({"data": illicits}, indent=2))
 
 
-def is_illicit(data):
-    """
-    Check if the edge data is illicit
-    """
-    for each in data["edges"]:
-        if each["group"] == '1':
-            return True
-    return False
+# def is_illicit(data):
+#     """
+#     Check if the edge data is illicit
+#     """
+#     for each in data["edges"]:
+#         if each["group"] == '1':
+#             return True
+#     return False
 
 def get_final(filtered_dict, initial_dict, write_to_file=True):
     """
@@ -321,7 +321,7 @@ def main():
     limits = create_limits(timestep_sorted_data)
     filtered_data = filter_group(timestep_sorted_data, limits)
     final_data = get_final(timestep_sorted_data, initial_data)
-    get_illicit_data(final_data, 'illicit_data.json')
+    # get_illicit_data(final_data, 'illicit_data.json')
 
     #print("Final Data\n")
     #print(final_data)
