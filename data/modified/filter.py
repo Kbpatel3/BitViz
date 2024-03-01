@@ -1,5 +1,7 @@
 # Filters the data to get the illicit data (will add more filters)
 
+import json
+
 def get_illicit_data(data, filename):
     """
     Get the illicit data from the final data
