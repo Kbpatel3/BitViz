@@ -5,6 +5,10 @@ import json
 def get_illicit_data(data, filename):
     """
     Get the illicit data from the final data
+
+    Args:
+    data: the final data
+    filename: the name of the file to write the illicit data to
     """
     illicits = []
     with open(filename, 'w') as out:
@@ -17,6 +21,9 @@ def get_illicit_data(data, filename):
 def is_illicit(data):
     """
     Check if the edge data is illicit
+
+    Args:
+    data: the edge data
     """
     for each in data["edges"]:
         if each["group"] == '1':
