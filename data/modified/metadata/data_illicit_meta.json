@@ -1,0 +1,298 @@
+{
+  "data": [
+    {
+      "timestep": 1,
+      "illicit": 102,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 2,
+      "illicit": 120,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 3,
+      "illicit": 116,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 4,
+      "illicit": 106,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 5,
+      "illicit": 94,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 6,
+      "illicit": 45,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 7,
+      "illicit": 483,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 8,
+      "illicit": 329,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 9,
+      "illicit": 634,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 10,
+      "illicit": 763,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 11,
+      "illicit": 448,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 12,
+      "illicit": 166,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 13,
+      "illicit": 597,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 14,
+      "illicit": 165,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 15,
+      "illicit": 313,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 16,
+      "illicit": 299,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 17,
+      "illicit": 373,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 18,
+      "illicit": 165,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 19,
+      "illicit": 267,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 20,
+      "illicit": 630,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 21,
+      "illicit": 389,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 22,
+      "illicit": 392,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 23,
+      "illicit": 253,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 24,
+      "illicit": 390,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 25,
+      "illicit": 269,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 26,
+      "illicit": 294,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 27,
+      "illicit": 85,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 28,
+      "illicit": 157,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 29,
+      "illicit": 737,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 30,
+      "illicit": 261,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 31,
+      "illicit": 281,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 32,
+      "illicit": 860,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 33,
+      "illicit": 91,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 34,
+      "illicit": 196,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 35,
+      "illicit": 415,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 36,
+      "illicit": 323,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 37,
+      "illicit": 151,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 38,
+      "illicit": 295,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 39,
+      "illicit": 295,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 40,
+      "illicit": 413,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 41,
+      "illicit": 492,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 42,
+      "illicit": 657,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 43,
+      "illicit": 215,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 44,
+      "illicit": 135,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 45,
+      "illicit": 122,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 46,
+      "illicit": 81,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 47,
+      "illicit": 146,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 48,
+      "illicit": 97,
+      "licit": 0,
+      "unknown": 0
+    },
+    {
+      "timestep": 49,
+      "illicit": 95,
+      "licit": 0,
+      "unknown": 0
+    }
+  ]
+}
