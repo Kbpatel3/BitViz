@@ -9,6 +9,7 @@ import SettingsButton from "./SettingsButton";
 import MachineLearningButton from "./MachineLearningButton";
 import ToHistogramButton from "./ToHistogramButton";
 import HomeButton from "./HomeButton";
+import FilterGraphButton from "./FilterGraphButton";
 
 // !new function
 /**
@@ -30,6 +31,9 @@ export default function NavBar({ scrollToRef, timestep }) {
 
           {/* Machine Learning Button (Temp)*/}
           <MachineLearningButton />
+
+          {/* Filter Graph Button */}
+          <FilterGraphButton />
         </div>
 
         {/* Search component */}

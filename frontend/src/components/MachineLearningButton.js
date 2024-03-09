@@ -5,6 +5,8 @@
  */
 
 import machineLearning from "../media/ML_icon.png";
+import { useReadSession } from "use-neo4j";  // Neo4j hook for reading data from the database
+
 
 // !new function
 /**
@@ -13,6 +15,27 @@ import machineLearning from "../media/ML_icon.png";
  * @returns {JSX.Element} A JSX element containing the Machine Learning Button
  */
 export default function MachineLearningButton() {
+
+  //? Temporary
+  const session = useReadSession();
+
+  const query_data = `CALL apoc.load.json("https://raw.githubusercontent.com/Kbpatel3/BitViz/main/data/
+    modified/data/data_all_predicted.json")
+    YIELD value
+    UNWIND value.data as data
+    MERGE (s:Transaction {id: data.id, timestep: data.timestep, group: data.group})
+    WITH s, data
+    UNWIND data.edges as edge
+    MERGE (t:Transaction {id: edge.id, timestep: edge.timestep, group: edge.group})
+    MERGE (s)-[:CONNECTED]->(t)`
+
+  const query_meta = `CALL apoc.load.json("https://raw.githubusercontent.com/Kbpatel3/BitViz/main/data/
+    modified/metadata/data_all_predicted_meta.json")
+    YIELD value
+    UNWIND value.data as data
+    MERGE (n:meta {timestep: data.timestep, illicit: data.illicit, licit: data.licit, 
+    unknown: data.unknown})`
+  
   return (
     <>
     {/* Machine Learning Button */}
@@ -21,6 +44,11 @@ export default function MachineLearningButton() {
       type="image"
       src={machineLearning}
       title="Machine Learning Analysis"
+      onClick={() => {
+        session.run(query_data);
+        session.run(query_meta);
+      }
+      }
     />
   </>
   );
