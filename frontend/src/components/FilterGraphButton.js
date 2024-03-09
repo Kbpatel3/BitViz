@@ -11,12 +11,20 @@ export default function FilterGraphButton() {
         src={filter}
         title="Filter Graph"
         onClick={() => {
-          // Show the Filter Panel
-          const filterPanel = document.getElementById("filterPanel");
-          filterPanel.style.display = "block";
+            <div id="filterPanel" class="filter-panel hidden bg-white border border-gray-300 shadow-md rounded-md p-4 mt-2">
+            <select id="filterDropdown" class="block w-full bg-gray-100 border border-gray-300 py-2 px-4 mb-2 rounded-md">
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+            </select>
+            <button id="applyFilterButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                Apply
+            </button>
+        </div>
         }
         }
       />
+      
     </>
     );
   }
