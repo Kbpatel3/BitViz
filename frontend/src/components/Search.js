@@ -155,9 +155,14 @@ export default function Search({ timestep }) {
         <input
           name="id"
           type="text"
-          className="border-2 border-slate-600 rounded-md pl-1 h-fit"
+          className="border-2 border-slate-600 rounded-md my-auto pl-1 h-fit font-medium uppercase leading-normal text-primary transition"
         />
-        <button type="submit" className="btn-primary ml-1">
+        <button type="submit" className="btn-primary ml-1 my-auto inline-block px-3 pb-[3px] pt-1 text-xs 
+            font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out 
+            hover:border-primary-accent-300 hover:bg-primary-50/50 hover:text-primary-accent-300 
+            focus:border-primary-600 focus:bg-primary-50/50 focus:text-primary-300 
+            focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 
+            motion-reduce:transition-none dark:text-primary-500">
           Search
         </button>
       </form>
