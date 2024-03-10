@@ -32,12 +32,12 @@ const address = 'localhost';
 const port = 7687;
 
 // Name and password
-const databaseName = 'test2';
+const username = 'neo4j'; // Username
 // NOTE: this must match the password that is entered when creating the database
 const password = 'password';
 
 // Gets a database driver from the use-neo4j package
-const driver = createDriver('neo4j', address, port, databaseName, password);
+const driver = createDriver('neo4j', address, port, username, password);
 
 // Gets the root of the index.html document (found in frontend/public/)
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -81,7 +81,12 @@ function App() {
     let query = getQuery(timestep);
 
     // Get the functions and variables we need from the use-neo4j package
-    const {records, run} = useReadCypher(query);
+    //const {records, run} = useReadCypher(query);
+
+    let database = 'neo4j';
+
+    // use useReadCypher to query the database named 'illicitchain'
+    const {records, run} = useReadCypher(query, {database: database});
 
     // Requery the database whenever the state changes
     useEffect(() => {
