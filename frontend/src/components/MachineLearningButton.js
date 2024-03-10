@@ -6,7 +6,8 @@
 
 import machineLearning from "../media/ML_icon.png";
 import { useReadSession } from "use-neo4j";  // Neo4j hook for reading data from the database
-
+import { switchGraph } from "../index";  // Function to switch to a different graph
+import { useState } from "react";  // React hook for managing state
 
 // !new function
 /**
@@ -16,25 +17,27 @@ import { useReadSession } from "use-neo4j";  // Neo4j hook for reading data from
  */
 export default function MachineLearningButton() {
 
+  const [switchedGraph, setSwitchedGraph] = useState(false);  // State for switching the graph
+
   //? Temporary
-  const session = useReadSession();
+  // const session = useReadSession();
 
-  const query_data = `CALL apoc.load.json("https://raw.githubusercontent.com/Kbpatel3/BitViz/main/data/
-    modified/data/data_all_predicted.json")
-    YIELD value
-    UNWIND value.data as data
-    MERGE (s:Transaction {id: data.id, timestep: data.timestep, group: data.group})
-    WITH s, data
-    UNWIND data.edges as edge
-    MERGE (t:Transaction {id: edge.id, timestep: edge.timestep, group: edge.group})
-    MERGE (s)-[:CONNECTED]->(t)`
+  // const query_data = `CALL apoc.load.json("https://raw.githubusercontent.com/Kbpatel3/BitViz/main/data/
+  //   modified/data/data_all_predicted.json")
+  //   YIELD value
+  //   UNWIND value.data as data
+  //   MERGE (s:Transaction {id: data.id, timestep: data.timestep, group: data.group})
+  //   WITH s, data
+  //   UNWIND data.edges as edge
+  //   MERGE (t:Transaction {id: edge.id, timestep: edge.timestep, group: edge.group})
+  //   MERGE (s)-[:CONNECTED]->(t)`
 
-  const query_meta = `CALL apoc.load.json("https://raw.githubusercontent.com/Kbpatel3/BitViz/main/data/
-    modified/metadata/data_all_predicted_meta.json")
-    YIELD value
-    UNWIND value.data as data
-    MERGE (n:meta {timestep: data.timestep, illicit: data.illicit, licit: data.licit, 
-    unknown: data.unknown})`
+  // const query_meta = `CALL apoc.load.json("https://raw.githubusercontent.com/Kbpatel3/BitViz/main/data/
+  //   modified/metadata/data_all_predicted_meta.json")
+  //   YIELD value
+  //   UNWIND value.data as data
+  //   MERGE (n:meta {timestep: data.timestep, illicit: data.illicit, licit: data.licit, 
+  //   unknown: data.unknown})`
   
   return (
     <>
@@ -45,8 +48,9 @@ export default function MachineLearningButton() {
       src={machineLearning}
       title="Machine Learning Analysis"
       onClick={() => {
-        session.run(query_data);
-        session.run(query_meta);
+        console.log('Machine Learning Button Clicked');
+        setSwitchedGraph(!switchedGraph);
+        switchedGraph ? switchGraph('neo4j') : switchGraph('test');
       }
       }
     />

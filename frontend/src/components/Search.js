@@ -158,7 +158,7 @@ export default function Search({ timestep }) {
       <input
         name="id"
         type="search"
-        class="rounded-md border-slate-600 rounded-md px-3 pb-[6px] pt-1 font-medium leading-normal text-primary"
+        class="ml-3 rounded-md border-slate-600 rounded-md px-3 pb-[6px] pt-1 font-medium leading-normal text-primary"
         placeholder="Search"
         aria-label="Search"
         id="exampleFormControlInput"

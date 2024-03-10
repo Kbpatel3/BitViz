@@ -27,11 +27,12 @@ import Landing from './Landing';
 
 
 // Address and port of the database
-const address = '152.30.5.83';
+// const address = '152.30.5.83';
+const address = 'localhost';
 const port = 7687;
 
 // Name and password
-const databaseName = 'neo4j';
+const databaseName = 'test2';
 // NOTE: this must match the password that is entered when creating the database
 const password = 'password';
 
@@ -63,6 +64,36 @@ root.render(
   </React.StrictMode>
 );
 
+export function switchGraph(databaseName) {
+
+  console.log("Machine");
+  // Switches the graph to a different database
+  const driver2 = createDriver('neo4j', address, port, databaseName, password);
+  root.render(
+    <React.StrictMode>
+      {/* Neo4j database provider context */}
+      <Neo4jProvider driver={driver2}>
+        {/* Observer context */}
+        <ObserverProvider>
+  
+          {/* Routes inside the app */}
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<Layout />}>
+                <Route index element={<Landing />} />
+                <Route path="/app" element={<App />}/>
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </ObserverProvider>
+      </Neo4jProvider>
+    </React.StrictMode>
+  );
+
+  //driver.close();
+
+  
+}
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
