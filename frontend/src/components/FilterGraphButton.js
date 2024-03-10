@@ -1,8 +1,9 @@
 import filter from "../media/filter_icon.png";
-import FilterPanel from "./FilterPanel";
+import { useState } from "react";
 
 export default function FilterGraphButton() {
-    return (
+  const [showFilterPanel, setShowFilterPanel] = useState(false);
+  return (
       <>
       {/* Filter Graph Button */}
       <input
@@ -10,20 +11,37 @@ export default function FilterGraphButton() {
         type="image"
         src={filter}
         title="Filter Graph"
-        onClick={() => {
-            <div id="filterPanel" class="filter-panel hidden bg-white border border-gray-300 shadow-md rounded-md p-4 mt-2">
-            <select id="filterDropdown" class="block w-full bg-gray-100 border border-gray-300 py-2 px-4 mb-2 rounded-md">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-            </select>
-            <button id="applyFilterButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Apply
-            </button>
-        </div>
-        }
+        onClick= {
+          () => setShowFilterPanel(!showFilterPanel)
         }
       />
+
+      {showFilterPanel && (
+        <div className="flex justify-between items-center space-x-1 ml-2">
+          <select
+              className="h-7 inline-block rounded-full border-2 border-primary px-3 pb-[3px] pt-1 text-xs 
+              font-medium uppercase leading-normal text-primary 
+              focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 
+              motion-reduce:transition-none dark:text-primary-500"
+          >
+              <option>All Data (Default)</option>
+              <option>Illcit Only</option>
+              <option>3 Edges Min</option>
+              <option>Have Edge</option>
+              <option>No Edge</option>
+          </select>
+          <button
+            type="button"
+            class="h-7 border-slate-600 inline-block rounded-full border-2 border-primary px-3 pb-[6px] pt-1 text-xs 
+            font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out 
+            hover:border-primary-accent-300 hover:bg-primary-50/50 hover:text-primary-accent-300 
+            focus:border-primary-600 focus:bg-primary-50/50 focus:text-primary-300 
+            focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 
+            motion-reduce:transition-none dark:text-primary-500">
+            Apply
+          </button>
+        </div>
+      )}
       
     </>
     );
