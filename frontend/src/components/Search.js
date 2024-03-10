@@ -151,13 +151,51 @@ export default function Search({ timestep }) {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className={"mx-auto"}>
+    <form onSubmit={handleSubmit} className={"mx-auto"}
+      class="relative flex"
+      data-twe-input-wrapper-init
+      data-twe-input-group-ref>
+      <input
+        name="id"
+        type="search"
+        class="rounded-md border-slate-600 rounded-md px-3 pb-[6px] pt-1 font-medium leading-normal text-primary"
+        placeholder="Search"
+        aria-label="Search"
+        id="exampleFormControlInput"
+        aria-describedby="basic-addon1" />
+      <button
+        class="relative z-[2] -ms-0.5 flex items-center rounded-e bg-primary px-5  text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+        type="submit"
+        id="button-addon1"
+        className="btn-primary ml-1 my-auto rounded-full border-2 border-primary inline-block px-3 pb-[6px] pt-1 text-sm
+            font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out 
+            hover:border-primary-accent-300 hover:bg-primary-50/50 hover:text-primary-accent-300 
+            focus:border-primary-600 focus:bg-primary-50/50 focus:text-primary-300 
+            focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 
+            motion-reduce:transition-none dark:text-primary-500">
+        <span class="[&>svg]:h-5 [&>svg]:w-5">
+          <svg
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </span>
+      </button>
+    </form>
+
+      {/* Old format */}
+      {/* <form onSubmit={handleSubmit} className={"mx-auto"}>
         <input
           name="id"
           type="text"
-          className="border-2 border-slate-600 rounded-md my-auto pl-1 h-fit font-medium uppercase leading-normal text-primary transition"
+          className="h-7 border-2 border-slate-600 rounded-md px-3 pb-[6px] pt-1 font-medium uppercase leading-normal text-primary"
         />
-        <button type="submit" className="btn-primary ml-1 my-auto inline-block px-3 pb-[3px] pt-1 text-xs 
+        <button type="submit" className="btn-primary ml-1 my-auto rounded-full border-2 border-primary inline-block px-3 pb-[6px] pt-1 text-sm
             font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out 
             hover:border-primary-accent-300 hover:bg-primary-50/50 hover:text-primary-accent-300 
             focus:border-primary-600 focus:bg-primary-50/50 focus:text-primary-300 
@@ -165,7 +203,7 @@ export default function Search({ timestep }) {
             motion-reduce:transition-none dark:text-primary-500">
           Search
         </button>
-      </form>
+      </form> */}
       {node ? (
         <NodeMeta nodeData={node} />
       ) : (
