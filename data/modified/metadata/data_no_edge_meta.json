@@ -2,110 +2,110 @@
   "data": [
     {
       "timestep": 1,
-      "illicit": 47,
-      "licit": 1161,
+      "illicit": 52,
+      "licit": 1156,
       "unknown": 0
     },
     {
       "timestep": 2,
-      "illicit": 62,
-      "licit": 766,
+      "illicit": 65,
+      "licit": 763,
       "unknown": 0
     },
     {
       "timestep": 3,
-      "illicit": 25,
-      "licit": 737,
+      "illicit": 26,
+      "licit": 736,
       "unknown": 0
     },
     {
       "timestep": 4,
-      "illicit": 34,
-      "licit": 844,
+      "illicit": 36,
+      "licit": 842,
       "unknown": 0
     },
     {
       "timestep": 5,
-      "illicit": 26,
-      "licit": 1017,
+      "illicit": 31,
+      "licit": 1012,
       "unknown": 0
     },
     {
       "timestep": 6,
-      "illicit": 21,
-      "licit": 498,
+      "illicit": 20,
+      "licit": 499,
       "unknown": 0
     },
     {
       "timestep": 7,
-      "illicit": 173,
-      "licit": 860,
+      "illicit": 178,
+      "licit": 855,
       "unknown": 0
     },
     {
       "timestep": 8,
-      "illicit": 157,
-      "licit": 604,
+      "illicit": 159,
+      "licit": 602,
       "unknown": 0
     },
     {
       "timestep": 9,
-      "illicit": 176,
-      "licit": 614,
+      "illicit": 179,
+      "licit": 611,
       "unknown": 0
     },
     {
       "timestep": 10,
-      "illicit": 478,
-      "licit": 712,
+      "illicit": 483,
+      "licit": 707,
       "unknown": 0
     },
     {
       "timestep": 11,
-      "illicit": 140,
-      "licit": 626,
+      "illicit": 141,
+      "licit": 625,
       "unknown": 0
     },
     {
       "timestep": 12,
-      "illicit": 118,
-      "licit": 353,
+      "illicit": 117,
+      "licit": 354,
       "unknown": 0
     },
     {
       "timestep": 13,
-      "illicit": 152,
-      "licit": 535,
+      "illicit": 154,
+      "licit": 533,
       "unknown": 0
     },
     {
       "timestep": 14,
-      "illicit": 67,
-      "licit": 239,
+      "illicit": 65,
+      "licit": 241,
       "unknown": 0
     },
     {
       "timestep": 15,
-      "illicit": 130,
-      "licit": 465,
+      "illicit": 137,
+      "licit": 458,
       "unknown": 0
     },
     {
       "timestep": 16,
-      "illicit": 127,
-      "licit": 359,
+      "illicit": 129,
+      "licit": 357,
       "unknown": 0
     },
     {
       "timestep": 17,
-      "illicit": 144,
-      "licit": 663,
+      "illicit": 142,
+      "licit": 665,
       "unknown": 0
     },
     {
       "timestep": 18,
-      "illicit": 82,
-      "licit": 305,
+      "illicit": 81,
+      "licit": 306,
       "unknown": 0
     },
     {
@@ -116,44 +116,44 @@
     },
     {
       "timestep": 20,
-      "illicit": 228,
-      "licit": 749,
+      "illicit": 233,
+      "licit": 744,
       "unknown": 0
     },
     {
       "timestep": 21,
-      "illicit": 162,
-      "licit": 662,
-      "unknown": 0
-    },
-    {
-      "timestep": 22,
-      "illicit": 125,
-      "licit": 1039,
-      "unknown": 0
-    },
-    {
-      "timestep": 23,
-      "illicit": 91,
-      "licit": 802,
-      "unknown": 0
-    },
-    {
-      "timestep": 24,
-      "illicit": 101,
+      "illicit": 167,
       "licit": 657,
       "unknown": 0
     },
     {
+      "timestep": 22,
+      "illicit": 130,
+      "licit": 1034,
+      "unknown": 0
+    },
+    {
+      "timestep": 23,
+      "illicit": 94,
+      "licit": 799,
+      "unknown": 0
+    },
+    {
+      "timestep": 24,
+      "illicit": 105,
+      "licit": 653,
+      "unknown": 0
+    },
+    {
       "timestep": 25,
-      "illicit": 92,
-      "licit": 468,
+      "illicit": 91,
+      "licit": 469,
       "unknown": 0
     },
     {
       "timestep": 26,
-      "illicit": 132,
-      "licit": 393,
+      "illicit": 133,
+      "licit": 392,
       "unknown": 0
     },
     {
@@ -164,38 +164,38 @@
     },
     {
       "timestep": 28,
-      "illicit": 45,
-      "licit": 212,
+      "illicit": 42,
+      "licit": 215,
       "unknown": 0
     },
     {
       "timestep": 29,
-      "illicit": 167,
-      "licit": 525,
+      "illicit": 165,
+      "licit": 527,
       "unknown": 0
     },
     {
       "timestep": 30,
-      "illicit": 131,
-      "licit": 370,
+      "illicit": 128,
+      "licit": 373,
       "unknown": 0
     },
     {
       "timestep": 31,
-      "illicit": 96,
-      "licit": 516,
+      "illicit": 100,
+      "licit": 512,
       "unknown": 0
     },
     {
       "timestep": 32,
-      "illicit": 195,
-      "licit": 586,
+      "illicit": 199,
+      "licit": 582,
       "unknown": 0
     },
     {
       "timestep": 33,
-      "illicit": 33,
-      "licit": 530,
+      "illicit": 37,
+      "licit": 526,
       "unknown": 0
     },
     {
@@ -206,20 +206,20 @@
     },
     {
       "timestep": 35,
-      "illicit": 210,
-      "licit": 949,
+      "illicit": 209,
+      "licit": 950,
       "unknown": 0
     },
     {
       "timestep": 36,
-      "illicit": 242,
-      "licit": 794,
+      "illicit": 238,
+      "licit": 798,
       "unknown": 0
     },
     {
       "timestep": 37,
-      "illicit": 83,
-      "licit": 348,
+      "illicit": 81,
+      "licit": 350,
       "unknown": 0
     },
     {
@@ -230,14 +230,14 @@
     },
     {
       "timestep": 39,
-      "illicit": 155,
-      "licit": 446,
+      "illicit": 154,
+      "licit": 447,
       "unknown": 0
     },
     {
       "timestep": 40,
-      "illicit": 153,
-      "licit": 778,
+      "illicit": 151,
+      "licit": 780,
       "unknown": 0
     },
     {
@@ -248,8 +248,8 @@
     },
     {
       "timestep": 42,
-      "illicit": 241,
-      "licit": 1565,
+      "illicit": 243,
+      "licit": 1563,
       "unknown": 0
     },
     {
@@ -260,38 +260,38 @@
     },
     {
       "timestep": 44,
-      "illicit": 53,
-      "licit": 899,
+      "illicit": 55,
+      "licit": 897,
       "unknown": 0
     },
     {
       "timestep": 45,
-      "illicit": 48,
-      "licit": 989,
+      "illicit": 50,
+      "licit": 987,
       "unknown": 0
     },
     {
       "timestep": 46,
-      "illicit": 34,
-      "licit": 890,
+      "illicit": 27,
+      "licit": 897,
       "unknown": 0
     },
     {
       "timestep": 47,
-      "illicit": 78,
-      "licit": 1065,
+      "illicit": 66,
+      "licit": 1077,
       "unknown": 0
     },
     {
       "timestep": 48,
-      "illicit": 14,
-      "licit": 548,
+      "illicit": 11,
+      "licit": 551,
       "unknown": 0
     },
     {
       "timestep": 49,
-      "illicit": 25,
-      "licit": 455,
+      "illicit": 21,
+      "licit": 459,
       "unknown": 0
     }
   ]
