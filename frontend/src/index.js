@@ -64,36 +64,6 @@ root.render(
   </React.StrictMode>
 );
 
-export function switchGraph(databaseName) {
-
-  console.log("Machine");
-  // Switches the graph to a different database
-  const driver2 = createDriver('neo4j', address, port, databaseName, password);
-  root.render(
-    <React.StrictMode>
-      {/* Neo4j database provider context */}
-      <Neo4jProvider driver={driver2}>
-        {/* Observer context */}
-        <ObserverProvider>
-  
-          {/* Routes inside the app */}
-          <BrowserRouter>
-            <Routes>
-              <Route path='/' element={<Layout />}>
-                <Route index element={<Landing />} />
-                <Route path="/app" element={<App />}/>
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </ObserverProvider>
-      </Neo4jProvider>
-    </React.StrictMode>
-  );
-
-  //driver.close();
-
-  
-}
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

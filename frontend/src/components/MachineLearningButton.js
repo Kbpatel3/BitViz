@@ -6,7 +6,6 @@
 
 import machineLearning from "../media/ML_icon.png";
 import { useReadSession } from "use-neo4j";  // Neo4j hook for reading data from the database
-import { switchGraph } from "../index";  // Function to switch to a different graph
 import { useState } from "react";  // React hook for managing state
 
 // !new function
@@ -15,7 +14,7 @@ import { useState } from "react";  // React hook for managing state
  * @fileoverview Machine Learning Button Component
  * @returns {JSX.Element} A JSX element containing the Machine Learning Button
  */
-export default function MachineLearningButton() {
+export default function MachineLearningButton({ handleGraphSwitch }) {
 
   const [switchedGraph, setSwitchedGraph] = useState(false);  // State for switching the graph
 
@@ -49,8 +48,9 @@ export default function MachineLearningButton() {
       title="Machine Learning Analysis"
       onClick={() => {
         console.log('Machine Learning Button Clicked');
+        switchedGraph ? handleGraphSwitch('neo4j') : handleGraphSwitch('test');
         setSwitchedGraph(!switchedGraph);
-        switchedGraph ? switchGraph('neo4j') : switchGraph('test');
+        // switchedGraph ? switchGraph('neo4j') : switchGraph('test');
       }
       }
     />

@@ -83,17 +83,27 @@ function App() {
     // Get the functions and variables we need from the use-neo4j package
     //const {records, run} = useReadCypher(query);
 
-    let database = 'neo4j';
-
-    // use useReadCypher to query the database named 'illicitchain'
+    //const [database, setDatabase] = useState('test5');
+    //let database = 'illicit';
+    const [database, setDatabase] = useState('neo4j');
     const {records, run} = useReadCypher(query, {database: database});
 
+    const handleGraphSwitch = (database) => {
+        setDatabase(database);
+        console.log("MachineData:", database);
+    };
+
     // Requery the database whenever the state changes
+    // useEffect(() => {
+    //     query = getQuery(timestep);
+    //     run({query});
+    // }, [timestep]);
+    // // alert(JSON.stringify(records));
+
     useEffect(() => {
         query = getQuery(timestep);
         run({query});
-    }, [timestep]);
-    // alert(JSON.stringify(records));
+    }, [database, timestep]);
 
     // Init our data
     let data = undefined;
@@ -145,7 +155,7 @@ function App() {
                 <div
                     className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex 
                         justify-center items-center h-full">
-                    <NavBar scrollToRef={scrollToRef} timestep={timestep}/>
+                    <NavBar scrollToRef={scrollToRef} timestep={timestep} handleGraphSwitch={handleGraphSwitch}/>
                 </div>
 
                 {/* Row 2-7 which contains the main nodal structure */}

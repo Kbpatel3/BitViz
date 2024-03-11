@@ -1,7 +1,7 @@
 import filter from "../media/filter_icon.png";
 import { useState } from "react";
 
-export default function FilterGraphButton() {
+export default function FilterGraphButton({ handleGraphSwitch }) {
   const [showFilterPanel, setShowFilterPanel] = useState(false);
   return (
       <>
