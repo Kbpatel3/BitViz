@@ -39,14 +39,23 @@ const password = 'password';
 // Gets a database driver from the use-neo4j package
 const driver = createDriver('neo4j', address, port, username, password);
 
+// const uri = `neo4j://${address}:${port}`;
+// const database = 'test';
+// const driver = neo4j.driver(uri, neo4j.auth.basic(username, password), {
+//   database: database // Specify the database in the configuration
+// });
+
 // Gets the root of the index.html document (found in frontend/public/)
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// const [database, setDatabase] = React.useState('neo4j');
 
 // Renders the root component of the application
 root.render(
   <React.StrictMode>
     {/* Neo4j database provider context */}
-    <Neo4jProvider driver={driver}>
+    <Neo4jProvider driver={driver}
+    database='test'>
       {/* Observer context */}
       <ObserverProvider>
 
