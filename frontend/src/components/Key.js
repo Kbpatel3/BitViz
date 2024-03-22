@@ -13,17 +13,17 @@
  */
 export default function Key() {
   return (
-  <div className="flex justify-end space-x-4">
+  <div className="flex h-9 justify-end space-x-4">
     {/* Key */}
-    <div className="flex items-center">
+    <div className="flex items-center text-xs font-medium uppercase leading-normal text-primary">
       <div className="w-4 h-4 rounded-full bg-illicit-yellow mr-2"></div>
       <p>Illicit</p>
     </div>
-    <div className="flex items-center">
+    <div className="flex items-center text-xs font-medium uppercase leading-normal text-primary">
       <div className="w-4 h-4 rounded-full bg-licit-blue mr-2"></div>
       <p>Licit</p>
     </div>
-    <div className="flex items-center">
+    <div className="flex items-center text-xs font-medium uppercase leading-normal text-primary">
       <div className="w-4 h-4 rounded-full bg-unknown-grey mr-2"></div>
       <p>Unknown</p>
     </div>

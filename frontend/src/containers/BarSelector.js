@@ -211,9 +211,15 @@ export default function BarSelector({highlighted, clickFunction}) {
             <>
                 <div className="flex justify-between items-center m-2">
                     <select
-                        className="block mt-1 border-gray-300 rounded-md shadow-sm 
-                        focus:border-rose-600 focus:ring-rose-600 text-center bg-slate-200 
-                        hover:bg-slate-300"
+                    className="h-7 border-gray-300 inline-block rounded-full shadow-sm border-2 border-primary px-3
+                     pb-[3px] pt-1 text-xs font-medium uppercase leading-normal text-primary 
+                    focus:outline-none focus:ring-0 active:border-primary-700 
+                    active:text-primary-700 motion-reduce:transition-none dark:text-primary-500 
+                    focus:border-rose-600 focus:ring-rose-600 text-center bg-slate-200 
+                    hover:bg-slate-300"
+                        // className="block mt-1 border-gray-300 rounded-md shadow-sm 
+                        // focus:border-rose-600 focus:ring-rose-600 text-center bg-slate-200 
+                        // hover:bg-slate-300"
                         onChange={(e) => {
                             const [sortBy, sortOrder] = e.target.value.split(",");
                             handleSortClick(sortBy, parseInt(sortOrder, 10));
@@ -240,20 +246,23 @@ export default function BarSelector({highlighted, clickFunction}) {
                         Filter
                     </button> */}
 
-                    <div className={"rounded-md bg-slate-200 hover:bg-slate-300 p-2"}>
+                    <div className="border-gray-300 inline-block rounded-full shadow-sm border-2 border-primary px-3
+                     pb-[3px] pt-1 text-xs font-medium uppercase leading-normal text-primary 
+                    focus:outline-none focus:ring-0 active:border-primary-700 
+                    active:text-primary-700 motion-reduce:transition-none dark:text-primary-500rounded-md bg-slate-200 hover:bg-slate-300 p-2">
                         <form id="filterForm" className="mr-5">
-                            <select id="filterType" name="filterType">
-                                <option value="Illicit">Illicit</option>
-                                <option value="Licit">Licit</option>
-                                <option value="Unknown">Unknown</option>
+                            <select id="filterType" name="filterType" className="py-1 border rounded">
+                                <option value="Illicit">ILLICIT</option>
+                                <option value="Licit">LICIT</option>
+                                <option value="Unknown">UNKNOWN</option>
                             </select>
 
                             <input type="number" id="minRange" name="minRange" 
-                            placeholder="Min (%)" min="0" max="100" 
+                            placeholder="MIN (%)" min="0" max="100" 
                             className="w-24 py-1 px-2 border rounded"></input>
                             <label> ~ </label>
                             <input type="number" id="maxRange" name="maxRange" 
-                            placeholder="Max (%)" min="0" max="100" 
+                            placeholder="MAX (%)" min="0" max="100" 
                             className="w-24 py-1 px-2 border rounded"></input>
                             <label> </label>
                             <button type="button" onClick={(e) => {
