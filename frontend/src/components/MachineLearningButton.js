@@ -48,7 +48,8 @@ export default function MachineLearningButton({ handleGraphSwitch }) {
       title="Machine Learning Analysis"
       onClick={() => {
         console.log('Machine Learning Button Clicked');
-        switchedGraph ? handleGraphSwitch('neo4j') : handleGraphSwitch('test');
+        console.log('Switched Graph: ' + switchedGraph);
+        switchedGraph ? handleGraphSwitch('neo4j') : handleGraphSwitch('data-all');
         setSwitchedGraph(!switchedGraph);
         // switchedGraph ? switchGraph('neo4j') : switchGraph('test');
       }

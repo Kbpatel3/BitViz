@@ -25,12 +25,12 @@ import {useEffect, useState, useContext, useRef} from "react";  // React hooks
 import Graph from "./components/Graph"; // Force directed graph
 import Pie from "./components/Pie"; // Pie chart
 import BarSelector from "./containers/BarSelector"; // Bar chart selector
-import {useReadCypher} from "use-neo4j";    // Neo4j hook
+//import {useReadCypher} from "use-neo4j";    // Neo4j hook
 import ObserverContext from "./context/ObserverContext";    // Observer context
 import {Select, MenuItem} from "@mui/material"; // Select component
 import BarWrapper from "./containers/BarWrapper";   // Bar chart wrapper
 import Slider from "./components/Slider";   // Slider component
-import Bar from "./components/barchart";    // Bar chart
+//import Bar from "./components/barchart";    // Bar chart
 import NavBar from "./components/NavBar";   // Navigation bar
 import SubGraph from "./components/SubGraph";   // Subgraph
 import Key from "./components/Key";  // Key
@@ -57,6 +57,9 @@ function App() {
     // Parent ref for the army of bar charts
     const scrollToRef = useRef(null);
 
+    // Used to keep track of the records returned from the database
+    const [records, setRecords] = useState(undefined);
+
     // Registers a callback function with the observer
     registerSubscriber((alertObject) => {
         alertObject.timestep && setTimestep(alertObject.timestep);
@@ -82,11 +85,43 @@ function App() {
 
     // Get the functions and variables we need from the use-neo4j package
     //const {records, run} = useReadCypher(query);
-
     //const [database, setDatabase] = useState('test5');
     //let database = 'illicit';
     const [database, setDatabase] = useState('neo4j');
-    const {records, run} = useReadCypher(query, {database: database});
+    //const {records, run} = useReadCypher(query, {database: database});
+
+    const neo4j = require('neo4j-driver');
+    const uri = 'neo4j://localhost:7687';
+    const user = 'neo4j';
+    const password = 'password';
+
+    const driver = neo4j.driver(uri, neo4j.auth.basic(user, password));
+
+    async function executeQuery(query) {
+        // Create a new session for the specific database
+        const session = driver.session({database: database});
+
+        // Run the query
+        try {
+            // Run the query
+            const result = await session.run(query);
+
+            // Return the result
+            return result.records;
+        } finally {
+            // Close the session
+            await session.close();
+        }
+    }
+
+    // Run on initial render only
+    useEffect(() => {
+        // Execute the query
+        executeQuery(query).then((result) => {
+            // Set the records
+            setRecords(result);
+        });
+    }, []);
 
     const handleGraphSwitch = (database) => {
         setDatabase(database);
@@ -102,7 +137,10 @@ function App() {
 
     useEffect(() => {
         query = getQuery(timestep);
-        run({query});
+        executeQuery(query).then((result) => {
+            // Set the records
+            setRecords(result);
+        });
     }, [database, timestep]);
 
     // Init our data
@@ -224,7 +262,7 @@ function App() {
                     {/* <SubGraph/> */}
                     {clickedNode ? (
                         <div>
-                            <SubGraph clickedNode={clickedNode} nodeClick={handleCircleClick}/>
+                            <SubGraph clickedNode={clickedNode} nodeClick={handleCircleClick} queryFunction = {executeQuery}/>
                         </div>
                     ) : (
                         <div>Click a node to see its subgraph</div>
@@ -243,7 +281,7 @@ function App() {
                 </div>
             </div>
             <div>
-                <BarSelector highlighted={timestep} clickFunction={handleBarClick}/>
+                <BarSelector highlighted={timestep} clickFunction={handleBarClick} queryFunction={executeQuery}/>
             </div>
         </>
     );

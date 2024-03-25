@@ -63,7 +63,7 @@ const Bar = ({ data }) => {
             const y_axis = d3
                 .scaleLinear()
                 .domain([0, height]) // changed the height to be adjust to max bar height
-                .range([0, height]);
+                .range([0, height / 3]);
               
             // Apply the y axis to the svg
             svg
