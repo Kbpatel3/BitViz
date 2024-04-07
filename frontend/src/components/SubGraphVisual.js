@@ -42,8 +42,8 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
       const dimensions = d3.select(".subgraph").node().getBoundingClientRect();
 
       // Constants used by the SVG
-      const height = dimensions.height;
-      const width = dimensions.width;
+      const height = dimensions.height-5;
+      const width = dimensions.width-5;
 
       // Reset our graph in the case of a state change
       svg.selectAll("*").remove();
@@ -62,8 +62,9 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
           "link",
           d3.forceLink().id((d) => d.id),
         )
-        .force("charge", d3.forceManyBody().strength(-1))
+        .force("charge", d3.forceManyBody().strength(-20)) //!changed
         .force("center", d3.forceCenter(width / 2, height / 2));
+        //.force("collide", d3.forceCollide().radius(10));
 
       // Functions to define what happens when a user clicks on a node
 
@@ -133,6 +134,10 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
             .on("drag", dragged)
             .on("end", dragended),
         )
+        .on('click', (d) => { // when a node in the subgraph is clicked
+          nodeClick(parseInt(d.target.id.slice(4)));
+          clickNode(parseInt(d.target.id.slice(4)));
+        });
 
       
       // Adds titles to nodes

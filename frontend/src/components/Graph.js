@@ -9,6 +9,7 @@
 import useD3 from "../hooks/useD3";
 import * as d3 from 'd3';
 import getColor from "../helper/color";
+import { useEffect } from "react";
 import "./graph.css";
 
 // !Changed the force of the graph, line: 47, 57
@@ -104,7 +105,7 @@ const Graph = ({data, highlight, nodeClick}) => {
               .on("end", dragended)
           ).on('click', (d) => {
             nodeClick(parseInt(d.target.id.slice(4)));
-            clickNode(parseInt(d.target.id.slice(4))); // added for highlighting node
+            //clickNode(parseInt(d.target.id.slice(4))); // added for highlighting node
             // d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
             // d3.select(`#${d.target.id}`).attr('fill', (d) => getColor(d.group)).attr('r', 12);
           });
@@ -150,6 +151,11 @@ const Graph = ({data, highlight, nodeClick}) => {
     // the data to be watched for changes
     [data]
   );
+
+  useEffect(() => {
+    // Call clickNode when highlight changes
+    clickNode(highlight);
+  }, [highlight]);
 
   // SVG Containing the graph
   return (

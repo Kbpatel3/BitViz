@@ -262,7 +262,8 @@ function App() {
                     {/* <SubGraph/> */}
                     {clickedNode ? (
                         <div>
-                            <SubGraph clickedNode={clickedNode} nodeClick={handleCircleClick} queryFunction = {executeQuery}/>
+                            <SubGraph clickedNode={clickedNode} nodeClick={handleCircleClick} 
+                            queryFunction = {executeQuery}/>
                         </div>
                     ) : (
                         <div>Click a node to see its subgraph</div>
