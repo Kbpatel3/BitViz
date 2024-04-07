@@ -28,14 +28,26 @@ import convert from "../helper/convert";    // Convert
  * @param {Function} props.clickFunction - A function to be run whenever a barchart is clicked on.
  * @returns {React.Component} - A JSX component showing the army of barcharts.
  */
-export default function BarSelector({highlighted, clickFunction}) {
+export default function BarSelector({highlighted, clickFunction, queryFunction}) {
+    // State for the query results
+    const [records, setRecords] = React.useState(undefined);
+
     // Define our query and our key
     const query = 'match (n:meta) with collect({timestep: n.timestep, illicit:n.illicit, ' +
         'licit:n.licit, unknown:n.unknown}) as meta return meta';
     const key = 'meta';
 
-    // Get the results and the loading value from the database
-    const {loading, first} = useReadCypher(query);
+
+    // Use effect for initial component render to query the DB
+    React.useEffect(() => {
+        queryFunction(query).then((result) => {
+            setRecords(result);
+            console.log("Records will be printed")
+            console.log(result)
+            console.log("Data will be printed")
+            console.log(result.get(key))
+        });
+    }, [records]);
 
     // State for sorted data
     const [sortedData, setSortedData] = React.useState([]);
@@ -50,13 +62,13 @@ export default function BarSelector({highlighted, clickFunction}) {
     const [isNewData, setIsNewData] = React.useState(false);
 
     // Check to see if the data has been loaded
-    if (first === undefined) {
+    if (records === undefined) {
         console.log("Meta data is undefined")
     } else {
         // Data has been loaded, gets the data and passes it to convert() to be properly formatted
 
         // Get the data
-        let data = first.get(key);
+        let data = records[0].get(key);
 
         // Convert the data
         data = convert(data);

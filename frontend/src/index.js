@@ -55,7 +55,7 @@ root.render(
   <React.StrictMode>
     {/* Neo4j database provider context */}
     <Neo4jProvider driver={driver}
-    database='test'>
+    database='neo4j'>
       {/* Observer context */}
       <ObserverProvider>
 

@@ -5,7 +5,7 @@
  */
 
 // Imports
-import { useReadCypher } from "use-neo4j";  // Neo4j hook for reading data from the database
+//import { useReadCypher } from "use-neo4j";  // Neo4j hook for reading data from the database
 import { useEffect, useState } from "react";  // React hooks
 import SubGraphVisual from "./SubGraphVisual";  // SubGraphVisual component
 
@@ -14,10 +14,14 @@ import SubGraphVisual from "./SubGraphVisual";  // SubGraphVisual component
  * SubGraph component, used to render the subgraph of a specific node
  * @param clickedNode - the node that was clicked on
  * @param nodeClick - function to be called when a node is clicked
+ * @param queryFunction - function to be called when needing to requery the database.
  * @returns {JSX.Element} - the subgraph of the clicked node
  * @constructor - the subgraph component
  */
-export default function SubGraph({ clickedNode, nodeClick }) {
+export default function SubGraph({ clickedNode, nodeClick, queryFunction }) {
+  // State for records
+  const [records, setRecords] = useState(undefined);
+
   // Constants used for talking to the database
   const key = "{nodes: nodes, links: links}";
 
@@ -42,14 +46,18 @@ export default function SubGraph({ clickedNode, nodeClick }) {
   let query = getQuery(clickedNode);
 
   // Get the functions and variables we need from the use-neo4j package
-  const { loading, error, records, run } = useReadCypher(query);
+  //const { loading, error, records, run } = useReadCypher(query);
 
   // Requery the database whenever the state of the clicked node changes
   useEffect(() => {
     query = getQuery(clickedNode);
-    run({ query });
-    if (loading) console.log("Loading");
-    if (error) console.log("Error");
+    //run({ query });
+    queryFunction(query).then((result) => {
+      setRecords(result);
+    })
+
+    //if (loading) console.log("Loading");
+    //if (error) console.log("Error");
   }, [clickedNode]);
 
   // Initialize our data
