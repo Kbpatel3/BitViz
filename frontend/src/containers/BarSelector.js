@@ -16,7 +16,6 @@
 // Imports
 import React from "react";  // React
 import Bar from "../components/barchart";   // Barchart
-import {useReadCypher} from "use-neo4j";    // Neo4j
 import convert from "../helper/convert";    // Convert
 
 // !added sorting and filtering features
@@ -42,10 +41,6 @@ export default function BarSelector({highlighted, clickFunction, queryFunction})
     React.useEffect(() => {
         queryFunction(query).then((result) => {
             setRecords(result);
-            console.log("Records will be printed")
-            console.log(result)
-            console.log("Data will be printed")
-            console.log(result.get(key))
         });
     }, [records]);
 
