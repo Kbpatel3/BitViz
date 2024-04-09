@@ -66,6 +66,12 @@ export default function BarSelector({highlighted, clickFunction, queryFunction})
     // State for whether the data is new
     const [isNewData, setIsNewData] = React.useState(false);
 
+    const [barMax, setBarMax] = React.useState(49); //!remove
+
+    const handleBarMax = (newMax) => {
+        setBarMax(newMax);
+    };
+
     // Check to see if the data has been loaded
     if (records === undefined) {
         console.log("Meta data is undefined")
@@ -369,7 +375,7 @@ export default function BarSelector({highlighted, clickFunction, queryFunction})
                                         } border-dashed self-center h-40`}
                                         onClick={() => clickFunction(d.timestep.low)}
                                     >
-                                        <Bar data={d.groups}/>
+                                        <Bar data={d.groups} barMax={barMax} setBarMax={handleBarMax}/>
                                     </div>
                                     <p className="text-center">Timestep {d.timestep.low}</p>
                                 </div>
@@ -387,7 +393,7 @@ export default function BarSelector({highlighted, clickFunction, queryFunction})
                                         } border-dashed self-center h-40`}
                                         onClick={() => clickFunction(d.timestep.low)}
                                     >
-                                        <Bar data={d.groups}/>
+                                        <Bar data={d.groups} barMax={barMax} setBarMax={handleBarMax}/>
                                     </div>
                                     <p className="text-center">Timestep {d.timestep.low}</p>
                                 </div>
