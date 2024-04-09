@@ -26,7 +26,7 @@ import Bar from "../components/barchart"; // Barchart
  * @param {number} props.timestep - The timestep to render.
  * @returns {React.Component} - A JSX component holding a single barchart.
  */
-export default function BarWrapper({timestep, queryFunction}) {
+export default function BarWrapper({timestep, queryFunction, barMax, setBarMax}) {
   // State for the query results
   const [records, setRecords] = React.useState(undefined);
 
@@ -69,7 +69,7 @@ export default function BarWrapper({timestep, queryFunction}) {
     
     // Set the result
     result = (
-      <Bar data={data}/>
+      <Bar data={data} barMax={barMax} setBarMax={setBarMax}/>
     );
   }
 

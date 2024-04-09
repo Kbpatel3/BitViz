@@ -60,6 +60,9 @@ function App() {
     // Used to keep track of the records returned from the database
     const [records, setRecords] = useState(undefined);
 
+    // State for the barMax
+    const [barMax, setBarMax] = useState(49);
+
     // Registers a callback function with the observer
     registerSubscriber((alertObject) => {
         alertObject.timestep && setTimestep(alertObject.timestep);
@@ -188,6 +191,11 @@ function App() {
         });
     };
 
+    // handle to set the barMax
+    const handleBarMax = (newMax) => {
+        setBarMax(newMax);
+    };
+
     return (
         <>
             <div className="grid grid-cols-3 grid-rows-8 gap-2">
@@ -243,7 +251,8 @@ function App() {
                         {/* Conditional rendering of the selected graph */}
                         {graph === "Bar" && (
                             <div className="relative -bottom-16">
-                                <BarWrapper timestep={timestep} queryFunction={executeQuery}/>
+                                <BarWrapper timestep={timestep} queryFunction={executeQuery} 
+                                    barMax={barMax} setBarMax={handleBarMax}/>
                             </div>
                         )}
                         {graph === "Pie" && <Pie data={data.nodes}/>}
@@ -285,7 +294,8 @@ function App() {
                 </div>
             </div>
             <div>
-                <BarSelector highlighted={timestep} clickFunction={handleBarClick} queryFunction={executeQuery}/>
+                <BarSelector highlighted={timestep} clickFunction={handleBarClick} 
+                    queryFunction={executeQuery} barMax={barMax} setBarMax={handleBarMax}/>
             </div>
         </>
     );

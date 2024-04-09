@@ -27,7 +27,7 @@ import convert from "../helper/convert";    // Convert
  * @param {Function} props.clickFunction - A function to be run whenever a barchart is clicked on.
  * @returns {React.Component} - A JSX component showing the army of barcharts.
  */
-export default function BarSelector({highlighted, clickFunction, queryFunction}) {
+export default function BarSelector({highlighted, clickFunction, queryFunction, barMax, setBarMax}) {
     // State for the query results
     const [records, setRecords] = React.useState(undefined);
 
@@ -65,14 +65,6 @@ export default function BarSelector({highlighted, clickFunction, queryFunction})
 
     // State for whether the data is new
     const [isNewData, setIsNewData] = React.useState(false);
-
-    // State for the barMax
-    const [barMax, setBarMax] = React.useState(49); //!remove
-
-    // handle to set the barMax
-    const handleBarMax = (newMax) => {
-        setBarMax(newMax);
-    };
 
     // Check to see if the data has been loaded
     if (records === undefined) {
@@ -377,7 +369,7 @@ export default function BarSelector({highlighted, clickFunction, queryFunction})
                                         } border-dashed self-center h-40`}
                                         onClick={() => clickFunction(d.timestep.low)}
                                     >
-                                        <Bar data={d.groups} barMax={barMax} setBarMax={handleBarMax}/>
+                                        <Bar data={d.groups} barMax={barMax} setBarMax={setBarMax}/>
                                     </div>
                                     <p className="text-center">Timestep {d.timestep.low}</p>
                                 </div>
@@ -395,7 +387,7 @@ export default function BarSelector({highlighted, clickFunction, queryFunction})
                                         } border-dashed self-center h-40`}
                                         onClick={() => clickFunction(d.timestep.low)}
                                     >
-                                        <Bar data={d.groups} barMax={barMax} setBarMax={handleBarMax}/>
+                                        <Bar data={d.groups} barMax={barMax} setBarMax={setBarMax}/>
                                     </div>
                                     <p className="text-center">Timestep {d.timestep.low}</p>
                                 </div>
