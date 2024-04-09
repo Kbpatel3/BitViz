@@ -152,6 +152,7 @@ const Graph = ({data, highlight, nodeClick}) => {
     [data]
   );
 
+  // Call the clickNode function when the highlight changes
   useEffect(() => {
     // Call clickNode when highlight changes
     clickNode(highlight);
