@@ -120,6 +120,7 @@ function App() {
         executeQuery(query).then((result) => {
             // Set the records
             setRecords(result);
+            console.log("Executed query", result)
         });
     }, []);
 
@@ -140,6 +141,7 @@ function App() {
         executeQuery(query).then((result) => {
             // Set the records
             setRecords(result);
+            console.log("Executed query due to timestep change or database change", result)
         });
     }, [database, timestep]);
 

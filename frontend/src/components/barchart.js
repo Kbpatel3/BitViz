@@ -22,7 +22,7 @@ const Bar = ({ data }) => {
     // Calls the useD3 hook to render the component
     const ref = useD3(
         (svg) => {
-            // DEfine our margins
+            // Define our margins
             const margin = {top: 30, right: 30, bottom: 70, left: 60};
 
             // Get the wrapping containers size

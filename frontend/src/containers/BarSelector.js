@@ -40,14 +40,20 @@ export default function BarSelector({highlighted, clickFunction, queryFunction})
 
     // Use effect for initial component render to query the DB
     React.useEffect(() => {
+        let isMounted = true;
+
+        console.log("Fetching data")
         queryFunction(query).then((result) => {
-            setRecords(result);
-            console.log("Records will be printed")
-            console.log(result)
-            console.log("Data will be printed")
-            console.log(result.get(key))
+            console.log("Data fetched", result[0].get(key))
+            if (isMounted) {
+                setRecords(result)
+            }
         });
-    }, [records]);
+
+        return () => {
+            isMounted = false;
+        };
+    },[queryFunction, query]);
 
     // State for sorted data
     const [sortedData, setSortedData] = React.useState([]);
@@ -68,7 +74,9 @@ export default function BarSelector({highlighted, clickFunction, queryFunction})
         // Data has been loaded, gets the data and passes it to convert() to be properly formatted
 
         // Get the data
-        let data = records[0].get(key);
+        // Keep only index 0 - 48 of result[0].get(key)
+                // This is a temporary fix to limit the number of bar charts displayed
+        let data = records[0].get(key).slice(0, 49);
 
         // Convert the data
         data = convert(data);
