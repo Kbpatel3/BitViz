@@ -66,8 +66,10 @@ export default function BarSelector({highlighted, clickFunction, queryFunction})
     // State for whether the data is new
     const [isNewData, setIsNewData] = React.useState(false);
 
+    // State for the barMax
     const [barMax, setBarMax] = React.useState(49); //!remove
 
+    // handle to set the barMax
     const handleBarMax = (newMax) => {
         setBarMax(newMax);
     };

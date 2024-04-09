@@ -106,6 +106,7 @@ const Bar = ({ data, barMax, setBarMax }) => {
                 .text(d => d.value)
                 .style("display", "none");;
 
+            // Show the total value when hovering over the chart
             svg.on("mouseover", () => totalValueText.style("display", "block"));
             svg.on("mouseout", () => totalValueText.style("display", "none"));
         },
