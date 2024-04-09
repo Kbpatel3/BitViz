@@ -12,13 +12,14 @@ import getColor from "../helper/color";
 
 // !changed line 65
 /**
- * Defines the componet for a barchart. Does not load data and it is required for it to be in a 
+ * Defines the component for a barchart. Does not load data and it is required for it to be in a
  * container to render 
  * accurate data
  * @param data The data to render
  * @returns A barchart JSX component
  */
 const Bar = ({ data }) => {
+    console.log("Data: ", data)
     // Calls the useD3 hook to render the component
     const ref = useD3(
         (svg) => {
@@ -62,8 +63,9 @@ const Bar = ({ data }) => {
             // Set the Y axis
             const y_axis = d3
                 .scaleLinear()
-                .domain([0, height]) // changed the height to be adjust to max bar height
-                .range([0, height / 3]);
+                .domain([0, d3.max(data, d => d.value)]) // changed the height to be adjust to
+                // max bar height
+                .range([height, 0]);
               
             // Apply the y axis to the svg
             svg
@@ -78,11 +80,9 @@ const Bar = ({ data }) => {
                 .enter()
                 .append("rect")
                 .attr("x", d => x_axis(d.group))
-                .attr("y", (d) => height - y_axis(d.value))
+                .attr("y", (d) => y_axis(d.value))
                 .attr("width", x_axis.bandwidth())
-                .attr("height", (d) => {
-                    return y_axis(d.value);
-                })
+                .attr("height", d => height - y_axis(d.value))
                 // Colors the bars according to the groups
                 .attr("fill", (d) => getColor(d.group) );
         },
