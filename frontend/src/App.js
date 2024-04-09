@@ -243,7 +243,7 @@ function App() {
                         {/* Conditional rendering of the selected graph */}
                         {graph === "Bar" && (
                             <div className="relative -bottom-16">
-                                <BarWrapper timestep={timestep}/>
+                                <BarWrapper timestep={timestep} queryFunction={executeQuery}/>
                             </div>
                         )}
                         {graph === "Pie" && <Pie data={data.nodes}/>}

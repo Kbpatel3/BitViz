@@ -26,23 +26,39 @@ import Bar from "../components/barchart"; // Barchart
  * @param {number} props.timestep - The timestep to render.
  * @returns {React.Component} - A JSX component holding a single barchart.
  */
-export default function BarWrapper({timestep}) {
+export default function BarWrapper({timestep, queryFunction}) {
+  // State for the query results
+  const [records, setRecords] = React.useState(undefined);
+
   // Defines the key and the query to get data from the database
   const key = '{groups: [{illicit: n.illicit, licit: n.licit, unknown: n.unknown}]}'
   const query = `match (n:meta {timestep: ${timestep}}) return ${key}`;
 
-  // Gets the data and the loading values
-  const { loading, first } = useReadCypher(query);
+  // // Gets the data and the loading values
+  // const { loading, first } = useReadCypher(query);
+
+  // Use effect for the render to query the database
+  React.useEffect(() => {
+    let isMounted = true;
+
+    queryFunction(query).then((result) => {
+      if (isMounted) {
+        setRecords(result)
+      }
+    });
+
+    return () => { isMounted = false };
+  }, [queryFunction, query])
 
   // Initialize the result vector
   let result = <div>Loading</div>
 
   // Check to see if the data has been loaded yet
-  if(first === undefined) {
+  if(records === undefined) {
     console.log('Bar wrapper data undefined')
   } else {
     // Get the data
-    let data = first.get(key);
+    let data = records[0].get(key);
     // Wrap the data in an array for D3
     data = 
       [
