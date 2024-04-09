@@ -85,6 +85,19 @@ const Bar = ({ data }) => {
                 .attr("height", d => height - y_axis(d.value))
                 // Colors the bars according to the groups
                 .attr("fill", (d) => getColor(d.group) );
+
+            // Add the labels to the bars
+            svg
+                .selectAll(".barchart")
+                .data(data)
+                .enter()
+                .append("text")
+                .attr("x", d => x_axis(d.group) + x_axis.bandwidth() / 2)
+                .attr("y", d => height - 5)
+                .attr("text-anchor", "middle")
+                .attr("fill", "black")
+                .style("font-size", "20px")
+                .text(d => d.value);
         },
         // Data to watch for a change
         [data]
