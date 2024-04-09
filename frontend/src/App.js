@@ -194,7 +194,7 @@ function App() {
                 {/* Row 1 which contains the search bar, page buttons, and the settings icon */}
                 <div
                     className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex 
-                        justify-center items-center h-full">
+                        justify-center items-center h-full border rounded">
                     <NavBar scrollToRef={scrollToRef} timestep={timestep} handleGraphSwitch={handleGraphSwitch}/>
                 </div>
 
@@ -202,7 +202,7 @@ function App() {
                 {data ? (
                     <div 
                     className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 
-                        hover:bg-slate-300">
+                        hover:bg-slate-300 border rounded">
                         {/* Render the color key */}
                         <Key className={"m-auto"}/>
 
@@ -217,7 +217,7 @@ function App() {
                 ) : (
                     <div 
                     className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 
-                        hover:bg-slate-300">
+                        hover:bg-slate-300 border rounded">
                         Data not loaded
                     </div>
                 )}
@@ -227,7 +227,7 @@ function App() {
                     // Shift this down to anchor bottom of container
                     <div
                         className="row-span-3 col-start-3 row-start-2 bg-slate-200 
-                            hover:bg-slate-300 max-h-[320px]">
+                            hover:bg-slate-300 max-h-[320px] border rounded">
                         {/* Select component for choosing the graph type */}
                         <Select
                             className={"w-full"}
@@ -251,7 +251,7 @@ function App() {
                 ) : (
                     <div 
                     className="h-80 row-span-3 col-start-3 row-start-2 bg-slate-200 
-                        hover:bg-slate-300">
+                        hover:bg-slate-300 border rounded text-xs font-medium">
                         Data not loaded
                     </div>
                 )}
@@ -259,12 +259,13 @@ function App() {
                 {/* Row 5-7 and column 3 which contains the subgraph */}
                 <div
                     className="subgraph row-span-3 col-start-3 row-start-5 bg-slate-200 
-                        hover:bg-slate-300 min-h-[320px] min-w-[500px]"
+                        hover:bg-slate-300 min-h-[320px] min-w-[500px] border rounded"
                 >
                     {/* <SubGraph/> */}
                     {clickedNode ? (
                         <div>
-                            <SubGraph clickedNode={clickedNode} nodeClick={handleCircleClick} queryFunction = {executeQuery}/>
+                            <SubGraph clickedNode={clickedNode} nodeClick={handleCircleClick} 
+                            queryFunction = {executeQuery}/>
                         </div>
                     ) : (
                         <div>Click a node to see its subgraph</div>
@@ -273,7 +274,8 @@ function App() {
 
                 {/* Row 8 which contains the slider */}
                 <div ref={scrollToRef} 
-                className="col-span-3 row-start-8 bg-slate-200 hover:bg-slate-300 pt-2.5">
+                className="col-span-3 row-start-8 bg-slate-200 hover:bg-slate-300 pt-2.5 border 
+                            rounded">
                     {/* Slider component */}
                     <Slider
                         timestep={timestep}
