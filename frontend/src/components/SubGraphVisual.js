@@ -184,6 +184,12 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
        */
       function clickNode(id) {
           d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
+          
+          // below d3 and svg has the same thing to avoid the bug of not keeping the highlight
+          d3.select(`#node${id}`) // highlighting the node that was clicked
+            .transition()
+            .duration(500)
+            .attr('r', 12);
           svg.select(`#node${id}`) // highlighting the node that was clicked
             .transition()
             .duration(500)
