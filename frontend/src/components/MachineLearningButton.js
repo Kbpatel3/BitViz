@@ -14,7 +14,7 @@ import { useState } from "react";  // React hook for managing state
  * @fileoverview Machine Learning Button Component
  * @returns {JSX.Element} A JSX element containing the Machine Learning Button
  */
-export default function MachineLearningButton({ handleGraphSwitch }) {
+export default function MachineLearningButton({ handleGraphSwitch, setBarMax }) {
 
   const [switchedGraph, setSwitchedGraph] = useState(false);  // State for switching the graph
 
@@ -50,6 +50,7 @@ export default function MachineLearningButton({ handleGraphSwitch }) {
         console.log('Machine Learning Button Clicked');
         console.log('Switched Graph: ' + switchedGraph);
         switchedGraph ? handleGraphSwitch('neo4j') : handleGraphSwitch('data-all-subset');
+        setBarMax(0); // Reset the bar max
         setSwitchedGraph(!switchedGraph);
         // switchedGraph ? switchGraph('neo4j') : switchGraph('test');
       }

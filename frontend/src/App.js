@@ -203,7 +203,8 @@ function App() {
                 <div
                     className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex 
                         justify-center items-center h-full border rounded">
-                    <NavBar scrollToRef={scrollToRef} timestep={timestep} handleGraphSwitch={handleGraphSwitch}/>
+                    <NavBar scrollToRef={scrollToRef} timestep={timestep} 
+                    handleGraphSwitch={handleGraphSwitch} setBarMax={handleBarMax}/>
                 </div>
 
                 {/* Row 2-7 which contains the main nodal structure */}

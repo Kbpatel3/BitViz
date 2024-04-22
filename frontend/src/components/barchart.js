@@ -10,7 +10,6 @@ import useD3 from "../hooks/useD3";
 import * as d3 from 'd3';
 import getColor from "../helper/color";
 
-// !changed line 65
 /**
  * Defines the component for a barchart. Does not load data and it is required for it to be in a
  * container to render 
@@ -104,7 +103,7 @@ const Bar = ({ data, barMax, setBarMax }) => {
                 .style("font-family", "Roboto, sans-serif")
                 .style("font-size", "17px")
                 .text(d => d.value)
-                .style("display", "none");;
+                .style("display", "none");
 
             // Show the total value when hovering over the chart
             svg.on("mouseover", () => totalValueText.style("display", "block"));
