@@ -101,6 +101,23 @@ const Pie = ({data}) => {
             u
                 .exit()
                 .remove()
+            
+                var arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(radius)
+            const totalValueText = u
+            .enter()
+            .append('text')
+            .text(d => d.value)
+            .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")";  })
+            .style("text-anchor", "middle")
+            .style("font-family", "Roboto, sans-serif")
+            .style("font-size", "17px")
+            .style("display", "none");
+
+             // Show the total value when hovering over the chart
+             svg.on("mouseover", () => totalValueText.style("display", "block"));
+             svg.on("mouseout", () => totalValueText.style("display", "none"));
 
         },
         [data]
