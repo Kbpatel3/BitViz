@@ -12,7 +12,6 @@ const ILLICIT = "rgb(255,164,0)"
 const LICIT =   "rgb(49,56,178)"
 const UNKNOWN = "rgb(128, 128, 128)"
 
-// !changed color
 /**
  * Matches the group value of a node and returns the correct coloring.
  *
@@ -23,15 +22,12 @@ const UNKNOWN = "rgb(128, 128, 128)"
  */
 const getColor = (group) => {
     if (group == "1") {
-        //console.log(ILLICIT);
         return ILLICIT;
     }
     if (group == "2") {
-        //console.log(LICIT);
         return LICIT;
     }
     if (group == "3") {
-        //console.log(UNKNOWN);
         return UNKNOWN;
     }
 

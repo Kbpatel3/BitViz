@@ -12,8 +12,6 @@ import getColor from "../helper/color";
 import { useEffect } from "react";
 import "./graph.css";
 
-// !Changed the force of the graph, line: 47, 57
-// !Make the feature of highlighting node work: line 107, 172-
 /**
  * Graph component for our app, takes data and uses a custom hook to render our graph to the screen
  * @param {*} Data The data for our graph to render
