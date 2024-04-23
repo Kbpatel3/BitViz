@@ -34,6 +34,7 @@ import Slider from "./components/Slider";   // Slider component
 import NavBar from "./components/NavBar";   // Navigation bar
 import SubGraph from "./components/SubGraph";   // Subgraph
 import Key from "./components/Key";  // Key
+import MlKey from "./components/MlKey";
 
 
 // !mainly modified html code to change the tool's layout
@@ -63,6 +64,9 @@ function App() {
     // State for the barMax
     const [barMax, setBarMax] = useState(49);
 
+    // State for whether the machine learning data is used
+    const [mlOn, setMlOn] = useState(false);
+
     // Registers a callback function with the observer
     registerSubscriber((alertObject) => {
         alertObject.timestep && setTimestep(alertObject.timestep);
@@ -86,12 +90,8 @@ function App() {
     // Get the query
     let query = getQuery(timestep);
 
-    // Get the functions and variables we need from the use-neo4j package
-    //const {records, run} = useReadCypher(query);
-    //const [database, setDatabase] = useState('test5');
-    //let database = 'illicit';
+    // Used to execute a query on the database
     const [database, setDatabase] = useState('neo4j');
-    //const {records, run} = useReadCypher(query, {database: database});
 
     const neo4j = require('neo4j-driver');
     const uri = 'neo4j://localhost:7687';
@@ -132,13 +132,6 @@ function App() {
         console.log("MachineData:", database);
     };
 
-    // Requery the database whenever the state changes
-    // useEffect(() => {
-    //     query = getQuery(timestep);
-    //     run({query});
-    // }, [timestep]);
-    // // alert(JSON.stringify(records));
-
     useEffect(() => {
         query = getQuery(timestep);
         executeQuery(query).then((result) => {
@@ -157,7 +150,6 @@ function App() {
     } else {
         // If the data has finished retrieving from the database, assign it to the data variable
         data = records[0].get(key);
-        //console.log(data);
     }
 
     // Runs whenever the slider is moved
@@ -196,6 +188,11 @@ function App() {
         setBarMax(newMax);
     };
 
+    // handle to set the mlOn
+    const handleMl = () => {
+        setMlOn(!mlOn);
+    }
+
     return (
         <>
             <div className="grid grid-cols-3 grid-rows-8 gap-2">
@@ -204,7 +201,7 @@ function App() {
                     className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex 
                         justify-center items-center h-full border rounded">
                     <NavBar scrollToRef={scrollToRef} timestep={timestep} 
-                    handleGraphSwitch={handleGraphSwitch} setBarMax={handleBarMax}/>
+                    handleGraphSwitch={handleGraphSwitch} setBarMax={handleBarMax} setMl={handleMl}/>
                 </div>
 
                 {/* Row 2-7 which contains the main nodal structure */}
@@ -212,8 +209,12 @@ function App() {
                     <div 
                     className="h-128 col-span-2 row-span-6 row-start-2 bg-slate-200 
                         hover:bg-slate-300 border rounded">
-                        {/* Render the color key */}
-                        <Key className={"m-auto"}/>
+
+                        <div className="flex justify-between">
+                            <MlKey className={"m-auto"} mlOn={mlOn}/>
+                            {/* Render the color key */}
+                            <Key className={"m-auto"}/>
+                        </div>
 
                         {/* Render the force directed graph */}
                         <Graph
