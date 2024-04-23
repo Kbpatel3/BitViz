@@ -17,7 +17,7 @@ import FilterGraphButton from "./FilterGraphButton";
  * @fileoverview NavBar component for the application
  * @returns {JSX.Element} A JSX element containing the NavBar
  */
-export default function NavBar({ scrollToRef, timestep, handleGraphSwitch, setBarMax }) {
+export default function NavBar({ scrollToRef, timestep, handleGraphSwitch, setBarMax, setMl }) {
   return (
     <>
       <div className={"flex justify-between items-center w-full h-full"}>
@@ -30,7 +30,8 @@ export default function NavBar({ scrollToRef, timestep, handleGraphSwitch, setBa
           <ToHistogramButton scrollToRef={scrollToRef} />
 
           {/* Machine Learning Button (Temp)*/}
-          <MachineLearningButton handleGraphSwitch={handleGraphSwitch} setBarMax={setBarMax}/>
+          <MachineLearningButton handleGraphSwitch={handleGraphSwitch} setBarMax={setBarMax} 
+                                setMl={setMl}/>
 
           {/* Filter Graph Button */}
           <FilterGraphButton handleGraphSwitch={handleGraphSwitch} setBarMax={setBarMax}/>
