@@ -51,7 +51,8 @@ export default function FilterGraphButton({ handleGraphSwitch, setBarMax }) {
               onChange={handleSelectChange}
               value={selectedFilter}
           >
-              <option value={"data-all"}>All Data (Default)</option>
+              <option value={"data-all-unpredicted"}>All Data Unpredicted</option>
+              <option value={"data-all-predicted"}>All Data Predicted</option>
               <option value={"data-illicit"}>Illicit Chains</option>
               <option value={"data-min-3-edge"}>3 Minimum Edges</option>
               <option value={"data-min-3-edge-illicit"}>3 Minimum Edges & Illicit Chains</option>
