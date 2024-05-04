@@ -37,7 +37,7 @@ import Key from "./components/Key";  // Key
 import MlKey from "./components/MlKey";
 
 
-// !mainly modified html code to change the tool's layout
+//! added neo4j drivers (line 96-), handleGraphSwitch, handleBarMax, handleMl
 /**
  * Main application component responsible for rendering the entire application.
  * Implements the observer design pattern to manage state across components.
@@ -93,13 +93,16 @@ function App() {
     // Used to execute a query on the database
     const [database, setDatabase] = useState('neo4j');
 
+    // Connect to the database
     const neo4j = require('neo4j-driver');
     const uri = 'neo4j://localhost:7687';
     const user = 'neo4j';
     const password = 'password';
 
+    // Create a new Neo4j driver
     const driver = neo4j.driver(uri, neo4j.auth.basic(user, password));
 
+    // Function to execute a query on the database
     async function executeQuery(query) {
         // Create a new session for the specific database
         const session = driver.session({database: database});
@@ -201,7 +204,8 @@ function App() {
                     className="col-span-3 row-span-1 bg-slate-200 hover:bg-slate-300 flex 
                         justify-center items-center h-full border rounded">
                     <NavBar scrollToRef={scrollToRef} timestep={timestep} 
-                    handleGraphSwitch={handleGraphSwitch} setBarMax={handleBarMax} setMl={handleMl}/>
+                    handleGraphSwitch={handleGraphSwitch} setBarMax={handleBarMax} setMl={handleMl}
+                    />
                 </div>
 
                 {/* Row 2-7 which contains the main nodal structure */}
@@ -296,6 +300,7 @@ function App() {
                 </div>
             </div>
             <div>
+                {/* TimeSteps Histograms */}
                 <BarSelector highlighted={timestep} clickFunction={handleBarClick} 
                     queryFunction={executeQuery} barMax={barMax} setBarMax={handleBarMax}/>
             </div>

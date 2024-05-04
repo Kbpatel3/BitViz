@@ -9,7 +9,7 @@
 import React from 'react';
 
 
-// !made own function for the slide and changed the format
+//! no changes
 /**
  * A slider component for the application.
  * @param {*} timestep The current timestep

@@ -19,7 +19,7 @@ import * as d3 from "d3";        // D3
 import getColor from "../helper/color"; // Helper function to get color based off of group
 import "./graph.css";         // CSS for the graph
 
-// !new function
+// ! changed teh force (line 65) and made the node clickable (line 137 and line 185-)
 /**
  * SubGraphVisual component, used to generate the subgraph visual using D3.
  *
@@ -62,7 +62,7 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
           "link",
           d3.forceLink().id((d) => d.id),
         )
-        .force("charge", d3.forceManyBody().strength(-20)) //!changed
+        .force("charge", d3.forceManyBody().strength(-20)) // the force that pushes nodes apart
         .force("center", d3.forceCenter(width / 2, height / 2));
         //.force("collide", d3.forceCollide().radius(10));
 
@@ -195,7 +195,7 @@ const SubGraphVisual = ({ data, highlight, nodeClick }) => {
             .duration(500)
             .attr('r', 12);
       }
-
+      // Highlight the node that was clicked
       clickNode(highlight);
 
     },

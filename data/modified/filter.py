@@ -1,4 +1,7 @@
+##########################################################################################
 # Filters the data to get the illicit data (will add more filters)
+# Authors: Noah Hassett and Kaushal Patel
+##########################################################################################
 
 import json
 import os

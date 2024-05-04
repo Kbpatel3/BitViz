@@ -16,6 +16,8 @@ import React from "react";  // React
 import { useReadCypher } from "use-neo4j";  // Neo4j hook
 import Bar from "../components/barchart"; // Barchart
 
+//! Added BarMax
+
 /**
  * Wrapper for the barchart, loads the data for a single barchart.
  *
@@ -33,13 +35,11 @@ export default function BarWrapper({timestep, queryFunction, barMax, setBarMax})
   const key = '{groups: [{illicit: n.illicit, licit: n.licit, unknown: n.unknown}]}'
   const query = `match (n:meta {timestep: ${timestep}}) return ${key}`;
 
-  // // Gets the data and the loading values
-  // const { loading, first } = useReadCypher(query);
-
   // Use effect for the render to query the database
   React.useEffect(() => {
     let isMounted = true;
 
+    // Query the database
     queryFunction(query).then((result) => {
       if (isMounted) {
         setRecords(result)

@@ -10,6 +10,7 @@ import useD3 from "../hooks/useD3";
 import * as d3 from 'd3';
 import getColor from "../helper/color";
 
+//! Added BarMax and Line 95-
 /**
  * Defines the component for a barchart. Does not load data and it is required for it to be in a
  * container to render 
@@ -27,6 +28,7 @@ const Bar = ({ data, barMax, setBarMax }) => {
 
             // Get the wrapping containers size
             const dimensions = d3.select(".bar-container").node().getBoundingClientRect();
+            
             // Constants used by the SVG
             const height = dimensions.height;
             const width = dimensions.width;
@@ -67,8 +69,7 @@ const Bar = ({ data, barMax, setBarMax }) => {
             // Set the Y axis
             const y_axis = d3
                 .scaleLinear()
-                .domain([0, barMax]) // changed the height to be adjust to
-                // max bar height
+                .domain([0, barMax]) // changed the height to be adjust to the max value
                 .range([height, 0]);
               
             // Apply the y axis to the svg
@@ -95,15 +96,15 @@ const Bar = ({ data, barMax, setBarMax }) => {
                 .selectAll(".barchart")
                 .data(data)
                 .enter()
-                .append("text")
+                .append("text") 
                 .attr("x", d => x_axis(d.group) + x_axis.bandwidth() / 2)
-                .attr("y", d => height - 5)
-                .attr("text-anchor", "middle")
-                .attr("fill", "black")
-                .style("font-family", "Roboto, sans-serif")
-                .style("font-size", "17px")
+                .attr("y", d => height - 5) // changed the y position
+                .attr("text-anchor", "middle") // center the text
+                .attr("fill", "black") // changed text color
+                .style("font-family", "Roboto, sans-serif") // changed font
+                .style("font-size", "17px") // changed font size
                 .text(d => d.value)
-                .style("display", "none");
+                .style("display", "none"); // Hide the total value by default
 
             // Show the total value when hovering over the chart
             svg.on("mouseover", () => totalValueText.style("display", "block"));

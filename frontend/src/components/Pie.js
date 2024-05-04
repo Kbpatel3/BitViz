@@ -16,7 +16,7 @@ import getColor from "../helper/color.js";
  * @returns A JSX component for a pie chart.
  */
 
-// !modified line 29
+//! Added Line 105 -
 const Pie = ({data}) => {
     const ref = useD3(
         (svg) => {
@@ -102,9 +102,12 @@ const Pie = ({data}) => {
                 .exit()
                 .remove()
             
-                var arc = d3.arc()
-                    .innerRadius(0)
-                    .outerRadius(radius)
+            // Arc for the pie chart
+            var arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius)
+            
+            // Total values of num of nodes for the pie chart
             const totalValueText = u
             .enter()
             .append('text')

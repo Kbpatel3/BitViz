@@ -12,6 +12,8 @@ import getColor from "../helper/color";
 import { useEffect } from "react";
 import "./graph.css";
 
+//! no changes
+
 /**
  * Graph component for our app, takes data and uses a custom hook to render our graph to the screen
  * @param {*} Data The data for our graph to render
@@ -44,11 +46,10 @@ const Graph = ({data, highlight, nodeClick}) => {
       const simulation = d3
           .forceSimulation(data.nodes)
           .force("link", d3.forceLink().id(d => d.id))
-          .force("charge", d3.forceManyBody().strength(-1))
+          .force("charge", d3.forceManyBody().strength(-1)) // the force that pushes nodes apart
           .force("center", d3.forceCenter(width / 2, height / 2));
 
         // Functions to define what happens when a user clicks on an app
-
         function dragstarted(event) {
             if (!event.active) simulation.alphaTarget(0.3).restart();
             event.subject.fx = event.subject.x;
@@ -58,18 +59,20 @@ const Graph = ({data, highlight, nodeClick}) => {
             simulation.force("charge", null);
         }
 
+        // Function to define what happens when a user drags a node
         function dragged(event) {
           event.subject.fx = event.x;
           event.subject.fy = event.y;
         }
 
+        // Function to define what happens when a user stops dragging a node
         function dragended(event) {
           if (!event.active) simulation.alphaTarget(0);
           event.subject.fx = null;
           event.subject.fy = null;
 
           // Add back the force when dragging ends
-            //simulation.force("charge", d3.forceManyBody().strength(-1));
+          //simulation.force("charge", d3.forceManyBody().strength(-1));
         }
 
         // Defines our links (edges) on the screen
@@ -94,7 +97,7 @@ const Graph = ({data, highlight, nodeClick}) => {
           .append("circle")
           .attr("id", (d) => `node${d.id}`)
           .attr("r", 7)
-          .attr("fill", (d) => getColor(d.group))
+          .attr("fill", (d) => getColor(d.group)) // Color the nodes based off of their group
           .call(
             d3
               .drag()
@@ -102,10 +105,7 @@ const Graph = ({data, highlight, nodeClick}) => {
               .on("drag", dragged)
               .on("end", dragended)
           ).on('click', (d) => {
-            nodeClick(parseInt(d.target.id.slice(4)));
-            //clickNode(parseInt(d.target.id.slice(4))); // added for highlighting node
-            // d3.selectAll('circle').attr('fill', (d) => getColor(d.group)).attr('r', 7);
-            // d3.select(`#${d.target.id}`).attr('fill', (d) => getColor(d.group)).attr('r', 12);
+            nodeClick(parseInt(d.target.id.slice(4))); // update the id of the node clicked
           });
 
         // Adds titles to nodes
@@ -142,12 +142,8 @@ const Graph = ({data, highlight, nodeClick}) => {
       simulation
         .force("link")
         .links(data.links);
-
-      // Calls the clicked node function with the specified highlighted node
-      //clickNode(highlight);
     },
-    // the data to be watched for changes
-    [data]
+    [data] // the data to be watched for changes
   );
 
   // Call the clickNode function when the highlight changes

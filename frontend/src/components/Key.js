@@ -5,7 +5,7 @@
  */
 
 
-// !new function
+// !changed fonts
 /**
  * Graph Key Component
  * @fileoverview Graph Key Component

@@ -18,7 +18,7 @@ import React from "react";  // React
 import Bar from "../components/barchart";   // Barchart
 import convert from "../helper/convert";    // Convert
 
-// !added sorting and filtering features
+// !changed fonts and added barMax (line: 305, 324)
 /**
  * BarSelector component, defines the logic needed to display a barchart for each timestep.
  *
@@ -27,7 +27,8 @@ import convert from "../helper/convert";    // Convert
  * @param {Function} props.clickFunction - A function to be run whenever a barchart is clicked on.
  * @returns {React.Component} - A JSX component showing the army of barcharts.
  */
-export default function BarSelector({highlighted, clickFunction, queryFunction, barMax, setBarMax}) {
+export default function BarSelector(
+    {highlighted, clickFunction, queryFunction, barMax, setBarMax}) {
     // State for the query results
     const [records, setRecords] = React.useState(undefined);
 
@@ -42,6 +43,7 @@ export default function BarSelector({highlighted, clickFunction, queryFunction, 
         let isMounted = true;
 
         console.log("Fetching data")
+        // Query the database
         queryFunction(query).then((result) => {
             console.log("Data fetched", result[0].get(key))
             if (isMounted) {
@@ -219,26 +221,19 @@ export default function BarSelector({highlighted, clickFunction, queryFunction, 
             }
         };
 
-        // Note: For filter panel
-        // const toggleFileter = () => {
-        //     var filterPanel = document.getElementById("filterPanel");
-        //     filterPanel.classList.toggle("hidden");
-        // }
-
         // Sets/displayed the barcharts
         result = (
             <>
                 <div className="flex justify-between items-center m-2">
                     <select
-                    className="h-7 border-gray-300 inline-block rounded-full shadow-sm border-2 border-primary px-3
-                     pb-[3px] pt-1 text-xs font-medium uppercase leading-normal text-primary
+                    className="h-7 border-gray-300 inline-block rounded-full shadow-sm border-2 
+                    border-primary px-3 pb-[3px] pt-1 text-xs font-medium uppercase leading-normal 
+                    text-primary
                     focus:outline-none focus:ring-0 active:border-primary-700
                     active:text-primary-700 motion-reduce:transition-none dark:text-primary-500
                     focus:border-rose-600 focus:ring-rose-600 text-center bg-slate-200
                     hover:bg-slate-300"
-                        // className="block mt-1 border-gray-300 rounded-md shadow-sm
-                        // focus:border-rose-600 focus:ring-rose-600 text-center bg-slate-200
-                        // hover:bg-slate-300"
+
                         onChange={(e) => {
                             const [sortBy, sortOrder] = e.target.value.split(",");
                             handleSortClick(sortBy, parseInt(sortOrder, 10));
@@ -252,25 +247,16 @@ export default function BarSelector({highlighted, clickFunction, queryFunction, 
                         <option value={"Unknown,0"}>Sort Unknown (Ascending)</option>
                         <option value={"Unknown,1"}>Sort Unknown (Descending)</option>
                     </select>
-                    
-                    {/* For filter Panel, when we need more things to filter*/}
-                    {/* <button className="block mt-1 border-gray-300 rounded-md shadow-sm 
-                    focus:border-rose-600 focus:ring-rose-600 text-center" 
-                            onClick={(e) => handleFilterClick("Unknown", 70, true)}>
-                        Filter Timesteps
-                    </button> */}
 
-                    {/* <button className="mr-8" 
-                            onClick={(e) => toggleFileter()}>
-                        Filter
-                    </button> */}
-
-                    <div className="border-gray-300 inline-block rounded-full shadow-sm border-2 border-primary px-3
+                    <div className="border-gray-300 inline-block rounded-full shadow-sm border-2 
+                    border-primary px-3
                      pb-[3px] pt-1 text-xs font-medium uppercase leading-normal text-primary
                     focus:outline-none focus:ring-0 active:border-primary-700
-                    active:text-primary-700 motion-reduce:transition-none dark:text-primary-500rounded-md bg-slate-200 hover:bg-slate-300 p-2">
+                    active:text-primary-700 motion-reduce:transition-none 
+                    dark:text-primary-500rounded-md bg-slate-200 hover:bg-slate-300 p-2">
                         <form id="filterForm" className="mr-5">
-                            <select id="filterType" name="filterType" className="py-1 border rounded">
+                            <select id="filterType" name="filterType" 
+                            className="py-1 border rounded">
                                 <option value="Illicit">ILLICIT</option>
                                 <option value="Licit">LICIT</option>
                                 <option value="Unknown">UNKNOWN</option>
@@ -301,59 +287,6 @@ export default function BarSelector({highlighted, clickFunction, queryFunction, 
                     </div>
 
                 </div>
-                
-                {/* Note: Filter Panel when we need more features for filtering */}
-                {/* <div id="filterPanel" class="hidden bg-white p-4 mt-4 border border-gray-300 
-                rounded">
-                    <div class="mb-4">
-                    <label for="minRange" class="block text-sm font-medium text-gray-600">
-                    Min Range:</label>
-                    <input type="text" id="minRange" name="minRange" class="mt-1 p-2 border 
-                    border-gray-300 rounded w-full">
-                    </input>
-                    </div>
-
-                    <div class="mb-4">
-                    <label for="maxRange" class="block text-sm font-medium text-gray-600">
-                    Max Range:</label>
-                    <input type="text" id="maxRange" name="maxRange" class="mt-1 p-2 border 
-                    border-gray-300 rounded w-full">
-                    </input>
-                    </div>
-                </div> */}
-
-                    {/* <select
-                        className="block mt-1 border-gray-300 rounded-md shadow-sm 
-                        focus:border-rose-600 focus:ring-rose-600 text-center"
-                            onChange={(e) => {
-                                const [filterBy, filterRange, isMin] = e.target.value.split(",");
-                                handleSortClick(filterBy, parseInt(filterRange, 10), isMin);
-                            }}
-                    >
-                        <button value={"Filter Timesteps, 50, true"}>Filter Timesteps</button>
-                    </select>
-                {/* </div> */}
-
-                {/* <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-10"> */}
-                    {/* Whether the user selected the sorted data */}
-                    {/* {sortedData.length > 0 ? (
-                        sortedData.map((d) => (
-                            <div key={d.timestep.low}>
-                                <div
-                                    className={`m-2 p-1 border-4 ${
-                                        Number(d.timestep.low) === highlighted
-                                            ? "border-rose-600"
-                                            : "border-grey"
-                                    } border-dashed self-center h-40`}
-                                    onClick={() => clickFunction(d.timestep.low)}
-                                >
-                                    <Bar data={d.groups}/>
-                                </div>
-                                <p className="text-center">Timestep {d.timestep.low}</p>
-                            </div>
-                        ))
-                        
-                    ) : ( */}
 
                     {/* Checks whether either sorting or filtering is performed */}
                     {isNewData ? 
@@ -369,7 +302,8 @@ export default function BarSelector({highlighted, clickFunction, queryFunction, 
                                         } border-dashed self-center h-40`}
                                         onClick={() => clickFunction(d.timestep.low)}
                                     >
-                                        <Bar data={d.groups} barMax={barMax} setBarMax={setBarMax}/>
+                                        <Bar data={d.groups} barMax={barMax} setBarMax={setBarMax}
+                                        />
                                     </div>
                                     <p className="text-center">Timestep {d.timestep.low}</p>
                                 </div>
@@ -387,7 +321,8 @@ export default function BarSelector({highlighted, clickFunction, queryFunction, 
                                         } border-dashed self-center h-40`}
                                         onClick={() => clickFunction(d.timestep.low)}
                                     >
-                                        <Bar data={d.groups} barMax={barMax} setBarMax={setBarMax}/>
+                                        <Bar data={d.groups} barMax={barMax} setBarMax={setBarMax}
+                                        />
                                     </div>
                                     <p className="text-center">Timestep {d.timestep.low}</p>
                                 </div>

@@ -15,7 +15,7 @@ import nodes from "./media/nodes.jpg"	// Importing the background image for the 
 import {Button} from "@mui/material";
 import {Link} from "react-router-dom";
 
-// !no changes but we'll remove this function in the end
+// !no changes but maybe good to remove this
 /**
  * The 'Landing' component is a functional React component that renders the landing page of the 
  * application. It includes a background image, a title, a tagline, and a button to navigate to 
