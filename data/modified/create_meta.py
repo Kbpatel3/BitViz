@@ -1,4 +1,6 @@
 ##
+# Author: Aidan Kirk
+# Author: Kellan Anderson
 # Author: Noah Hassett
 # Author: Kaushal Patel
 #
@@ -9,6 +11,9 @@
 import json
 
 def main():
+    """
+    Main function that creates the meta file
+    """
     with open("data_final.json", 'r') as f:
         data = json.load(f)
     check_nodes = []

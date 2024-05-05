@@ -2,7 +2,8 @@
 PSEUDOCODE:
 Load the initial data from the .csv files
 Pass the initial data to sort_by_timestep() to generate the nodes in each timestep
-Take the timestep sorted data and pass it to create_limits() to find the number of each group of node needed in the 
+Take the timestep sorted data and pass it to create_limits() to find the number of each group of 
+node needed in the 
 final data
     Returns a limits dictionary
 
