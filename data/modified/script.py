@@ -10,8 +10,8 @@ Take the timestep-sorted dictionary and the limits dicitonary and pass to filter
 group-filtered_dictionary
 Pass group_filtered_dict to limit_by_edge() to filter data by the # of edges of a node
     Returns edge_filtered_dict
-Take group_filtered_dict and pass to get_final() to bring in all connected nodes from the limited data and write to 
-final.json
+Take group_filtered_dict and pass to get_final() to bring in all connected nodes from the limited 
+data and write to final.json
 """
 
 import json
@@ -96,8 +96,9 @@ def create_limits(timestep_sorted_dict, write_to_file=False):
         # Calculate the totals
         timestep_total = group1_sum + group2_sum + group3_sum
 
-        # Get the ratio of a groups count to the rest of the data in the timestep and take the ceiling of the product of
-        # the MAX_NODES setting times the ratio, then set the value in the limits
+        # Get the ratio of a groups count to the rest of the data in the timestep and take the
+        # ceiling of the product of the MAX_NODES setting times the ratio, then set the value in 
+        # the limits
         limits[timestep] = {
             "group1": ceil(MAX_NODES * (group1_sum / timestep_total)),
             "group2": ceil(MAX_NODES * (group2_sum / timestep_total)),
@@ -139,8 +140,8 @@ def filter_group(sorted_dict, limits_dict):
                 # CHECK 2: if the nodes egdes are withing the settings range
                 edges = len(node['edges'])
 
-                # Lower our min edges setting for group 1 nodes due to some timesteps containing group one nodes with 
-                # only one edge
+                # Lower our min edges setting for group 1 nodes due to some timesteps containing 
+                # group one nodes with only one edge
                 min_edges = 1 if group_key == "group1" else MIN_EDGES
 
                 if edges <= MAX_EDGES and edges >= min_edges:
@@ -152,27 +153,6 @@ def filter_group(sorted_dict, limits_dict):
             node_cnt += 1
 
     return rtn_dict
-
-# def get_illicit_data(data, filename):
-#     """
-#     Get the illicit data from the final data
-#     """
-#     illicits = []
-#     with open(filename, 'w') as out:
-#         for each in data["data"]:
-#             if each["group"] == '1' or is_illicit(each):
-#                 illicits.append(each)
-#         out.write(json.dumps({"data": illicits}, indent=2))
-
-
-# def is_illicit(data):
-#     """
-#     Check if the edge data is illicit
-#     """
-#     for each in data["edges"]:
-#         if each["group"] == '1':
-#             return True
-#     return False
 
 def get_final(filtered_dict, initial_dict, write_to_file=True):
     """
@@ -198,7 +178,7 @@ def get_final(filtered_dict, initial_dict, write_to_file=True):
 
             # Loop over each edge in the current node
             for edge_id in node['edges']:
-                # pull the values from the original dataset to append it to the tempory nose
+                # pull the values from the original dataset to append it to the temporary nose
                 temp['edges'].append({
                     "id": edge_id,
                     "timestep": timestep_num,
@@ -218,8 +198,8 @@ def get_final(filtered_dict, initial_dict, write_to_file=True):
 
 def pull_timestep(string):
     """
-    Takes the last two characters from the string provided and checks if they're a digit, if so return, else return the
-    last character
+    Takes the last two characters from the string provided and checks if they're a digit, if so 
+    return, else return the last character
     """
     if string[-2:].isdigit():
         return string[-2:]
@@ -236,8 +216,8 @@ def percent_as_str(part, whole):
 
 def print_stats(data, filename='metadata.csv'):
     """
-    Takes the data and writes it to a .csv file. This allows us to look at the data easier through a program such as
-    Excel
+    Takes the data and writes it to a .csv file. This allows us to look at the data easier through
+    a program such as Excel.
     """
 
     # Used for keeping track of what nodes we've looked at
@@ -275,7 +255,8 @@ def print_stats(data, filename='metadata.csv'):
         csv_str += f'Timestep {timestep},{g1},{g2},{g3},{g1p},{g2p},{g3p},{total}\n'
 
     # Add the totals line to our file
-    csv_str += f'TOTALS,{totals_data["1"]},{totals_data["2"]},{totals_data["3"]},{totals_data["total"]}'
+    csv_str += f'TOTALS,{totals_data["1"]},{totals_data["2"]},{totals_data["3"]},
+            {totals_data["total"]}'
 
     # Write the data to our file and print a confirmation message
     with open(filename, 'w') as f:
