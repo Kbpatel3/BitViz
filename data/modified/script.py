@@ -260,8 +260,7 @@ def print_stats(data, filename='metadata.csv'):
         csv_str += f'Timestep {timestep},{g1},{g2},{g3},{g1p},{g2p},{g3p},{total}\n'
 
     # Add the totals line to our file
-    csv_str += f'TOTALS,{totals_data["1"]},{totals_data["2"]},{totals_data["3"]},
-            {totals_data["total"]}'
+    csv_str += f'TOTALS,{totals_data["1"]},{totals_data["2"]},{totals_data["3"]},{totals_data["total"]}'
 
     # Write the data to our file and print a confirmation message
     with open(filename, 'w') as f:
