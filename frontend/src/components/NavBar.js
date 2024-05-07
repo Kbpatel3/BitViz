@@ -11,7 +11,7 @@ import ToHistogramButton from "./ToHistogramButton";
 import HomeButton from "./HomeButton";
 import FilterGraphButton from "./FilterGraphButton";
 
-// !new function
+//! added more features like maxbar, setML...
 /**
  * NavBar component for the application
  * @fileoverview NavBar component for the application

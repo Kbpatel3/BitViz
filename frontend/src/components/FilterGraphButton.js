@@ -7,25 +7,31 @@
 import filter from "../media/filter_icon.png";
 import { useState } from "react";
 
+//!NEW FUNCTION
+
 /**
  * Filter Graph Button Component
  * @fileoverview Filter Graph Button Component
  * @returns {JSX.Element} A JSX element containing the Filter Graph Button
  */
 export default function FilterGraphButton({ handleGraphSwitch, setBarMax }) {
+  // Tracks if the filter panel is shown
   const [showFilterPanel, setShowFilterPanel] = useState(false);
+
+  // Tracks the selected filter
   const [selectedFilter, setSelectedFilter] = useState("");
 
   // Function to handle selection change
   const handleSelectChange = (event) => {
       console.log("SELECTED FILTER " + event.target.value)
-      setSelectedFilter(event.target.value);
+      setSelectedFilter(event.target.value); // Set the selected filter
   };
 
+  // Function to apply the filter
   const applyFilter = () => {
       console.log("Filter should load " + {selectedFilter} + " dataset")
       setBarMax(0); // Reset the bar max
-      handleGraphSwitch(selectedFilter);
+      handleGraphSwitch(selectedFilter); // Switch the graph
   };
 
   return (
@@ -40,7 +46,7 @@ export default function FilterGraphButton({ handleGraphSwitch, setBarMax }) {
           () => setShowFilterPanel(!showFilterPanel)
         }
       />
-
+      {/* Filter Panel */}
       {showFilterPanel && (
         <div className="flex justify-between items-center space-x-1 ml-2">
           <select

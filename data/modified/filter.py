@@ -1,4 +1,12 @@
-# Filters the data to get the illicit data (will add more filters)
+##
+# Author: Noah Hassett
+# Author: Kaushal Patel
+#
+# This script is responsible for filtering the json file and creating new json files with the 
+# filtered data.
+#
+# NOTE: illicit=1, licit=2, unknown=3
+##
 
 import json
 import os

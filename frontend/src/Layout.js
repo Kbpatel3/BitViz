@@ -12,7 +12,7 @@
  * @author Noah Hassett
  */
 
-// !added comments to understand the features
+//! no changes
 
 import React from "react";
 import { Outlet } from "react-router-dom";

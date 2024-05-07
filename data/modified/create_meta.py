@@ -1,6 +1,19 @@
+##
+# Author: Aidan Kirk
+# Author: Kellan Anderson
+# Author: Noah Hassett
+# Author: Kaushal Patel
+#
+# This script is responsible for creating the meta.json file that contains the number of illicit, 
+# licit, and unknown transactions for each timestep and used to create meta nodes in the graph db.
+##
+
 import json
 
 def main():
+    """
+    Main function that creates the meta file
+    """
     with open("data_final.json", 'r') as f:
         data = json.load(f)
     check_nodes = []

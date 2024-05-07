@@ -9,7 +9,7 @@
 import { useEffect, useState } from "react";  // React hooks
 import SubGraphVisual from "./SubGraphVisual";  // SubGraphVisual component
 
-// !new function
+//! pass "nodeClick" to make the node clickable
 /**
  * SubGraph component, used to render the subgraph of a specific node
  * @param clickedNode - the node that was clicked on
@@ -31,6 +31,8 @@ export default function SubGraph({ clickedNode, nodeClick, queryFunction }) {
    * @returns {string} - the query to be sent to the database
    */
   const getQuery = (v) => {
+
+    // Query to get the data from the database
     const query = `MATCH path = (n {id: "${v}"})-[*]-(m)
      WHERE id(n) <> id(m)
      WITH nodes(path) AS nodes_in_path
@@ -45,19 +47,12 @@ export default function SubGraph({ clickedNode, nodeClick, queryFunction }) {
   // Get the query
   let query = getQuery(clickedNode);
 
-  // Get the functions and variables we need from the use-neo4j package
-  //const { loading, error, records, run } = useReadCypher(query);
-
   // Requery the database whenever the state of the clicked node changes
   useEffect(() => {
     query = getQuery(clickedNode);
-    //run({ query });
     queryFunction(query).then((result) => {
       setRecords(result);
     })
-
-    //if (loading) console.log("Loading");
-    //if (error) console.log("Error");
   }, [clickedNode]);
 
   // Initialize our data

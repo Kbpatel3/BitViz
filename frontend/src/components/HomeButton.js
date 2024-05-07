@@ -6,7 +6,7 @@
 
 import home from "../media/home_icon.png";
 
-// !new function
+// !no changes
 /**
  * Home Button Component
  * @fileoverview Home Button Component

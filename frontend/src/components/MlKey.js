@@ -4,22 +4,23 @@
  * @author Kaushal Patel
  */
 
-
+//! NEW
 /**
- * Machine Learning Key Component
+ * Machine Learning Key Component that displays whether the machine learning is on or off
  * @fileoverview Machine Learning Key Component
  * @returns {JSX.Element} A JSX element containing the Machine Learning Key 
  */
 export default function MlKey({ mlOn }) {
     return (
-        <div className="justify-between pt-1 pl-2 font-medium uppercase leading-normal text-primary">
+        <div 
+        className="justify-between pt-1 pl-2 font-medium uppercase leading-normal text-primary">
             {mlOn ? (
                 <div>
                 ML: <span class="text-shadow-lg text-violet-600">On</span>
                 </div>
             ) : (
                 <div>
-                ML: Off
+                ML: Off 
                 </div>
             )}
         </div>
