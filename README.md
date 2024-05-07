@@ -55,7 +55,7 @@ git clone https://github.com/Kbpatel3/BitViz-ML.git
 ### File Structure
 Before proceeding, make sure you get an idea of the file structure of the project.
 
-To view the file structure, click [here](https://tinyurl.com/FileStructureBitViz)
+To view the file structure, click [here](https://imgur.com/a/S2eV0de)
 
 The project is divided into two main parts: BitViz-ML and BitViz. The BitViz-ML
 folder contains the machine learning model generation that is used to classify the data. The 
