@@ -11,7 +11,7 @@ module.exports = {
       backgroundColor: {
         'illicit-yellow': '#FFA400FF',
         'licit-blue': '#3138B2FF',
-        'unknown-grey': '#808080',
+        'unknown-grey': '#434343',
       },
     },
   },

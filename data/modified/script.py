@@ -179,6 +179,10 @@ def get_final(filtered_dict, initial_dict, write_to_file=True):
     Convert the final dataset to a format that the Neo4j database can load
     """
 
+    # Print count of filtered_dict and inital_dict
+    print(len(filtered_dict))
+    print(len(initial_dict))
+
     # Init data
     final = []
 
@@ -318,8 +322,10 @@ def main():
 
     # Pass initial data to filters
     timestep_sorted_data = sort_by_timestep(initial_data)
-    limits = create_limits(timestep_sorted_data)
-    filtered_data = filter_group(timestep_sorted_data, limits)
+    print("Done with sort_by_timestep")
+    #limits = create_limits(timestep_sorted_data)
+    #filtered_data = filter_group(timestep_sorted_data, limits)
+    print("About to get final")
     final_data = get_final(timestep_sorted_data, initial_data)
     # get_illicit_data(final_data, 'illicit_data.json')
 
