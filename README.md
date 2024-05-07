@@ -49,22 +49,8 @@ git clone https://github.com/Kbpatel3/BitViz.git
 ```bash
 git clone https://github.com/Kbpatel3/BitViz-ML.git
 ```
-
-3) Install the node modules for the frontend
-```bash
-cd BitViz/frontend
-npm install
-```
-
-4) Follow README.md in the BitViz-ML project to setup the machine learning model
-
-5) The project is now installed.
-
-The node modules will be installed and the project will be ready to run.
-However, we need to setup the database before we can run the project. There are two methods
-to setup the database: automatic and manual. The automatic method is the easiest and is
-recommended. The manual method is more difficult and requires more steps. The automatic
-method is described below.
+3) Continue with the automatic setup to setup the rest of the project.
+4) Follow README.md in the BitViz-ML project to setup the machine learning model.
 
 ### File Structure
 Before proceeding, make sure you get an idea of the file structure of the project.
