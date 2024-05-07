@@ -10,7 +10,7 @@
 // Colors to use throughout the app 
 const ILLICIT = "rgb(255,164,0)"
 const LICIT =   "rgb(49,56,178)"
-const UNKNOWN = "rgb(128, 128, 128)"
+const UNKNOWN = "rgb(67, 67, 67)"
 
 /**
  * Matches the group value of a node and returns the correct coloring.
