@@ -30,7 +30,7 @@ export default function MachineLearningButton({ handleGraphSwitch, setBarMax, se
       onClick={() => {
         console.log('Machine Learning Button Clicked');
         console.log('Switched Graph: ' + switchedGraph);
-        switchedGraph ? handleGraphSwitch('neo4j') : handleGraphSwitch('data-all-subset');
+        switchedGraph ? handleGraphSwitch('data-all-subset-no-ml') : handleGraphSwitch('data-all-subset');
         setBarMax(0); // Reset the bar max
         setSwitchedGraph(!switchedGraph); // Switch the graph
         setMl(); // Set the machine learning on/off
