@@ -91,7 +91,7 @@ function App() {
     let query = getQuery(timestep);
 
     // Used to execute a query on the database
-    const [database, setDatabase] = useState('neo4j');
+    const [database, setDatabase] = useState('data-all-subset-no-ml');
 
     // Connect to the database
     const neo4j = require('neo4j-driver');
